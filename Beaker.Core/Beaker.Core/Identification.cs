@@ -29,8 +29,10 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class PatientIdentification : Identification
+    public abstract class Identification
     {
-        public Patient Patient { get; set; }
+        public string Number { get; set; }
+        public string Type { get; set; }
+
     }
 }

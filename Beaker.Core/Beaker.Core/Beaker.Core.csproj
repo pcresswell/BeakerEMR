@@ -42,10 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gender.cs" />
+    <Compile Include="Identification.cs" />
     <Compile Include="OntarioHealthCard.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="PatientIdentification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider.cs" />
+    <Compile Include="ProviderIdentification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

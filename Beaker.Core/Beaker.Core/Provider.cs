@@ -29,8 +29,9 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class PatientIdentification : Identification
+    public class Provider
     {
-        public Patient Patient { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

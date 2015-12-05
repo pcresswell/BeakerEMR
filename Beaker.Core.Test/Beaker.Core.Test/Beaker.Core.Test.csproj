@@ -77,6 +77,8 @@
     <Compile Include="TestPatient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestPatientIdentifier.cs" />
+    <Compile Include="TestProvider.cs" />
+    <Compile Include="TestProviderIdentification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Beaker.Core.Test.licenseheader" />
