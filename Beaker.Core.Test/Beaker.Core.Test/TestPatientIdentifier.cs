@@ -37,11 +37,13 @@ namespace Beaker.Core.Test
             PatientIdentification identification = new PatientIdentification()
             {
                 Type = "Social Insurance Number",
+                Number ="123 456 789",
                 Patient = patient
             };
 
             Assert.AreEqual("Social Insurance Number", identification.Type);
             Assert.AreEqual(patient, identification.Patient);
+            Assert.AreEqual("123 456 789", identification.Number);
         }
     }
 }

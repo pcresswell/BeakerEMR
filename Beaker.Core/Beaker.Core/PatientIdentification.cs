@@ -31,6 +31,7 @@ namespace Beaker.Core
 {
     public class PatientIdentification
     {
+        public string Number { get; set; }
         public Patient Patient { get; set; }
         public string Type { get; set; }
     }
