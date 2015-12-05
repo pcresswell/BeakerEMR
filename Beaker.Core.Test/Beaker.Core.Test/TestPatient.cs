@@ -10,10 +10,11 @@ namespace Beaker.Core.Test
         [SetUp]
         public void Setup()
         {
-            patient = new Patient {
+            patient = new Patient
+            {
                 FirstName = "Peter",
                 LastName = "Cresswell"
-            };    
+            };
         }
 
         private Patient patient;
@@ -47,7 +48,7 @@ namespace Beaker.Core.Test
             Assert.AreEqual("Mr.", this.patient.Prefix);
             Assert.AreEqual("3rd", this.patient.Suffix);
         }
-       
+
         [Test]
         public void PatientMayHaveAGender()
         {
@@ -65,7 +66,7 @@ namespace Beaker.Core.Test
         [Test]
         public void PatientNameIsEmptyByDefault()
         {
-           this. patient = new Patient();
+            this.patient = new Patient();
             Assert.AreEqual(this.patient.FirstName, string.Empty);
             Assert.AreEqual(this.patient.LastName, string.Empty);
             Assert.AreEqual(this.patient.MiddleName, string.Empty);
@@ -80,6 +81,5 @@ namespace Beaker.Core.Test
             this.patient.DateOfBirth = new DateTime(1978, 3, 31);
             Assert.AreEqual(new DateTime(1978, 3, 31), this.patient.DateOfBirth);
         }
-
     }
 }
