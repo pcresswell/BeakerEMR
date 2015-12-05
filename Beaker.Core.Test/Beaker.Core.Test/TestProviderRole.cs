@@ -22,16 +22,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
 
-namespace Beaker.Core
+namespace Beaker.Core.Test
 {
-    public abstract class Identification
+    [TestFixture]
+    public class TestProviderRole
     {
-        public string Number { get; set; }
-        public string Type { get; set; }
+        [Test]
+        public void ProviderRoleHasATypeAndProvider()
+        {
+            Provider provider = new Provider();
+            ProviderRole role = new ProviderRole() { Type = "Physician", Provider = provider };
+
+            Assert.AreEqual(role.Type, "Physician");
+            Assert.AreEqual(provider, role.Provider);
+        }
     }
 }

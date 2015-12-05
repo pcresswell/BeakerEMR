@@ -29,9 +29,9 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public abstract class Identification
+    public class ProviderRole
     {
-        public string Number { get; set; }
+        public Provider Provider { get; set; }
         public string Type { get; set; }
     }
 }
