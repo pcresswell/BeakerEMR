@@ -53,8 +53,15 @@ namespace Beaker.Core
         /// </summary>
         public static readonly Gender Unknown = new Gender("Unknown");
 
+        /// <summary>
+        /// The name of the gender.
+        /// </summary>
         public string Name { get; private set; }
 
+        /// <summary>
+        /// Gender.
+        /// </summary>
+        /// <param name="name"></param>
         public Gender(string name)
         {
             this.Name = name;
