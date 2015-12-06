@@ -78,6 +78,7 @@
     <Compile Include="TestOntarioHealthCard.cs" />
     <Compile Include="TestPatient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestPatientEnrollmentRelationship.cs" />
     <Compile Include="TestPatientIdentifier.cs" />
     <Compile Include="TestPatientProviderRelationship.cs" />
     <Compile Include="TestPhoneNumber.cs" />

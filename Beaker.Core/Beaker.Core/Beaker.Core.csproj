@@ -49,6 +49,7 @@
     <Compile Include="ISOLanguage.cs" />
     <Compile Include="OntarioHealthCard.cs" />
     <Compile Include="Patient.cs" />
+    <Compile Include="PatientEnrollmentRelationship.cs" />
     <Compile Include="PatientIdentification.cs" />
     <Compile Include="PatientProviderRelationship.cs" />
     <Compile Include="Person.cs" />
