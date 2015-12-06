@@ -29,11 +29,8 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class Provider : Person
+    public class User
     {
-        public Provider() : base()
-        { }
-
-        public User User { get; set; }
+        
     }
 }

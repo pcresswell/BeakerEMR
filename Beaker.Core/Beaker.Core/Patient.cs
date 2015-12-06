@@ -37,5 +37,6 @@ namespace Beaker.Core
 
         public ISOLanguage PreferredOfficialLanguage { get; set; }
         public ISOLanguage PreferredSpokenLanguage { get; set; }
+        public User User { get; set; }
     }
 }
