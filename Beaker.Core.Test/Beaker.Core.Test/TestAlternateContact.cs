@@ -33,21 +33,62 @@ namespace Beaker.Core.Test
         public void AlternateContactHasAPersonAsAContact()
         {
             Patient patient = new Patient();
+            Person susana = new Person()
+            {
+                FirstName = "Susana",
+                LastName = "Hsu"
+            };
+            PhoneNumber workPhoneNumber = new PhoneNumber
+            {
+                AreaCode = "416",
+                Number = "345 6789",
+                Owner = susana,
+                Type = PhoneNumberType.Work
+            };
+            PhoneNumber homePhoneNumber = new PhoneNumber
+            {
+                AreaCode = "416",
+                Number = "543 7654",
+                Owner = susana,
+                Type = PhoneNumberType.Home
+            };
+
+            PhoneNumber cellPhoneNumber = new PhoneNumber
+            {
+                AreaCode = "416",
+                Number = "454 6565",
+                Owner = susana,
+                Type = PhoneNumberType.Mobile
+            };
+
+            EmailAddress email = new EmailAddress()
+            {
+                Value = "susana.hsu@gmail.com",
+                Type = EmailAddressType.Home,
+                Owner = susana
+            };
+
             AlternateContact alternateContact = new AlternateContact()
             {
                 Patient = patient,
-                ContactPerson = new Person
-                {
-                    FirstName = "Susana",
-                    LastName = "Hsu"
-                },
-                Purpose = AlternateContactPurpose.Emergency
+                ContactPerson = susana,
+                Purpose = AlternateContactPurpose.Emergency,
+                HomePhoneNumber = homePhoneNumber,
+                WorkPhoneNumber = workPhoneNumber,
+                CellPhoneNumber = cellPhoneNumber,
+                Email = email,
+                Note = "Contact in case of emergency."
             };
 
             Assert.AreEqual(patient, alternateContact.Patient);
             Assert.AreEqual("Susana", alternateContact.ContactPerson.FirstName);
             Assert.AreEqual("Hsu", alternateContact.ContactPerson.LastName);
             Assert.AreEqual(AlternateContactPurpose.Emergency, alternateContact.Purpose);
+            Assert.AreEqual(homePhoneNumber, alternateContact.HomePhoneNumber);
+            Assert.AreEqual(workPhoneNumber, alternateContact.WorkPhoneNumber);
+            Assert.AreEqual(cellPhoneNumber, alternateContact.CellPhoneNumber);
+            Assert.AreEqual(email, alternateContact.Email);
+            Assert.AreEqual("Contact in case of emergency", alternateContact.Note);
         }
     }
 }

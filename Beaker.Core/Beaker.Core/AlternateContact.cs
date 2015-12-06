@@ -36,8 +36,13 @@ namespace Beaker.Core
 
     public class AlternateContact
     {
+        public PhoneNumber CellPhoneNumber { get; set; }
         public Person ContactPerson { get; set; }
+        public EmailAddress Email { get; set; }
+        public PhoneNumber HomePhoneNumber { get; set; }
+        public string Note { get; set; }
         public Patient Patient { get; set; }
         public string Purpose { get; set; }
+        public PhoneNumber WorkPhoneNumber { get; set; }
     }
 }

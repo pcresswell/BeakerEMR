@@ -34,6 +34,7 @@ namespace Beaker.Core
         public static readonly string Home = "Home";
         public static readonly string Work = "Work";
         public static readonly string Other = "Other";
+        public static readonly string Mobile = "Mobile";
     }
 
     public class PhoneNumber
