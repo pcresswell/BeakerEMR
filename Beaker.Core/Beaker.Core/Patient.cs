@@ -39,5 +39,6 @@ namespace Beaker.Core
         }
 
         public User User { get; set; }
+        public string Note { get; set; }
     }
 }

@@ -88,7 +88,7 @@ namespace Beaker.Core.Test
             Assert.AreEqual(workPhoneNumber, alternateContact.WorkPhoneNumber);
             Assert.AreEqual(cellPhoneNumber, alternateContact.CellPhoneNumber);
             Assert.AreEqual(email, alternateContact.Email);
-            Assert.AreEqual("Contact in case of emergency", alternateContact.Note);
+            Assert.AreEqual("Contact in case of emergency.", alternateContact.Note);
         }
     }
 }

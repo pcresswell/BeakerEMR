@@ -98,5 +98,12 @@ namespace Beaker.Core.Test
             patient.Person.PreferredOfficialLanguage = new ISOLanguage("eng", "English");
             Assert.AreEqual(new ISOLanguage("eng", "English"), patient.Person.PreferredOfficialLanguage);
         }
+
+        [Test]
+        public void PatientHasANote()
+        {
+            patient.Note = "Likes to be called Pete";
+            Assert.AreEqual("Likes to be called Pete", patient.Note);
+        }
     }
 }
