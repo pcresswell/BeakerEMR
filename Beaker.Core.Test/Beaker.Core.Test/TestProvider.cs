@@ -34,12 +34,16 @@ namespace Beaker.Core.Test
         {
             Provider provider = new Provider()
             {
-                FirstName = "Peter",
-                LastName = "Cresswell"
+                Person = new Person
+                {
+                    FirstName = "Peter",
+                    LastName = "Cresswell"
+
+                }
             };
 
-            Assert.AreEqual("Peter", provider.FirstName);
-            Assert.AreEqual("Cresswell", provider.LastName);
+            Assert.AreEqual("Peter", provider.Person.FirstName);
+            Assert.AreEqual("Cresswell", provider.Person.LastName);
         }
     }
 }

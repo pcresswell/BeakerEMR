@@ -32,7 +32,7 @@ namespace Beaker.Core.Test
         [Test]
         public void PhoneNumberHasAreaCodeAndNumberAndPatient()
         {
-            Patient patient = new Patient();
+            Person patient = new Person();
             PhoneNumber number = new PhoneNumber()
             {
                 AreaCode = "416",

@@ -29,11 +29,17 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class Provider : Person
+    public class Provider 
     {
+        /// <summary>
+        /// Provider role. The Provider contains the details of the provider.
+        /// </summary>
         public Provider() : base()
-        { }
-
+        {
+            this.Person = new Person();
+        }
         public User User { get; set; }
+        public Person Person { get; set; }
+
     }
 }

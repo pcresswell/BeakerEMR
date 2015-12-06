@@ -22,22 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using NUnit.Framework;
 
-
-namespace Beaker.Core
+namespace Beaker.Core.Test
 {
-    public class Patient 
+    [TestFixture]
+    public class TestAlternateContact
     {
-        public Person Person { get; set; }
-
-        public Patient() : base()
+        [Test]
+        public void AlternateContactHasAPersonAsAContact()
         {
-            this.Person = new Person();
-        }
+            Patient patient = new Patient();
+            AlternateContact alternateContact = new AlternateContact()
+            {
+                Patient = patient,
+                ContactPerson = new Person
+                {
+                    FirstName = "Susana",
+                    LastName = "Hsu"
+                },
+                Purpose = AlternateContactPurpose.Emergency
+            };
 
-        public User User { get; set; }
+            Assert.AreEqual(patient, alternateContact.Patient);
+            Assert.AreEqual("Susana", alternateContact.ContactPerson.FirstName);
+            Assert.AreEqual("Hsu", alternateContact.ContactPerson.LastName);
+            Assert.AreEqual(AlternateContactPurpose.Emergency, alternateContact.Purpose);
+        }
     }
 }

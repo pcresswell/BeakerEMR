@@ -29,16 +29,52 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public abstract class Person
+    /// <summary>
+    /// Represents a physical person. Does not contain any role information such as patient, provider, etc.
+    /// </summary>
+    public class Person
     {
+        /// <summary>
+        /// The person's first name.
+        /// </summary>
         public string FirstName { get; set; }
+        /// <summary>
+        /// The person's last name.
+        /// </summary>
         public string LastName { get; set; }
+        /// <summary>
+        /// The person's middle name.
+        /// </summary>
         public string MiddleName { get; set; }
+        /// <summary>
+        /// The person's prefix. Example, "Mr." or "Ms.".
+        /// </summary>
         public string Prefix { get; set; }
+        /// <summary>
+        /// The person's suffix. Example, "Jr.", "Sr.".
+        /// </summary>
         public string Suffix { get; set; }
+        /// <summary>
+        /// The persons gender as identified at birth.
+        /// </summary>
         public Gender Gender { get; set; }
+        /// <summary>
+        /// The person's date of birth.
+        /// </summary>
         public DateTime DateOfBirth { get; set; }
-
+        /// <summary>
+        /// Preferred official language. Official languages are specified based on the country of origin.
+        /// For example, "English" or "French" for Canada are offical languages.
+        /// </summary>
+        public ISOLanguage PreferredOfficialLanguage { get; set; }
+        /// <summary>
+        /// Preferred language for conversation. Does not depend on the country of origin. 
+        /// </summary>
+        public ISOLanguage PreferredSpokenLanguage { get; set; }
+        
+        /// <summary>
+        /// Constructs a Person.
+        /// </summary>
         public Person()
         {
             this.Gender = Gender.Unknown;

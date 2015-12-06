@@ -25,19 +25,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class Patient 
+    public static class AlternateContactPurpose
     {
-        public Person Person { get; set; }
+        public static readonly string Emergency = "Emergency";
+    }
 
-        public Patient() : base()
-        {
-            this.Person = new Person();
-        }
-
-        public User User { get; set; }
+    public class AlternateContact
+    {
+        public Person ContactPerson { get; set; }
+        public Patient Patient { get; set; }
+        public string Purpose { get; set; }
     }
 }

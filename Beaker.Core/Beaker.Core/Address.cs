@@ -29,22 +29,57 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-
+    /// <summary>
+    /// An address.
+    /// </summary>
     public class Address
     {
+        /// <summary>
+        /// The city.
+        /// </summary>
         public string City { get; set; }
+        /// <summary>
+        /// The country.
+        /// </summary>
         public string Country { get; set; }
+        /// <summary>
+        /// Postal code or zip code.
+        /// </summary>
         public string PostalCode { get; set; }
+        /// <summary>
+        /// Province or state.
+        /// </summary>
         public string Province { get; set; }
+        /// <summary>
+        /// The person associated with the address.
+        /// </summary>
         public Person Resident { get; set; }
+        /// <summary>
+        /// The street.
+        /// </summary>
         public string Street { get; set; }
+        /// <summary>
+        /// The type of address. See AddressType.
+        /// </summary>
         public string Type { get; set; }
     }
 
+    /// <summary>
+    /// Types of addresses.
+    /// </summary>
     public static class AddressType
     {
+        /// <summary>
+        /// Home address.
+        /// </summary>
         public static readonly string Home = "Home";
+        /// <summary>
+        /// Work address.
+        /// </summary>
         public static readonly string Work = "Work";
+        /// <summary>
+        /// Other address.
+        /// </summary>
         public static readonly string Other = "Other";
     }
 }

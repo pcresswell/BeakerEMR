@@ -12,8 +12,11 @@ namespace Beaker.Core.Test
         {
             patient = new Patient
             {
-                FirstName = "Peter",
-                LastName = "Cresswell"
+                Person = new Person
+                {
+                    FirstName = "Peter",
+                    LastName = "Cresswell"
+                }
             };
         }
 
@@ -28,72 +31,72 @@ namespace Beaker.Core.Test
         [Test]
         public void PatientHasAFirstAndLastName()
         {
-            Assert.AreEqual("Peter", this.patient.FirstName);
-            Assert.AreEqual("Cresswell", this.patient.LastName);
+            Assert.AreEqual("Peter", this.patient.Person.FirstName);
+            Assert.AreEqual("Cresswell", this.patient.Person.LastName);
         }
 
         [Test]
         public void PatientHasAMiddleName()
         {
-            this.patient.MiddleName = "Graydon";
-            Assert.AreEqual("Graydon", this.patient.MiddleName);
+            this.patient.Person.MiddleName = "Graydon";
+            Assert.AreEqual("Graydon", this.patient.Person.MiddleName);
         }
 
         [Test]
         public void PatientHasAPrefixAndSuffix()
         {
-            this.patient.Prefix = "Mr.";
-            this.patient.Suffix = "3rd";
+            this.patient.Person.Prefix = "Mr.";
+            this.patient.Person.Suffix = "3rd";
 
-            Assert.AreEqual("Mr.", this.patient.Prefix);
-            Assert.AreEqual("3rd", this.patient.Suffix);
+            Assert.AreEqual("Mr.", this.patient.Person.Prefix);
+            Assert.AreEqual("3rd", this.patient.Person.Suffix);
         }
 
         [Test]
         public void PatientMayHaveAGender()
         {
-            this.patient.Gender = Gender.Male;
-            Assert.AreEqual(this.patient.Gender, Gender.Male);
-            Assert.AreEqual(this.patient.Gender, new Gender("Male"));
+            this.patient.Person.Gender = Gender.Male;
+            Assert.AreEqual(this.patient.Person.Gender, Gender.Male);
+            Assert.AreEqual(this.patient.Person.Gender, new Gender("Male"));
         }
 
         [Test]
         public void PatientByDefaultHasUnknownGender()
         {
-            Assert.AreEqual(this.patient.Gender, Gender.Unknown);
+            Assert.AreEqual(this.patient.Person.Gender, Gender.Unknown);
         }
 
         [Test]
         public void PatientNameIsEmptyByDefault()
         {
             this.patient = new Patient();
-            Assert.AreEqual(this.patient.FirstName, string.Empty);
-            Assert.AreEqual(this.patient.LastName, string.Empty);
-            Assert.AreEqual(this.patient.MiddleName, string.Empty);
-            Assert.AreEqual(this.patient.Prefix, string.Empty);
-            Assert.AreEqual(this.patient.Suffix, string.Empty);
+            Assert.AreEqual(this.patient.Person.FirstName, string.Empty);
+            Assert.AreEqual(this.patient.Person.LastName, string.Empty);
+            Assert.AreEqual(this.patient.Person.MiddleName, string.Empty);
+            Assert.AreEqual(this.patient.Person.Prefix, string.Empty);
+            Assert.AreEqual(this.patient.Person.Suffix, string.Empty);
         }
 
         [Test]
         public void PatientByDefaultIsBornOnJan11899()
         {
-            Assert.AreEqual(this.patient.DateOfBirth, new DateTime(1899, 1, 1));
-            this.patient.DateOfBirth = new DateTime(1978, 3, 31);
-            Assert.AreEqual(new DateTime(1978, 3, 31), this.patient.DateOfBirth);
+            Assert.AreEqual(this.patient.Person.DateOfBirth, new DateTime(1899, 1, 1));
+            this.patient.Person.DateOfBirth = new DateTime(1978, 3, 31);
+            Assert.AreEqual(new DateTime(1978, 3, 31), this.patient.Person.DateOfBirth);
         }
 
         [Test]
         public void PatientMayHaveAPreferredSpokenLanguage()
         {
-            patient.PreferredSpokenLanguage = new ISOLanguage("eng", "English");
-            Assert.AreEqual(new ISOLanguage("eng", "English"), patient.PreferredSpokenLanguage);
+            patient.Person.PreferredSpokenLanguage = new ISOLanguage("eng", "English");
+            Assert.AreEqual(new ISOLanguage("eng", "English"), patient.Person.PreferredSpokenLanguage);
         }
 
         [Test]
         public void PatientMayHaveAPreferredOfficialLanguage()
         {
-            patient.PreferredOfficialLanguage = new ISOLanguage("eng", "English");
-            Assert.AreEqual(new ISOLanguage("eng", "English"), patient.PreferredOfficialLanguage);
+            patient.Person.PreferredOfficialLanguage = new ISOLanguage("eng", "English");
+            Assert.AreEqual(new ISOLanguage("eng", "English"), patient.Person.PreferredOfficialLanguage);
         }
     }
 }

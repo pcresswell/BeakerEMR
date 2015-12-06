@@ -32,7 +32,7 @@ namespace Beaker.Core.Test
         [Test]
         public void AddressProperties()
         {
-            Patient patient = new Patient();
+            Person patient = new Person();
 
             Address address = new Address()
             {

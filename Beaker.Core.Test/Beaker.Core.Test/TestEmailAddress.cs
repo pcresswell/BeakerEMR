@@ -32,7 +32,7 @@ namespace Beaker.Core.Test
         [Test]
         public void EmailAddressHasOwnerAndValue()
         {
-            Patient patient = new Patient();
+            Person patient = new Person();
             EmailAddress email = new EmailAddress()
             {
                 Value = "pcresswell@gmail.com",
