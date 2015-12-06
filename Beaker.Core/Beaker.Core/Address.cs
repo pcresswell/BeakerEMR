@@ -25,14 +25,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class Patient : Person
+
+    public class Address
     {
-        public Patient() : base()
-        {            
-        }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string PostalCode { get; set; }
+        public string Province { get; set; }
+        public Person Resident { get; set; }
+        public string Street { get; set; }
+        public string Type { get; set; }
+    }
+
+    public static class AddressType
+    {
+        public static readonly string Home = "Home";
+        public static readonly string Work = "Work";
+        public static readonly string Other = "Other";
     }
 }

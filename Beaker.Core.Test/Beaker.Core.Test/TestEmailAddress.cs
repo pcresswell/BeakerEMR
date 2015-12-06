@@ -27,38 +27,22 @@ using NUnit.Framework;
 namespace Beaker.Core.Test
 {
     [TestFixture]
-    public class TestOntarioHealthCard
+    public class TestEmailAddress
     {
-        private OntarioHealthCard healthCard;
-
         [Test]
-        public void TestHealthCardHasANumber()
-        {
-            this.healthCard = new OntarioHealthCard();
-            this.healthCard.Number = "1234567890";
-            Assert.AreEqual(this.healthCard.Number, "1234567890");
-        }
-
-        [Test]
-        public void TestHealthCardHasAVersion()
-        {
-            this.healthCard = new OntarioHealthCard() { Version = "VR" };
-            Assert.AreEqual("VR", this.healthCard.Version);
-        }
-
-        [Test]
-        public void TestHealthCardHasExpiryDate()
-        {
-            this.healthCard = new OntarioHealthCard() { ExpiryDate = new DateTime(2020, 1, 2) };
-            Assert.AreEqual(new DateTime(2020, 1, 2), healthCard.ExpiryDate);
-        }
-
-        [Test]
-        public void TestHealthCardHasAnOwner()
+        public void EmailAddressHasOwnerAndValue()
         {
             Patient patient = new Patient();
-            this.healthCard = new OntarioHealthCard() { Owner = patient };
-            Assert.AreEqual(patient, healthCard.Owner);
+            EmailAddress email = new EmailAddress()
+            {
+                Value = "pcresswell@gmail.com",
+                Owner = patient,
+                Type = EmailAddressType.Home
+            };
+
+            Assert.AreEqual("pcresswell@gmail.com", email.Value);
+            Assert.AreEqual(patient, email.Owner);
+            Assert.AreEqual(EmailAddressType.Home, email.Type);
         }
     }
 }

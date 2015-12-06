@@ -27,38 +27,26 @@ using NUnit.Framework;
 namespace Beaker.Core.Test
 {
     [TestFixture]
-    public class TestOntarioHealthCard
+    public class TestPhoneNumber
     {
-        private OntarioHealthCard healthCard;
-
         [Test]
-        public void TestHealthCardHasANumber()
-        {
-            this.healthCard = new OntarioHealthCard();
-            this.healthCard.Number = "1234567890";
-            Assert.AreEqual(this.healthCard.Number, "1234567890");
-        }
-
-        [Test]
-        public void TestHealthCardHasAVersion()
-        {
-            this.healthCard = new OntarioHealthCard() { Version = "VR" };
-            Assert.AreEqual("VR", this.healthCard.Version);
-        }
-
-        [Test]
-        public void TestHealthCardHasExpiryDate()
-        {
-            this.healthCard = new OntarioHealthCard() { ExpiryDate = new DateTime(2020, 1, 2) };
-            Assert.AreEqual(new DateTime(2020, 1, 2), healthCard.ExpiryDate);
-        }
-
-        [Test]
-        public void TestHealthCardHasAnOwner()
+        public void PhoneNumberHasAreaCodeAndNumberAndPatient()
         {
             Patient patient = new Patient();
-            this.healthCard = new OntarioHealthCard() { Owner = patient };
-            Assert.AreEqual(patient, healthCard.Owner);
+            PhoneNumber number = new PhoneNumber()
+            {
+                AreaCode = "416",
+                Number = "493 8433",
+                Extension = "1",
+                Owner = patient,
+                Type = PhoneNumberType.Home
+            };
+
+            Assert.AreEqual("416", number.AreaCode);
+            Assert.AreEqual("493 8433", number.Number);
+            Assert.AreEqual("1", number.Extension);
+            Assert.AreEqual(patient, number.Owner);
+            Assert.AreEqual(PhoneNumberType.Home, number.Type);
         }
     }
 }

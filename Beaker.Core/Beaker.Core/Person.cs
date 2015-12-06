@@ -22,43 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 using System;
-using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Beaker.Core.Test
+namespace Beaker.Core
 {
-    [TestFixture]
-    public class TestOntarioHealthCard
+    public abstract class Person
     {
-        private OntarioHealthCard healthCard;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MiddleName { get; set; }
+        public string Prefix { get; set; }
+        public string Suffix { get; set; }
+        public Gender Gender { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
-        [Test]
-        public void TestHealthCardHasANumber()
+        public Person()
         {
-            this.healthCard = new OntarioHealthCard();
-            this.healthCard.Number = "1234567890";
-            Assert.AreEqual(this.healthCard.Number, "1234567890");
-        }
-
-        [Test]
-        public void TestHealthCardHasAVersion()
-        {
-            this.healthCard = new OntarioHealthCard() { Version = "VR" };
-            Assert.AreEqual("VR", this.healthCard.Version);
-        }
-
-        [Test]
-        public void TestHealthCardHasExpiryDate()
-        {
-            this.healthCard = new OntarioHealthCard() { ExpiryDate = new DateTime(2020, 1, 2) };
-            Assert.AreEqual(new DateTime(2020, 1, 2), healthCard.ExpiryDate);
-        }
-
-        [Test]
-        public void TestHealthCardHasAnOwner()
-        {
-            Patient patient = new Patient();
-            this.healthCard = new OntarioHealthCard() { Owner = patient };
-            Assert.AreEqual(patient, healthCard.Owner);
+            this.Gender = Gender.Unknown;
+            this.FirstName = string.Empty;
+            this.LastName = string.Empty;
+            this.MiddleName = string.Empty;
+            this.Prefix = string.Empty;
+            this.Suffix = string.Empty;
+            this.DateOfBirth = new DateTime(1899, 1, 1);
         }
     }
 }

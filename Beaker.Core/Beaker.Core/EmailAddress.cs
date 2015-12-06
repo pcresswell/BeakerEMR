@@ -25,14 +25,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class Patient : Person
+    public static class EmailAddressType
     {
-        public Patient() : base()
-        {            
-        }
+        public static readonly string Home = "Home";
+        public static readonly string Work = "Work";
+        public static readonly string Other = "Other";
+    }
+
+    public class EmailAddress
+    {
+        public Person Owner { get; set; }
+        public string Type { get; set; }
+        public string Value { get; set; }
     }
 }

@@ -27,38 +27,31 @@ using NUnit.Framework;
 namespace Beaker.Core.Test
 {
     [TestFixture]
-    public class TestOntarioHealthCard
+    public class TestAddress
     {
-        private OntarioHealthCard healthCard;
-
         [Test]
-        public void TestHealthCardHasANumber()
-        {
-            this.healthCard = new OntarioHealthCard();
-            this.healthCard.Number = "1234567890";
-            Assert.AreEqual(this.healthCard.Number, "1234567890");
-        }
-
-        [Test]
-        public void TestHealthCardHasAVersion()
-        {
-            this.healthCard = new OntarioHealthCard() { Version = "VR" };
-            Assert.AreEqual("VR", this.healthCard.Version);
-        }
-
-        [Test]
-        public void TestHealthCardHasExpiryDate()
-        {
-            this.healthCard = new OntarioHealthCard() { ExpiryDate = new DateTime(2020, 1, 2) };
-            Assert.AreEqual(new DateTime(2020, 1, 2), healthCard.ExpiryDate);
-        }
-
-        [Test]
-        public void TestHealthCardHasAnOwner()
+        public void AddressProperties()
         {
             Patient patient = new Patient();
-            this.healthCard = new OntarioHealthCard() { Owner = patient };
-            Assert.AreEqual(patient, healthCard.Owner);
+
+            Address address = new Address()
+            {
+                Type = AddressType.Home,
+                Street = "109 Clydesdale Drive",
+                PostalCode = "M2J 3N3",
+                City = "Toronto",
+                Province = "Ontario",
+                Country = "Canada",
+                Resident = patient
+            };
+
+            Assert.AreEqual(address.Type, AddressType.Home);
+            Assert.AreEqual("109 Clydesdale Drive", address.Street);
+            Assert.AreEqual("M2J 3N3", address.PostalCode);
+            Assert.AreEqual("Toronto", address.City);
+            Assert.AreEqual("Ontario", address.Province);
+            Assert.AreEqual("Canada", address.Country);
+            Assert.AreEqual(patient, address.Resident);
         }
     }
 }
