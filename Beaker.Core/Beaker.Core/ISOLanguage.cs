@@ -25,17 +25,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class Patient : Person
+    /// <summary>
+    /// ISO Language conforming to ISO 639-2. See: https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes
+    /// </summary>
+    public class ISOLanguage
     {
-        public Patient() : base()
-        {            
+        public string Code { get; private set; }
+        public string Name { get; private set; }
+
+        public ISOLanguage(string code, string name)
+        {
+            this.Code = code;
+            this.Name = name;
         }
 
-        public ISOLanguage PreferredOfficialLanguage { get; set; }
-        public ISOLanguage PreferredSpokenLanguage { get; set; }
+        public override bool Equals(object obj)
+        {
+            ISOLanguage other = (ISOLanguage)obj;
+            if (other == null)
+            {
+                return false;
+            }
+
+            return this.Code.Equals(other.Code);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Code.GetHashCode();
+        }
+
     }
 }

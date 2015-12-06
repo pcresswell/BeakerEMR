@@ -81,5 +81,19 @@ namespace Beaker.Core.Test
             this.patient.DateOfBirth = new DateTime(1978, 3, 31);
             Assert.AreEqual(new DateTime(1978, 3, 31), this.patient.DateOfBirth);
         }
+
+        [Test]
+        public void PatientMayHaveAPreferredSpokenLanguage()
+        {
+            patient.PreferredSpokenLanguage = new ISOLanguage("eng", "English");
+            Assert.AreEqual(new ISOLanguage("eng", "English"), patient.PreferredSpokenLanguage);
+        }
+
+        [Test]
+        public void PatientMayHaveAPreferredOfficialLanguage()
+        {
+            patient.PreferredOfficialLanguage = new ISOLanguage("eng", "English");
+            Assert.AreEqual(new ISOLanguage("eng", "English"), patient.PreferredOfficialLanguage);
+        }
     }
 }

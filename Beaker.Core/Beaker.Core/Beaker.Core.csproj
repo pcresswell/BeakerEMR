@@ -46,6 +46,7 @@
     <Compile Include="EmailAddress.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Identification.cs" />
+    <Compile Include="ISOLanguage.cs" />
     <Compile Include="OntarioHealthCard.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="PatientIdentification.cs" />
