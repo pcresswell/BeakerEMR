@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 namespace Beaker.Core
 {
     /// <summary>
-    /// A problem, procedure or diagnosis of a family member and its details.
+    /// A problem, procedure or diagnosis of a family member and its details. 
     /// </summary>
     public class FamilyHistory
     {
