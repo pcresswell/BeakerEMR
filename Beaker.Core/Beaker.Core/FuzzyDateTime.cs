@@ -1,4 +1,4 @@
-﻿/*  
+﻿/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Peter Cresswell (pcresswell@gmail.com)
@@ -20,66 +20,50 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     /// <summary>
-    /// Gender class. Represents a person's gender.
+    /// A DateTime in which the accuracy of the value is not exactly known.
     /// </summary>
-    public class Gender
+    public class FuzzyDateTime
     {
         /// <summary>
-        /// The Male gender
+        /// The DateTime
         /// </summary>
-        public static readonly Gender Male = new Gender("Male");
-
+        public DateTime DateTime { get; private set; }
         /// <summary>
-        /// The Female gender
+        /// The accuracy of the DateTime value.
         /// </summary>
-        public static readonly Gender Female = new Gender("Female");
+        public FuzzyDateTimeAccuracy Accuracy { get; private set; }
 
-        /// <summary>
-        /// Unknown gender.
-        /// </summary>
-        public static readonly Gender Unknown = new Gender("Unknown");
-
-        /// <summary>
-        /// The name of the gender. For example "Male" or "Female".
-        /// </summary>
-        public string Name { get; private set; }
-
-        /// <summary>
-        /// Gender.
-        /// </summary>
-        /// <param name="name"></param>
-        public Gender(string name)
+        public FuzzyDateTime(int year, int month, int day, FuzzyDateTimeAccuracy accuracy)
         {
-            this.Name = name;
+            this.DateTime = new DateTime(year, month, day);
+            this.Accuracy = accuracy;
         }
 
-        public override bool Equals(object obj)
-        {
-            Gender otherGender = obj as Gender;
-            if (otherGender == null)
-            {
-                return false;
-            }
+    }
 
-            return this.Name.Equals(otherGender.Name);
-        }
-
-        public override int GetHashCode()
-        {
-            return this.Name.GetHashCode();
-        }
+    /// <summary>
+    /// Accuracy values.
+    /// </summary>
+    public enum FuzzyDateTimeAccuracy
+    {
+        Exact = 0,
+        Minute = 1,
+        Hour = 2,
+        Day = 3,
+        Week  = 4,
+        Month = 5,
+        Year = 6,
+        Decade = 7,
+        Unknown = 8
     }
 }

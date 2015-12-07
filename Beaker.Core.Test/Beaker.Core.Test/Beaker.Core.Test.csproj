@@ -76,7 +76,9 @@
     <Compile Include="TestAddress.cs" />
     <Compile Include="TestAlternateContact.cs" />
     <Compile Include="TestEmailAddress.cs" />
+    <Compile Include="TestFamilyHistory.cs" />
     <Compile Include="TestFamilyRelationship.cs" />
+    <Compile Include="TestFuzzyDateTime.cs" />
     <Compile Include="TestOntarioHealthCard.cs" />
     <Compile Include="TestPatient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -45,7 +45,9 @@
     <Compile Include="AlternateContact.cs" />
     <Compile Include="Dates.cs" />
     <Compile Include="EmailAddress.cs" />
+    <Compile Include="FamilyHistory.cs" />
     <Compile Include="FamilyRelationship.cs" />
+    <Compile Include="FuzzyDateTime.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Identification.cs" />
     <Compile Include="ISOLanguage.cs" />
