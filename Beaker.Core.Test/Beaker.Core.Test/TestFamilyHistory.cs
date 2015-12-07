@@ -42,7 +42,10 @@ namespace Beaker.Core.Test
             };
             Assert.AreEqual(patient, history.Patient);
             Assert.AreEqual(startDate, history.StartDate);
+
             
+            history.AgeAtOnset = new FuzzyAge(25, FuzzyAgeAccuracy.Exact);
+            Assert.AreEqual(new FuzzyAge(25, FuzzyAgeAccuracy.Exact), history.AgeAtOnset);
         }
     }
 }

@@ -31,6 +31,7 @@ namespace Beaker.Core
 {
     public class FamilyHistory
     {
+        public FuzzyAge AgeAtOnset { get; set; }
         public Patient Patient { get; set; }
         public FuzzyDateTime StartDate { get; set; }
     }

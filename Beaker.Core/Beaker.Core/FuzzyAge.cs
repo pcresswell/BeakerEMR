@@ -30,43 +30,70 @@ using System.Threading.Tasks;
 namespace Beaker.Core
 {
     /// <summary>
-    /// Represents the relationship between two family members.
+    /// A fuzzy age.
     /// </summary>
-    public class FamilyRelationship
+    public class FuzzyAge
     {
         /// <summary>
-        /// Contruct a new Family Relationship.
+        /// The age.
         /// </summary>
-        /// <param name="type">The type of relationship.</param>
-        public FamilyRelationship(string type)
+        public int Age { get; private set; }
+        /// <summary>
+        /// The accuracy of the age recording.
+        /// </summary>
+        public FuzzyAgeAccuracy Accuracy { get; private set; }
+        /// <summary>
+        /// Creates a new FuzzyAge.
+        /// </summary>
+        /// <param name="age"></param>
+        /// <param name="accuracy"></param>
+        public FuzzyAge(int age, FuzzyAgeAccuracy accuracy)
         {
-            this.Type = type;
+            this.Age = age;
+            this.Accuracy = accuracy;
         }
 
-        /// <summary>
-        /// Person one. 
-        /// </summary>
-        public Person One { get; set; }
-        /// <summary>
-        /// Person two.
-        /// </summary>
-        public Person Two { get; set; }
-        /// <summary>
-        /// The type of relationship. Follows a convension of "One-Two" such as "Child-Parent" where 
-        /// person one is the child and person two is the parent.
-        /// </summary>
-        public string Type { get; private set; }
+        public override bool Equals(object obj)
+        {
+            FuzzyAge otherAge = (FuzzyAge)obj;
+            if (otherAge == null)
+            {
+                return false;
+            }
+
+            return (otherAge.Age.Equals(this.Age) && otherAge.Accuracy.Equals(this.Accuracy));
+        }
+
+        public override int GetHashCode()
+        {
+            return (this.Age.GetHashCode() + (1000 * this.Accuracy.GetHashCode()));
+        }
     }
 
-    public static class FamilyRelationshipType
+    /// <summary>
+    /// The accuracy of the age.
+    /// </summary>
+    public enum FuzzyAgeAccuracy
     {
-        public static readonly string ChildParent = "Child-Parent";
-        public static readonly string Sibling = "Sibling-Sibling";
-        public static readonly string NeiceUncle = "Neice-Uncle";
-        public static readonly string NeiceAunt = "Neice-Aunt";
-        public static readonly string NephewUncle = "Nephew-Uncle";
-        public static readonly string NephewAunt = "Nephew-Aunt";
-        public static readonly string ChildGrandParent = "Child-GrandParent";
-        public static readonly string Spouse = "Spouse-Spouse";
+        /// <summary>
+        /// Exact.
+        /// </summary>
+        Exact = 0,
+        /// <summary>
+        /// Roughly accurate to +/- one year.
+        /// </summary>
+        OneYear = 1,
+        /// <summary>
+        /// Roughly accurate to +/- five years.
+        /// </summary>
+        FiveYears = 2,
+        /// <summary>
+        /// Roughly accurate to +/- a decade
+        /// </summary>
+        Decade = 3,
+        /// <summary>
+        /// Unknown accuracy.
+        /// </summary>
+        Unknown = 4
     }
 }

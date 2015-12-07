@@ -1,8 +1,0 @@
-language: csharp 
-2 solution: Beaker.Core.sln
-3 before_install: 
-4   - sudo apt-get install nunit-console 
-5 before_script: 
-6   - nuget restore Beaker.Core.sln
-7 after_script: 
-8   - nunit-console Beaker.Core.Test/bin/Release/Beaker.Core.Test.dll 
