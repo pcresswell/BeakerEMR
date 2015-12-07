@@ -1,8 +1,11 @@
-language: csharp 
-2 solution: Beaker.Core.sln
-3 before_install: 
-4   - sudo apt-get install nunit-console 
-5 before_script: 
-6   - nuget restore Beaker.Core.sln
-7 after_script: 
-8   - nunit-console Beaker.Core.Test/bin/Release/Beaker.Core.Test.dll
+language: csharp
+solution: ./Beaker.Core/Beaker.Core.sln
+ 
+install:
+  - sudo apt-get install nunit-console
+  - nuget restore ./Beaker.Core/Beaker.Core.sln
+ 
+script:
+  - xbuild ./Beaker.Core/Beaker.Core.sln
+  - nunit-console ./Beaker.Core.Test/Beaker.Core.Test/bin/Debug/Beaker.Core.Test.dll
+
