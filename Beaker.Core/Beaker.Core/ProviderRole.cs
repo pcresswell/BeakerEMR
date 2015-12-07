@@ -29,9 +29,18 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// A provider role.
+    /// </summary>
     public class ProviderRole
     {
+        /// <summary>
+        /// The provider.
+        /// </summary>
         public Provider Provider { get; set; }
+        /// <summary>
+        /// The type of the role.
+        /// </summary>
         public string Type { get; set; }
     }
 }

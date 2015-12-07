@@ -31,7 +31,13 @@ namespace Beaker.Core
 {
     public class PatientEnrollmentRelationship : PatientProviderRelationship
     {
+        /// <summary>
+        /// Reason for the termination of enrollment.
+        /// </summary>
         public int TerminationReasonCode { get; set; }
+        /// <summary>
+        /// The enrollment status.
+        /// </summary>
         public string EnrollmentStatus { get; set; }
 
         public PatientEnrollmentRelationship() : base()

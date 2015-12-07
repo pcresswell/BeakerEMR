@@ -29,14 +29,35 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// A general relationship between a provider and a patient.
+    /// </summary>
     public class PatientProviderRelationship
     {
+        /// <summary>
+        /// The patient.
+        /// </summary>
         public Patient Patient { get; set; }
+        /// <summary>
+        /// The provider.
+        /// </summary>
         public Provider Provider { get; set; }
+        /// <summary>
+        /// The date on which the relationship started.
+        /// </summary>
         public DateTime StartDate { get; set; }
+        /// <summary>
+        /// The type of relationship.
+        /// </summary>
         public string Type { get; set; }
+        /// <summary>
+        /// The date on which the relationship ended.
+        /// </summary>
         public DateTime EndDate { get; set; }
 
+        /// <summary>
+        /// Creates a new PatientProviderRelationship
+        /// </summary>
         public PatientProviderRelationship()
         {
             this.EndDate = Dates.Infinity;

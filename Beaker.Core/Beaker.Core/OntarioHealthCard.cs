@@ -29,11 +29,26 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// An Ontario health card.
+    /// </summary>
     public class OntarioHealthCard
     {
+        /// <summary>
+        /// The expiry date.
+        /// </summary>
         public DateTime ExpiryDate { get; set; }
+        /// <summary>
+        /// The number.
+        /// </summary>
         public string Number { get; set; }
+        /// <summary>
+        /// The owner of the health card.
+        /// </summary>
         public Patient Owner { get; set; }
+        /// <summary>
+        /// The version code of the health card.
+        /// </summary>
         public string Version { get; set; }
     }
 }

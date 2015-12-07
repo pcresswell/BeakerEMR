@@ -38,8 +38,17 @@ namespace Beaker.Core
 
     public class EmailAddress
     {
+        /// <summary>
+        /// The owner of the email.
+        /// </summary>
         public Person Owner { get; set; }
+        /// <summary>
+        /// The type of the email.
+        /// </summary>
         public string Type { get; set; }
+        /// <summary>
+        /// The email address itself.
+        /// </summary>
         public string Value { get; set; }
     }
 }

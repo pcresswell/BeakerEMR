@@ -29,8 +29,14 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// A general purpose identification for a patient.
+    /// </summary>
     public class PatientIdentification : Identification
     {
+        /// <summary>
+        /// The patient.
+        /// </summary>
         public Patient Patient { get; set; }
     }
 }

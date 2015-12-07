@@ -29,9 +29,18 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// General identification number. 
+    /// </summary>
     public abstract class Identification
     {
+        /// <summary>
+        /// The number.
+        /// </summary>
         public string Number { get; set; }
+        /// <summary>
+        /// The type of identification.
+        /// </summary>
         public string Type { get; set; }
     }
 }

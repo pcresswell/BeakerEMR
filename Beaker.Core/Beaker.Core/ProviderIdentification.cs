@@ -29,9 +29,14 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// A general purpose identification for a provider.
+    /// </summary>
     public class ProviderIdentification : Identification
     {
+        /// <summary>
+        /// The provider.
+        /// </summary>
         public Provider Provider { get; set; }
-        
     }
 }

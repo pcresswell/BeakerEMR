@@ -38,7 +38,13 @@ namespace Beaker.Core
         {
             this.Person = new Person();
         }
+        /// <summary>
+        /// The user that manages this provider.
+        /// </summary>
         public User User { get; set; }
+        /// <summary>
+        /// The person.
+        /// </summary>
         public Person Person { get; set; }
 
     }

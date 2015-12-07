@@ -34,7 +34,13 @@ namespace Beaker.Core
     /// </summary>
     public class ISOLanguage
     {
+        /// <summary>
+        /// The 3 character language code.
+        /// </summary>
         public string Code { get; private set; }
+        /// <summary>
+        /// The name of the language.
+        /// </summary>
         public string Name { get; private set; }
 
         public ISOLanguage(string code, string name)

@@ -49,12 +49,12 @@ namespace Beaker.Core
         public static readonly Gender Female = new Gender("Female");
 
         /// <summary>
-        /// Default gender. Unknown gender.
+        /// Unknown gender.
         /// </summary>
         public static readonly Gender Unknown = new Gender("Unknown");
 
         /// <summary>
-        /// The name of the gender.
+        /// The name of the gender. For example "Male" or "Female".
         /// </summary>
         public string Name { get; private set; }
 

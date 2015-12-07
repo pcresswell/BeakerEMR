@@ -29,16 +29,32 @@ using System.Text;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// The patient role. 
+    /// </summary>
     public class Patient 
     {
-        public Person Person { get; set; }
-
-        public Patient() : base()
+        /// <summary>
+        /// Creates a new Patient.
+        /// </summary>
+        public Patient() 
         {
             this.Person = new Person();
         }
 
+        /// <summary>
+        /// The user that manages this patient.
+        /// </summary>
         public User User { get; set; }
+        /// <summary>
+        /// A note about the patient.
+        /// </summary>
         public string Note { get; set; }
+        /// <summary>
+        /// The person.
+        /// </summary>
+        public Person Person { get; set; }
+
+
     }
 }

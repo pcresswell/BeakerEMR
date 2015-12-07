@@ -29,8 +29,14 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// Date constants
+    /// </summary>
     public static class Dates
     {
+        /// <summary>
+        /// Represents an infinite date.
+        /// </summary>
         public static readonly DateTime Infinity = new DateTime(3000, 1, 1);
     }
 }

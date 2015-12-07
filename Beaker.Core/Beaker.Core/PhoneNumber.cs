@@ -37,12 +37,30 @@ namespace Beaker.Core
         public static readonly string Mobile = "Mobile";
     }
 
+    /// <summary>
+    /// A phone number.
+    /// </summary>
     public class PhoneNumber
     {
+        /// <summary>
+        /// The area code.
+        /// </summary>
         public string AreaCode { get; set; }
+        /// <summary>
+        /// The extension.
+        /// </summary>
         public string Extension { get; set; }
+        /// <summary>
+        /// The phone number.
+        /// </summary>
         public string Number { get; set; }
+        /// <summary>
+        /// The owner of the phone number.
+        /// </summary>
         public Person Owner { get; set; }
+        /// <summary>
+        /// The type of phone number. For example, "Home" or "Work".
+        /// </summary>
         public string Type { get; set; }
     }
 }
