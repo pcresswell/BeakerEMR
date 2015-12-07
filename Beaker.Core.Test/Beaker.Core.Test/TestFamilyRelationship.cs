@@ -42,7 +42,7 @@ namespace Beaker.Core.Test
             };
             Assert.AreEqual(son, relationship.One);
             Assert.AreEqual(father, relationship.Two);
-            Assert.AreEqual("Child-Parent", relationship.Type);
+            Assert.AreEqual("Child-Father", relationship.Type);
         }
 
         [Test]

@@ -52,6 +52,7 @@
     <Compile Include="Gender.cs" />
     <Compile Include="Identification.cs" />
     <Compile Include="ISOLanguage.cs" />
+    <Compile Include="LifeStage.cs" />
     <Compile Include="OntarioHealthCard.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="PatientEnrollmentRelationship.cs" />

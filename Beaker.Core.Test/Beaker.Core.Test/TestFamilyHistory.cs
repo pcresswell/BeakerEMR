@@ -56,6 +56,9 @@ namespace Beaker.Core.Test
             FamilyRelationship father = new FamilyRelationship(FamilyRelationshipType.ChildFather);
             history.Relationship = father;
             Assert.AreEqual(father, history.Relationship);
+
+            history.LifeStage = LifeStage.Adult;
+            Assert.AreEqual(LifeStage.Adult, history.LifeStage);
         }
     }
 }

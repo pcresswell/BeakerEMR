@@ -30,39 +30,29 @@ using System.Threading.Tasks;
 namespace Beaker.Core
 {
     /// <summary>
-    /// A problem, procedure or diagnosis of a family member and its details. 
+    /// A life stage.
     /// </summary>
-    public class FamilyHistory
+    public enum LifeStage
     {
         /// <summary>
-        /// Age of onset for the issue.
+        /// Up to 28 days old
         /// </summary>
-        public FuzzyAge AgeAtOnset { get; set; }
-       
+        Newborn = 1,
         /// <summary>
-        /// The problem, procedure or diagnosis.
+        /// 29 days to 2 years
         /// </summary>
-        public string Issue { get; set; }
-        public LifeStage LifeStage { get; set; }
-
+        Infant = 2,
         /// <summary>
-        /// A note.
+        /// 2 years to 15 years
         /// </summary>
-        public string Note { get; set; }
-
+        Child = 3,
         /// <summary>
-        /// The patient whose family member experienced the issue.
+        /// 16 years to 17 years
         /// </summary>
-        public Patient Patient { get; set; }
-        
+        Adolescent = 4,
         /// <summary>
-        /// The relation that has the issue.
+        /// 18 years and over.
         /// </summary>
-        public FamilyRelationship Relationship { get; set; }
-
-        /// <summary>
-        /// The approximate date on which the issue was idetified or treated.
-        /// </summary>
-        public FuzzyDateTime StartDate { get; set; }
+        Adult = 5
     }
 }
