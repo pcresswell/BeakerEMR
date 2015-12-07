@@ -5,5 +5,4 @@ language: csharp
 5 before_script: 
 6   - nuget restore Beaker.Core.sln
 7 after_script: 
-8   - nunit-console Beaker.Core.Test/bin/Release/Beaker.Core.Test.dll 
-
+8   - nunit-console Beaker.Core.Test/bin/Release/Beaker.Core.Test.dll
