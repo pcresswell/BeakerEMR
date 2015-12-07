@@ -35,7 +35,7 @@ namespace Beaker.Core.Test
             Person son = new Person();
             Person father = new Person();
 
-            FamilyRelationship relationship = new FamilyRelationship(FamilyRelationshipType.ChildParent)
+            FamilyRelationship relationship = new FamilyRelationship(FamilyRelationshipType.ChildFather)
             {
                 One = son,
                 Two = father

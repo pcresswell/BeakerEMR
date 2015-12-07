@@ -46,6 +46,16 @@ namespace Beaker.Core.Test
             
             history.AgeAtOnset = new FuzzyAge(25, FuzzyAgeAccuracy.Exact);
             Assert.AreEqual(new FuzzyAge(25, FuzzyAgeAccuracy.Exact), history.AgeAtOnset);
+
+            history.Issue = "Diabetes";
+            Assert.AreEqual("Diabetes", history.Issue);
+
+            history.Note = "A note";
+            Assert.AreEqual("A note", history.Note);
+
+            FamilyRelationship father = new FamilyRelationship(FamilyRelationshipType.ChildFather);
+            history.Relationship = father;
+            Assert.AreEqual(father, history.Relationship);
         }
     }
 }

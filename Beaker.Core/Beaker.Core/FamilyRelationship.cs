@@ -60,7 +60,8 @@ namespace Beaker.Core
 
     public static class FamilyRelationshipType
     {
-        public static readonly string ChildParent = "Child-Parent";
+        public static readonly string ChildFather = "Child-Father";
+        public static readonly string ChildMother = "Child-Mother";
         public static readonly string Sibling = "Sibling-Sibling";
         public static readonly string NeiceUncle = "Neice-Uncle";
         public static readonly string NeiceAunt = "Neice-Aunt";

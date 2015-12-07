@@ -29,10 +29,39 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// A problem, procedure or diagnosis of a family member and its details.
+    /// </summary>
     public class FamilyHistory
     {
+        /// <summary>
+        /// Age of onset for the issue.
+        /// </summary>
         public FuzzyAge AgeAtOnset { get; set; }
+       
+        /// <summary>
+        /// The problem, procedure or diagnosis.
+        /// </summary>
+        public string Issue { get; set; }
+
+        /// <summary>
+        /// A note.
+        /// </summary>
+        public string Note { get; set; }
+
+        /// <summary>
+        /// The patient whose family member experienced the issue.
+        /// </summary>
         public Patient Patient { get; set; }
+        
+        /// <summary>
+        /// The relation that has the issue.
+        /// </summary>
+        public FamilyRelationship Relationship { get; set; }
+
+        /// <summary>
+        /// The approximate date on which the issue was idetified or treated.
+        /// </summary>
         public FuzzyDateTime StartDate { get; set; }
     }
 }
