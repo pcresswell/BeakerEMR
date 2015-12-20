@@ -27,7 +27,7 @@ using NUnit.Framework;
 namespace Beaker.Core.Test
 {
     [TestFixture]
-    public class TestAlternateContact
+    public class TestPatientContact
     {
         [Test]
         public void AlternateContactHasAPersonAsAContact()
@@ -38,6 +38,7 @@ namespace Beaker.Core.Test
                 FirstName = "Susana",
                 LastName = "Hsu"
             };
+
             PhoneNumber workPhoneNumber = new PhoneNumber
             {
                 AreaCode = "416",
@@ -45,6 +46,7 @@ namespace Beaker.Core.Test
                 Owner = susana,
                 Type = PhoneNumberType.Work
             };
+
             PhoneNumber homePhoneNumber = new PhoneNumber
             {
                 AreaCode = "416",
@@ -68,7 +70,7 @@ namespace Beaker.Core.Test
                 Owner = susana
             };
 
-            AlternateContact alternateContact = new AlternateContact()
+            PatientContact alternateContact = new PatientContact()
             {
                 Patient = patient,
                 ContactPerson = susana,

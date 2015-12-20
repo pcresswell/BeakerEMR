@@ -74,7 +74,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="TestAddress.cs" />
-    <Compile Include="TestAlternateContact.cs" />
+    <Compile Include="TestPatientContact.cs" />
     <Compile Include="TestEmailAddress.cs" />
     <Compile Include="TestFamilyHistory.cs" />
     <Compile Include="TestFamilyRelationship.cs" />

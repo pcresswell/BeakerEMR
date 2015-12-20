@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
-    <Compile Include="AlternateContact.cs" />
+    <Compile Include="PatientContact.cs" />
     <Compile Include="Dates.cs" />
     <Compile Include="EmailAddress.cs" />
     <Compile Include="FamilyHistory.cs" />

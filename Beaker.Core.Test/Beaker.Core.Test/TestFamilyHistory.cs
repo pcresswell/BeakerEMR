@@ -40,6 +40,7 @@ namespace Beaker.Core.Test
                 Patient = patient,
                 StartDate = startDate
             };
+
             Assert.AreEqual(patient, history.Patient);
             Assert.AreEqual(startDate, history.StartDate);
 

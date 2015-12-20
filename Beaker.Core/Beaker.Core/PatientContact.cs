@@ -34,7 +34,7 @@ namespace Beaker.Core
         public static readonly string Emergency = "Emergency";
     }
 
-    public class AlternateContact
+    public class PatientContact
     {
         public PhoneNumber CellPhoneNumber { get; set; }
         public Person ContactPerson { get; set; }

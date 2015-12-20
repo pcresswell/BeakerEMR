@@ -54,7 +54,5 @@ namespace Beaker.Core
         /// The person.
         /// </summary>
         public Person Person { get; set; }
-
-
     }
 }
