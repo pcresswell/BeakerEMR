@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="TestAddress.cs" />
     <Compile Include="TestHealthCondition.cs" />
+    <Compile Include="TestImmunization.cs" />
     <Compile Include="TestPatientContact.cs" />
     <Compile Include="TestEmailAddress.cs" />
     <Compile Include="TestFamilyHistory.cs" />

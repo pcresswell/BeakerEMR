@@ -50,11 +50,24 @@ namespace Beaker.Core
         /// <param name="month"></param>
         /// <param name="day"></param>
         /// <param name="accuracy"></param>
-        public FuzzyDateTime(int year, int month, int day, FuzzyDateTimeAccuracy accuracy)
+        public FuzzyDateTime(int year, int month, int day, FuzzyDateTimeAccuracy accuracy) : this(year, month, day, 0, 0, 0, accuracy)
         {
-            this.DateTime = new DateTime(year, month, day);
+
+        }
+
+        public FuzzyDateTime(int year, int month, int day, int hour, int minute, int second, FuzzyDateTimeAccuracy accuracy)
+        {
+            this.DateTime = new DateTime(year, month, day, hour, minute, second);
             this.Accuracy = accuracy;
         }
+
+        /// <summary>
+        /// Creates an fuzzy date time with the given year, month and day with not time value. Assumes exact.
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        public FuzzyDateTime(int year, int month, int day) : this(year, month, day, FuzzyDateTimeAccuracy.Exact) { }
 
         /// <summary>
         /// Equality is based on the accuracy and the date.
@@ -62,15 +75,22 @@ namespace Beaker.Core
         /// <param name="obj"></param>
         /// <returns></returns>
         public override bool Equals(object obj)
-        {           
-            FuzzyDateTime other = (FuzzyDateTime)obj;
-
+        {
             if (obj == null)
             {
                 return false;
             }
 
-            return (this.DateTime.Equals(other.DateTime) && this.Accuracy.Equals(other.Accuracy));
+            FuzzyDateTime otherFuzzyDateTime = obj as FuzzyDateTime;
+
+            if (otherFuzzyDateTime == null)
+            {
+                return false;
+            }
+            else
+            {
+                return (this.DateTime.Equals(otherFuzzyDateTime.DateTime) && this.Accuracy.Equals(otherFuzzyDateTime.Accuracy));
+            }
         }
 
         public override int GetHashCode()
@@ -103,7 +123,7 @@ namespace Beaker.Core
         /// <summary>
         /// Plus or minus a week.
         /// </summary>
-        Week  = 4,
+        Week = 4,
         /// <summary>
         /// Plus or minus a month.
         /// </summary>
