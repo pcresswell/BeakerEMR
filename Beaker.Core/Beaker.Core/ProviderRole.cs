@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// A provider role.
     /// </summary>
-    public class ProviderRole
+    public class ProviderRole : Entity
     {
         /// <summary>
         /// The provider.

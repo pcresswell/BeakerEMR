@@ -25,34 +25,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    /// <summary>
-    /// The patient role. 
-    /// </summary>
-    public class Patient : Entity
+    public class SurgicalHealthCondition : HealthCondition
     {
         /// <summary>
-        /// Creates a new Patient.
+        /// The date on which the procedure was performed.
         /// </summary>
-        public Patient() 
-        {
-            this.Person = new Person();
-        }
+        public FuzzyDateTime ProcedureDate { get; set; }
 
         /// <summary>
-        /// The user that manages this patient.
+        /// The name of the procedure performed.
         /// </summary>
-        public User User { get; set; }
-        /// <summary>
-        /// A note about the patient.
-        /// </summary>
-        public string Note { get; set; }
-        /// <summary>
-        /// The person.
-        /// </summary>
-        public Person Person { get; set; }
+        public string Procedure { get; set; }
     }
 }

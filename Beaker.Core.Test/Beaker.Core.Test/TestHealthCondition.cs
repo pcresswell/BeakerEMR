@@ -41,7 +41,8 @@ namespace Beaker.Core.Test
                 LifeStage = LifeStage.Adult,
                 Note = "Some note",
                 Patient = patient,
-                StartDate = startDate
+                StartDate = startDate,
+                Status = HealthConditionStatus.Active
             };
 
             Assert.AreEqual(new FuzzyAge(30, FuzzyAgeAccuracy.FiveYears), condition.AgeAtOnset);
@@ -50,6 +51,7 @@ namespace Beaker.Core.Test
             Assert.AreEqual("Some note", condition.Note);
             Assert.AreEqual(patient, condition.Patient);
             Assert.AreEqual(startDate, condition.StartDate);
+            Assert.AreEqual(HealthConditionStatus.Active, condition.Status);
         }
     }
 }

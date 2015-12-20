@@ -22,37 +22,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using NUnit.Framework;
 
-
-namespace Beaker.Core
+namespace Beaker.Core.Test
 {
-    /// <summary>
-    /// The patient role. 
-    /// </summary>
-    public class Patient : Entity
+    [TestFixture]
+    public class TestSurgicalCondition
     {
-        /// <summary>
-        /// Creates a new Patient.
-        /// </summary>
-        public Patient() 
+        [Test]
+        public void CreateSurgicalCondition()
         {
-            this.Person = new Person();
-        }
+            SurgicalHealthCondition surgery = new SurgicalHealthCondition()
+            {
+                Procedure = "Ankle ORIF",
+                ProcedureDate = new FuzzyDateTime(2014, 2, 2, FuzzyDateTimeAccuracy.Month)
+            };
 
-        /// <summary>
-        /// The user that manages this patient.
-        /// </summary>
-        public User User { get; set; }
-        /// <summary>
-        /// A note about the patient.
-        /// </summary>
-        public string Note { get; set; }
-        /// <summary>
-        /// The person.
-        /// </summary>
-        public Person Person { get; set; }
+            Assert.AreEqual("Ankle ORIF", surgery.Procedure);
+            Assert.AreEqual(new FuzzyDateTime(2014, 2, 2, FuzzyDateTimeAccuracy.Month), surgery.ProcedureDate);
+        }
     }
 }

@@ -29,12 +29,12 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public static class AlternateContactPurpose
+    public static class PatientContactPurpose
     {
         public static readonly string Emergency = "Emergency";
     }
 
-    public class PatientContact
+    public class PatientContact : Entity
     {
         public PhoneNumber CellPhoneNumber { get; set; }
         public Person ContactPerson { get; set; }

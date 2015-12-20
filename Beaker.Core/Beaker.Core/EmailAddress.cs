@@ -36,7 +36,7 @@ namespace Beaker.Core
         public static readonly string Other = "Other";
     }
 
-    public class EmailAddress
+    public class EmailAddress : Entity
     {
         /// <summary>
         /// The owner of the email.

@@ -43,12 +43,40 @@ namespace Beaker.Core
         /// </summary>
         public FuzzyDateTimeAccuracy Accuracy { get; private set; }
 
+        /// <summary>
+        /// Creates 
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <param name="accuracy"></param>
         public FuzzyDateTime(int year, int month, int day, FuzzyDateTimeAccuracy accuracy)
         {
             this.DateTime = new DateTime(year, month, day);
             this.Accuracy = accuracy;
         }
 
+        /// <summary>
+        /// Equality is based on the accuracy and the date.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {           
+            FuzzyDateTime other = (FuzzyDateTime)obj;
+
+            if (obj == null)
+            {
+                return false;
+            }
+
+            return (this.DateTime.Equals(other.DateTime) && this.Accuracy.Equals(other.Accuracy));
+        }
+
+        public override int GetHashCode()
+        {
+            return this.DateTime.GetHashCode();
+        }
     }
 
     /// <summary>
@@ -56,14 +84,57 @@ namespace Beaker.Core
     /// </summary>
     public enum FuzzyDateTimeAccuracy
     {
+        /// <summary>
+        /// The date is known to be exact.
+        /// </summary>
         Exact = 0,
+        /// <summary>
+        /// Plus or minus a minute.
+        /// </summary>
         Minute = 1,
+        /// <summary>
+        /// Plus or minus an hour.
+        /// </summary>
         Hour = 2,
+        /// <summary>
+        /// Plus or minus a day.
+        /// </summary>
         Day = 3,
+        /// <summary>
+        /// Plus or minus a week.
+        /// </summary>
         Week  = 4,
+        /// <summary>
+        /// Plus or minus a month.
+        /// </summary>
         Month = 5,
-        Year = 6,
-        Decade = 7,
-        Unknown = 8
+        /// <summary>
+        /// Plus or minus three months.
+        /// </summary>
+        ThreeMonths = 6,
+        /// <summary>
+        /// Plus or minus half a year.
+        /// </summary>
+        SixMonths = 7,
+        /// <summary>
+        /// Plus or minus a year.
+        /// </summary>
+        Year = 8,
+        /// <summary>
+        /// Plus or minus a couple of years.
+        /// </summary>
+        TwoYears = 9,
+        /// <summary>
+        /// Plus or minus five years.
+        /// </summary>
+        FiveYears = 10,
+        /// <summary>
+        /// Plus or minus a decade.
+        /// </summary>
+        Decade = 11,
+        /// <summary>
+        /// The exactness of the date cannot be estimated.
+        /// </summary>
+        Unknown = 12
     }
 }

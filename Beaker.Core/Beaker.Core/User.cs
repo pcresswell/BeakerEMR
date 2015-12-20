@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// A user. 
     /// </summary>
-    public class User
+    public class User : Entity
     {
         
     }

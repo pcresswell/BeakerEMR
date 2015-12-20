@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// A general relationship between a provider and a patient.
     /// </summary>
-    public class PatientProviderRelationship
+    public class PatientProviderRelationship : Entity
     {
         /// <summary>
         /// The patient.

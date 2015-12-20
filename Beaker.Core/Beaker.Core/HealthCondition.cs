@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// Represents a health condition for a patient.
     /// </summary>
-    public class HealthCondition
+    public class HealthCondition : Entity
     {
         /// <summary>
         /// Age of onset for the issue.
@@ -40,7 +40,7 @@ namespace Beaker.Core
         public FuzzyAge AgeAtOnset { get; set; }
 
         /// <summary>
-        /// The problem, procedure or diagnosis.
+        /// The problem or diagnosis.
         /// </summary>
         public string Issue { get; set; }
 
@@ -65,12 +65,17 @@ namespace Beaker.Core
         public FuzzyDateTime StartDate { get; set; }
 
         /// <summary>
+        /// The approximate date on which the issue was resolved.
+        /// </summary>
+        public FuzzyDateTime ResolutionDate { get; set; }
+
+        /// <summary>
         /// Identifies the condition status
         /// </summary>
-        public string ConditionStatus { get; set; }
+        public string Status { get; set; }
     }
 
-    public static class ConditionStatuses
+    public static class HealthConditionStatus
     {
         public static readonly string Active = "Active";
         public static readonly string Inactive = "Inactive";

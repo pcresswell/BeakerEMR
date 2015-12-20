@@ -90,6 +90,7 @@
     <Compile Include="TestProvider.cs" />
     <Compile Include="TestProviderIdentification.cs" />
     <Compile Include="TestProviderRole.cs" />
+    <Compile Include="TestSurgicalCondition.cs" />
     <Compile Include="TestUser.cs" />
   </ItemGroup>
   <ItemGroup>

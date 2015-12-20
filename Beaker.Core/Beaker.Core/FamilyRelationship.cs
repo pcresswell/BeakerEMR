@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// Represents the relationship between two family members.
     /// </summary>
-    public class FamilyRelationship
+    public class FamilyRelationship : Entity
     {
         /// <summary>
         /// Contruct a new Family Relationship.

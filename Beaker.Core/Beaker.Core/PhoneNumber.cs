@@ -40,7 +40,7 @@ namespace Beaker.Core
     /// <summary>
     /// A phone number.
     /// </summary>
-    public class PhoneNumber
+    public class PhoneNumber : Entity
     {
         /// <summary>
         /// The area code.

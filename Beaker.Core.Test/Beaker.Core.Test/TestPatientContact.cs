@@ -74,7 +74,7 @@ namespace Beaker.Core.Test
             {
                 Patient = patient,
                 ContactPerson = susana,
-                Purpose = AlternateContactPurpose.Emergency,
+                Purpose = PatientContactPurpose.Emergency,
                 HomePhoneNumber = homePhoneNumber,
                 WorkPhoneNumber = workPhoneNumber,
                 CellPhoneNumber = cellPhoneNumber,
@@ -85,7 +85,7 @@ namespace Beaker.Core.Test
             Assert.AreEqual(patient, alternateContact.Patient);
             Assert.AreEqual("Susana", alternateContact.ContactPerson.FirstName);
             Assert.AreEqual("Hsu", alternateContact.ContactPerson.LastName);
-            Assert.AreEqual(AlternateContactPurpose.Emergency, alternateContact.Purpose);
+            Assert.AreEqual(PatientContactPurpose.Emergency, alternateContact.Purpose);
             Assert.AreEqual(homePhoneNumber, alternateContact.HomePhoneNumber);
             Assert.AreEqual(workPhoneNumber, alternateContact.WorkPhoneNumber);
             Assert.AreEqual(cellPhoneNumber, alternateContact.CellPhoneNumber);
