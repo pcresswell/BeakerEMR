@@ -27,39 +27,29 @@ using NUnit.Framework;
 namespace Beaker.Core.Test
 {
     [TestFixture]
-    public class TestFamilyHistory
+    public class TestHealthCondition
     {
         [Test]
-        public void FamilyHistoryHasAStartDate()
+        public void CreateHealthCondition()
         {
             Patient patient = new Patient();
-            FuzzyDateTime startDate = new FuzzyDateTime(2010, 1, 10, FuzzyDateTimeAccuracy.Exact);
-
-            FamilyHealthCondition history = new FamilyHealthCondition()
+            FuzzyDateTime startDate = new FuzzyDateTime(2015, 1, 1, FuzzyDateTimeAccuracy.Exact);
+            HealthCondition condition = new HealthCondition()
             {
+                AgeAtOnset = new FuzzyAge(30, FuzzyAgeAccuracy.FiveYears),
+                Issue = "Diabetes",
+                LifeStage = LifeStage.Adult,
+                Note = "Some note",
                 Patient = patient,
                 StartDate = startDate
             };
 
-            Assert.AreEqual(patient, history.Patient);
-            Assert.AreEqual(startDate, history.StartDate);
-
-            
-            history.AgeAtOnset = new FuzzyAge(25, FuzzyAgeAccuracy.Exact);
-            Assert.AreEqual(new FuzzyAge(25, FuzzyAgeAccuracy.Exact), history.AgeAtOnset);
-
-            history.Issue = "Diabetes";
-            Assert.AreEqual("Diabetes", history.Issue);
-
-            history.Note = "A note";
-            Assert.AreEqual("A note", history.Note);
-
-            FamilyRelationship father = new FamilyRelationship(FamilyRelationshipType.ChildFather);
-            history.Relationship = father;
-            Assert.AreEqual(father, history.Relationship);
-
-            history.LifeStage = LifeStage.Adult;
-            Assert.AreEqual(LifeStage.Adult, history.LifeStage);
+            Assert.AreEqual(new FuzzyAge(30, FuzzyAgeAccuracy.FiveYears), condition.AgeAtOnset);
+            Assert.AreEqual("Diabetes", condition.Issue);
+            Assert.AreEqual(LifeStage.Adult, condition.LifeStage);
+            Assert.AreEqual("Some note", condition.Note);
+            Assert.AreEqual(patient, condition.Patient);
+            Assert.AreEqual(startDate, condition.StartDate);
         }
     }
 }

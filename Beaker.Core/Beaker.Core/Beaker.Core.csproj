@@ -42,10 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="HealthCondition.cs" />
     <Compile Include="PatientContact.cs" />
     <Compile Include="Dates.cs" />
     <Compile Include="EmailAddress.cs" />
-    <Compile Include="FamilyHistory.cs" />
+    <Compile Include="FamilyHealthCondition.cs" />
     <Compile Include="FamilyRelationship.cs" />
     <Compile Include="FuzzyAge.cs" />
     <Compile Include="FuzzyDateTime.cs" />
