@@ -88,6 +88,7 @@
     <Compile Include="TestPatientIdentifier.cs" />
     <Compile Include="TestPatientProviderRelationship.cs" />
     <Compile Include="TestPhoneNumber.cs" />
+    <Compile Include="TestPrescription.cs" />
     <Compile Include="TestProvider.cs" />
     <Compile Include="TestProviderIdentification.cs" />
     <Compile Include="TestProviderRole.cs" />
