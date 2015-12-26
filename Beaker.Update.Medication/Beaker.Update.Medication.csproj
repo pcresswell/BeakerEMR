@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DFFB1CB6-4D70-49FA-B06D-42D3BD0B7AF8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Beaker.Update.Medication</RootNamespace>
+    <AssemblyName>Beaker.Update.Medication</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="20150601\CompanyList.cs" />
+    <Compile Include="20150601\DrugProductList.cs" />
+    <Compile Include="20150601\FormList.cs" />
+    <Compile Include="20150601\IngredientList.cs" />
+    <Compile Include="20150601\PackageList.cs" />
+    <Compile Include="20150601\PharmaceuticalList.cs" />
+    <Compile Include="20150601\RouteList.cs" />
+    <Compile Include="20150601\ScheduleList.cs" />
+    <Compile Include="20150601\StatusList.cs" />
+    <Compile Include="20150601\TherapeuticList.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="DrugProduct.cs" />
+    <Compile Include="Form.cs" />
+    <Compile Include="Ingredient.cs" />
+    <Compile Include="20150601\Medication20150601Migration.cs" />
+    <Compile Include="Package.cs" />
+    <Compile Include="Pharmaceutical.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Route.cs" />
+    <Compile Include="Schedule.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="Therapeutic.cs" />
+    <Compile Include="VeterinarySpecies.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
+      <Project>{065ff225-b832-4a42-9c0d-2df7cae4fef6}</Project>
+      <Name>Beaker.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beaker.Repository\Beaker.Repository.csproj">
+      <Project>{f4beb033-a085-4e5d-b5bc-bb21f57e3bb6}</Project>
+      <Name>Beaker.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -29,29 +29,27 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public abstract class Entity
+    /// <summary>
+    /// Anything that would be persisted must implement this interface.
+    /// </summary>
+    public interface IPersistable
     {
-        public Entity(Guid entityID)
-        {
-            this.EntityID = entityID;
-        }
-
-        public Entity() : this(Guid.NewGuid())
-        {
-            
-        }
-
         /// <summary>
         /// Represents the identity of an entity. Storage independent identity. 
-        /// Used for tracking identity across systems.
+        /// Used for tracking identity across systems. 
         /// </summary>
-        public Guid EntityID { get; private set; }
+        Guid DomainObjectID { get; set; }
+
+        /// <summary>
+        /// Identifier at the table/row level. Globally unique.
+        /// </summary>
+        int ID { get; set; }
 
         /// <summary>
         /// Represents the author of the current version of the entity. Not necessarily the 
         /// initial author.
         /// </summary>
-        public Guid AuthorID { get; set; }
+        Guid AuthorID { get; set; }
 
         /// <summary>
         /// Represents when the entity came into existance in real time. Does NOT represent
@@ -61,7 +59,7 @@ namespace Beaker.Core
         /// 
         /// Recorded in UTC.
         /// </summary>
-        public DateTime ValidStartDateTime { get; set; }
+        DateTime ValidStartDateTime { get; set; }
 
         /// <summary>
         /// Represents when the entity existence was no longer true. Does NOT represent
@@ -71,20 +69,20 @@ namespace Beaker.Core
         /// 
         /// Recoreded in UTC.
         /// </summary>
-        public DateTime ValidEndDateTime { get; set; }
+        DateTime ValidEndDateTime { get; set; }
 
         /// <summary>
         /// Represents when the entity became known to be true according to this system.
         /// 
         /// Recorded in UTC.
         /// </summary>
-        public DateTime RecordStartDateTime { get; set; }
+        DateTime RecordStartDateTime { get; set; }
 
         /// <summary>
         /// Represents when the entity becamse known to be false according to this system.
         /// 
         /// Recorded in UTC.
         /// </summary>
-        public DateTime RecordEndDateTime { get; set; }
+        DateTime RecordEndDateTime { get; set; }
     }
 }

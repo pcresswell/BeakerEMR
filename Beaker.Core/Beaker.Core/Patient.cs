@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// The patient role. 
     /// </summary>
-    public class Patient : Entity
+    public class Patient : DomainObject
     {
         /// <summary>
         /// Creates a new Patient.

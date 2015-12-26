@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public class Provider : Entity
+    public class Provider : DomainObject
     {
         /// <summary>
         /// Provider role. The Provider contains the details of the provider.

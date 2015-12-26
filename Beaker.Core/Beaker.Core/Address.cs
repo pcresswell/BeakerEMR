@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// An address.
     /// </summary>
-    public class Address : Entity
+    public class Address : DomainObject
     {
         /// <summary>
         /// The city.

@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// General identification number. 
     /// </summary>
-    public abstract class Identification : Entity
+    public abstract class Identification : DomainObject
     {
         /// <summary>
         /// The number.

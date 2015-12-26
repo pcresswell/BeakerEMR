@@ -34,7 +34,7 @@ namespace Beaker.Core
         public static readonly string Emergency = "Emergency";
     }
 
-    public class PatientContact : Entity
+    public class PatientContact : DomainObject
     {
         public PhoneNumber CellPhoneNumber { get; set; }
         public Person ContactPerson { get; set; }

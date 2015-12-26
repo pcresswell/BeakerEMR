@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// Represents a health condition for a patient.
     /// </summary>
-    public class HealthCondition : Entity
+    public class HealthCondition : DomainObject
     {
         /// <summary>
         /// Age of onset for the issue.

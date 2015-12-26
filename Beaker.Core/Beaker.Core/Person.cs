@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// Represents a physical person. Does not contain any role information such as patient, provider, etc.
     /// </summary>
-    public class Person : Entity
+    public class Person : DomainObject
     {
         /// <summary>
         /// The person's first name.

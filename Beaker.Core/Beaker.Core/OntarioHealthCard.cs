@@ -32,7 +32,7 @@ namespace Beaker.Core
     /// <summary>
     /// An Ontario health card.
     /// </summary>
-    public class OntarioHealthCard : Entity
+    public class OntarioHealthCard : DomainObject
     {
         /// <summary>
         /// The expiry date.

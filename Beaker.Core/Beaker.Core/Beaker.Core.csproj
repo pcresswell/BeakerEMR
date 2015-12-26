@@ -42,9 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="DomainObject.cs" />
     <Compile Include="HealthCondition.cs" />
     <Compile Include="Immunization.cs" />
+    <Compile Include="IPersistable.cs" />
+    <Compile Include="Medication\Company.cs" />
+    <Compile Include="Medication\DrugProduct.cs" />
+    <Compile Include="Medication\Form.cs" />
+    <Compile Include="Medication\Ingredient.cs" />
+    <Compile Include="Medication\Medication.cs" />
+    <Compile Include="Medication\Package.cs" />
+    <Compile Include="Medication\Pharmaceutical.cs" />
+    <Compile Include="Medication\Route.cs" />
+    <Compile Include="Medication\Schedule.cs" />
+    <Compile Include="Medication\Status.cs" />
+    <Compile Include="Medication\Therapeutic.cs" />
     <Compile Include="PatientContact.cs" />
     <Compile Include="Dates.cs" />
     <Compile Include="EmailAddress.cs" />
