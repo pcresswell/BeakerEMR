@@ -21,21 +21,28 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Beaker.Core
+namespace Beaker.Authorize
 {
-    /// <summary>
-    /// A user. 
-    /// </summary>
-    public class User : DomainObject
+    using System;
+
+    public class Update : Action
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string EmailAddress { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Authorize.Update"/> class.
+        /// </summary>
+        public Update()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Authorize.Update"/> class.
+        /// </summary>
+        /// <param name="subject">Subject.</param>
+        public Update(object subject)
+            : base(subject)
+        {
+        }
     }
 }

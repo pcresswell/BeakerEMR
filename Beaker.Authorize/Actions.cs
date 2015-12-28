@@ -21,21 +21,51 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Beaker.Core
+namespace Beaker.Authorize
 {
+    using System;
+
     /// <summary>
-    /// A user. 
+    /// Static class for Actions.
     /// </summary>
-    public class User : DomainObject
+    public class Actions
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string EmailAddress { get; set; }
+        /// <summary>
+        /// The Create action.
+        /// </summary>
+        public static readonly Create Create = new Create();
+
+        /// <summary>
+        /// The Read action.
+        /// </summary>
+        public static readonly Read Read = new Read();
+
+        /// <summary>
+        /// The update action.
+        /// </summary>
+        public static readonly Update Update = new Update();
+
+        /// <summary>
+        /// The Delete action.
+        /// </summary>
+        public static readonly Delete Delete = new Delete();
+
+        /// <summary>
+        /// The Share action.
+        /// </summary>
+        public static readonly Share Share = new Share();
+
+        /// <summary>
+        /// The Manage action.
+        /// </summary>
+        public static readonly Manage Manage = new Manage();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Authorize.Actions"/> class.
+        /// </summary>
+        private Actions()
+        {
+        }
     }
 }

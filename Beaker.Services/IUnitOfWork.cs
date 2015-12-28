@@ -21,21 +21,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Beaker.Core;
 
-namespace Beaker.Core
+namespace Beaker.Services
 {
-    /// <summary>
-    /// A user. 
-    /// </summary>
-    public class User : DomainObject
+    public interface IUnitOfWork
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string EmailAddress { get; set; }
+        TPersistable Create<TPersistable>() where TPersistable : IPersistable, new();
+        void Save<TPersistable>(TPersistable persistable) where TPersistable : IPersistable;
+        void Delete<TPersistable>(TPersistable persistable) where TPersistable : IPersistable;
     }
 }

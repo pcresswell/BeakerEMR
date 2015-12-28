@@ -1,4 +1,6 @@
-﻿/*
+﻿extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Peter Cresswell (pcresswell@gmail.com)
@@ -21,21 +23,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Beaker.Core
-{
-    /// <summary>
-    /// A user. 
-    /// </summary>
-    public class User : DomainObject
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string EmailAddress { get; set; }
-    }
-}
+extensions: .aspx .ascx
+<%-- 
+Sample license text.
+--%>
+extensions: .vb
+'Sample license text.
+extensions:  .xml .config .xsd
+<!--
+Sample license text.
+-->
