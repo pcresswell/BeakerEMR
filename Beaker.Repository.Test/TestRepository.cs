@@ -24,7 +24,8 @@ SOFTWARE.
 using System;
 using NUnit.Framework;
 using Beaker.Core;
-using Beaker.Repository.Memory;
+using SQLite;
+using Beaker.Repository.SQLite;
 
 namespace Beaker.Repository.Test
 {
@@ -32,21 +33,20 @@ namespace Beaker.Repository.Test
     public class TestRepository
     {
         Patient patient;
-        PatientMemoryPersistentStore store;
-        Repository<Patient> patientRepository;
+        IPatientRepository patientRepository;
 
         [SetUp]
         public void Setup()
         {
             this.patient = new Patient();
-            this.store = new PatientMemoryPersistentStore();
-            this.patientRepository = new Repository<Patient>(store);
-        }
+            BeakerSQLiteConnection c = new BeakerSQLiteConnection(new SQLiteConnection(":memory:"));
+            var personRepository = new PersonRepository(c);
+            this.patientRepository = new PatientRepository(c) { PersonRepository = personRepository };
+            
 
-        [TearDown]
-        public void Teardown()
-        {
-            this.store.Clear();
+            patientRepository.Initialize();
+            personRepository.Initialize();
+            
         }
 
         [Test]
@@ -66,8 +66,8 @@ namespace Beaker.Repository.Test
             Assert.AreEqual(Beaker.Core.Dates.Infinity, patient.ValidEndDateTime);
 
             // It should also save the object to the persistent store
-            Assert.AreEqual(1, this.store.Count);
-            Assert.AreEqual(1, this.patient.ID);
+            Assert.AreEqual(1, this.patientRepository.Count);
+            Assert.IsTrue(this.patient.ID != Guid.Empty);
         }
 
         [Test]
@@ -76,13 +76,13 @@ namespace Beaker.Repository.Test
             patientRepository.Save(patient);
 
             // It should also save the object to the persistent store
-            Assert.AreEqual(1, store.Count);
-            Assert.AreEqual(1, patient.ID);
+            Assert.AreEqual(1, patientRepository.Count);
+            Assert.IsTrue(Guid.Empty != patient.ID);
 
             // Every save adds a new row.
             patientRepository.Save(patient);
-            Assert.AreEqual(2, store.Count);
-            Assert.AreEqual(2, patient.ID);
+            Assert.AreEqual(2, patientRepository.Count);
+            Assert.IsTrue(Guid.Empty != patient.ID);
         }
 
         [Test]
@@ -91,10 +91,10 @@ namespace Beaker.Repository.Test
             Assert.IsFalse(patientRepository.IsPersisted(patient));
             patientRepository.Save(patient);
             Assert.IsTrue(patientRepository.IsPersisted(patient));
-            Assert.AreEqual(1, store.Count);
+            Assert.AreEqual(1, patientRepository.Count);
             System.Threading.Thread.Sleep(1000);
             patientRepository.Delete(patient);
-            Assert.AreEqual(1, store.Count);
+            Assert.AreEqual(1, patientRepository.Count);
 
             // Deleting a record marks the object as having an end valid datetime
             Assert.That(patient.ValidEndDateTime, Is.EqualTo(DateTime.UtcNow).Within(TimeSpan.FromSeconds(1)));
@@ -104,9 +104,9 @@ namespace Beaker.Repository.Test
         public void DeletingARecordTwiceDoesNothing()
         {
             patientRepository.Save(patient);
-            Assert.AreEqual(1, store.Count);
+            Assert.AreEqual(1, patientRepository.Count);
             patientRepository.Delete(patient);
-            Assert.AreEqual(1, store.Count);
+            Assert.AreEqual(1, patientRepository.Count);
 
             // Deleting a record marks the object as having an end valid datetime
             Assert.That(patient.ValidEndDateTime, Is.EqualTo(DateTime.UtcNow).Within(TimeSpan.FromSeconds(1)));
@@ -153,4 +153,5 @@ namespace Beaker.Repository.Test
             Assert.AreEqual("Some different note", patientRepository.Find(patient.DomainObjectID).Note);
         }
     }
+    
 }

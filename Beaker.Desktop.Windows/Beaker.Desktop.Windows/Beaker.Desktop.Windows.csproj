@@ -139,10 +139,6 @@
       <Project>{100179e3-3872-4d9e-95e8-ca71d32aa808}</Project>
       <Name>Beaker.Repository.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Beaker.Repository.Memory\Beaker.Repository.Memory.csproj">
-      <Project>{8c7e8e99-355c-4818-9eae-fbe1cc0fd9f7}</Project>
-      <Name>Beaker.Repository.Memory</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Beaker.Repository.SQLite\Beaker.Repository.SQLite.csproj">
       <Project>{7e20a621-af82-42b6-bb03-b3e3f029969b}</Project>
       <Name>Beaker.Repository.SQLite</Name>

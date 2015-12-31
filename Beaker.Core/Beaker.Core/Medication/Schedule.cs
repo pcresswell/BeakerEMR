@@ -27,15 +27,17 @@ namespace Beaker.Core.Medication
 {
 	public class Schedule : DomainObject
 	{
+        public Schedule() { }
+
 		public Schedule (int drugCode, string schedule)
 		{
 			this.DrugCode = drugCode;
 			this.ScheduleCode = schedule;
 		}
 
-		public int DrugCode { get; private set; }
+		public int DrugCode { get; set; }
 
-		public string ScheduleCode { get; private set; }
+		public string ScheduleCode { get; set; }
 	}
 }
 

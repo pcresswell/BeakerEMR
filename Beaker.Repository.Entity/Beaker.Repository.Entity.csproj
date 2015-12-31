@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{100179e3-3872-4d9e-95e8-ca71d32aa808}</ProjectGuid>
+    <ProjectGuid>{100179E3-3872-4D9E-95E8-CA71D32AA808}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Beaker.Repository.Entity</RootNamespace>
@@ -13,7 +13,8 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -41,6 +42,20 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Beaker.Authorize\Beaker.Authorize.csproj">
+      <Project>{7fa31657-7d0e-4924-be6b-61f3743d6116}</Project>
+      <Name>Beaker.Authorize</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
+      <Project>{065ff225-b832-4a42-9c0d-2df7cae4fef6}</Project>
+      <Name>Beaker.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beaker.Repository\Beaker.Repository.csproj">
+      <Project>{f4beb033-a085-4e5d-b5bc-bb21f57e3bb6}</Project>
+      <Name>Beaker.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -49,5 +64,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
 </Project>

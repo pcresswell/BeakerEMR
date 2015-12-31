@@ -37,6 +37,7 @@ namespace Beaker.Core
         /// <summary>
         /// The relation that has the issue.
         /// </summary>
+        [SameAs]
         public FamilyRelationship Relationship { get; set; }
     }
 }

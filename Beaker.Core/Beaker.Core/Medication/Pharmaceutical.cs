@@ -27,15 +27,16 @@ namespace Beaker.Core.Medication
 {
 	public class Pharmaceutical : DomainObject
 	{
+        public Pharmaceutical() { }
 		public Pharmaceutical (int drugCode, string pharmaceuticalStd)
 		{
 			this.DrugCode = drugCode;
 			this.PharmaceuticalSTD = pharmaceuticalStd;
 		}
 
-		public int DrugCode { get; private set; }
+		public int DrugCode { get; set; }
 
-		public string PharmaceuticalSTD { get; private set; }
+		public string PharmaceuticalSTD { get; set; }
 	}
 }
 

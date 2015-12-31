@@ -27,6 +27,8 @@ namespace Beaker.Core.Medication
 {
 	public class Therapeutic : DomainObject
 	{
+        public Therapeutic() { }
+
 		public Therapeutic (int drugCode, string tcAtcNumber, string tcAtc, string tcAhfsNumber, string tcAhfs)
 		{
 			this.DrugCode = drugCode;
@@ -36,15 +38,15 @@ namespace Beaker.Core.Medication
 			this.TCAHFS = tcAhfs;
 		}
 
-		public int DrugCode	{ get; private set; }
+		public int DrugCode	{ get; set; }
 
-		public string TCATCNumber { get; private set; }
+		public string TCATCNumber { get; set; }
 
-		public string TCATC { get; private set; }
+		public string TCATC { get; set; }
 
-		public string TCAHFSNumber { get; private set; }
+		public string TCAHFSNumber { get; set; }
 
-		public string TCAHFS { get; private set; }
+		public string TCAHFS { get; set; }
 	}
 }
 

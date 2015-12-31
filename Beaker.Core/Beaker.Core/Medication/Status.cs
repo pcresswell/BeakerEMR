@@ -27,6 +27,8 @@ namespace Beaker.Core.Medication
 {
 	public class Status : DomainObject
 	{
+        public Status() { }
+
 		public Status (int drugCode, string currentStatusFlag, string status, DateTime historyDate)
 		{
 			this.DrugCode = drugCode;
@@ -35,13 +37,13 @@ namespace Beaker.Core.Medication
 			this.HistoryDate = historyDate;
 		}
 
-		public int DrugCode { get; private set; }
+		public int DrugCode { get; set; }
 
-		public string CurrentStatusFlag { get; private set; }
+		public string CurrentStatusFlag { get; set; }
 
-		public string StatusCode { get; private set; }
+		public string StatusCode { get; set; }
 
-		public DateTime HistoryDate { get; private set; }
+		public DateTime HistoryDate { get; set; }
 	}
 }
 

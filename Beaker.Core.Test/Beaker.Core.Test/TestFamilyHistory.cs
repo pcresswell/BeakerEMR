@@ -27,8 +27,19 @@ using NUnit.Framework;
 namespace Beaker.Core.Test
 {
     [TestFixture]
-    public class TestFamilyHistory
+    public class TestFamilyHistory : TestDomainObject<FamilyHealthCondition>
     {
+        [Test]
+        public void TestAttributes()
+        {
+            base.AttributeTest("Patient", new Patient(), new Patient());
+            base.AttributeTest("StartDate", new FuzzyDateTime(2015, 1, 1), new FuzzyDateTime(2015, 2, 2));
+            base.AttributeTest("AgeAtOnset", new FuzzyAge(24,FuzzyAgeAccuracy.Exact), new FuzzyAge(25, FuzzyAgeAccuracy.Exact));
+            base.AttributeTest("Issue", "Something", "Different");
+            base.AttributeTest("Note", "Something", "Different");
+            base.AttributeTest("Relationship", new FamilyRelationship(FamilyRelationshipType.ChildFather), new FamilyRelationship(FamilyRelationshipType.ChildMother));
+        }
+
         [Test]
         public void FamilyHistoryHasAStartDate()
         {

@@ -27,6 +27,7 @@ namespace Beaker.Core.Medication
 {
 	public class Form : DomainObject
 	{
+        public Form() { }
 		public Form (int drugCode, int pharmFormCode, string pharmaceuticalForm)
 		{
 			this.DrugCode = drugCode;
@@ -34,11 +35,11 @@ namespace Beaker.Core.Medication
 			this.PharmaceuticalForm = pharmaceuticalForm;
 		}
 
-		public int DrugCode { get; private set; }
+		public int DrugCode { get;  set; }
 
-		public int PharmaceuticalFormCode { get; private set; }
+		public int PharmaceuticalFormCode { get;  set; }
 
-		public string PharmaceuticalForm { get; private set; }
+		public string PharmaceuticalForm { get;  set; }
 	}
 }
 

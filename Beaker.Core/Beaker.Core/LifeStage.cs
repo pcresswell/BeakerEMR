@@ -34,6 +34,7 @@ namespace Beaker.Core
     /// </summary>
     public enum LifeStage
     {
+        None = 0,
         /// <summary>
         /// Up to 28 days old
         /// </summary>

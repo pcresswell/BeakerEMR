@@ -63,12 +63,29 @@ namespace Beaker.Core
         /// </summary>
         public string Dosage { get; set; }
 
-
+        /// <summary>
+        /// Drug Code.
+        /// </summary>
         public string DrugCode { get; set; }
+        /// <summary>
+        /// Drug description.
+        /// </summary>
         public string DrugDescription { get; set; }
+        /// <summary>
+        /// Drug Form.
+        /// </summary>
         public string DrugForm { get; set; }
+        /// <summary>
+        /// Drug Strength.
+        /// </summary>
         public string DrugStrength { get; set; }
+        /// <summary>
+        /// Duration of prescription.
+        /// </summary>
         public string Duration { get; set; }
+        /// <summary>
+        /// Earliest Pickup Date.
+        /// </summary>
         public DateTime EarliestPickupDate { get; set; }
         public string Frequency { get; set; }
         public string Instructions { get; set; }

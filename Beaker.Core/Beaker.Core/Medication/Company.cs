@@ -25,74 +25,78 @@ using System;
 
 namespace Beaker.Core.Medication
 {
-	public class Company : DomainObject
-	{
-		public Company (int drugCode,
-		                string mfrCode,
-		                string companyCode,
-		                string companyName,
-		                string companyType,
-		                string addressMailingFlag,
-		                string addressBillingFlag,
-		                string addressNotificationFlag,
-		                string addressOther,
-		                string suiteNumber,
-		                string streetName,
-		                string cityName,
-		                string province,
-		                string country,
-		                string postalCode,
-		                string postOfficeBox)
-		{
-			this.DrugCode = drugCode;
-			this.MFRCode = mfrCode;
-			this.CompanyCode = companyCode;
-			this.CompanyName = companyName;
-			this.CompanyType = companyType;
-			this.AddressMailingFlag = addressMailingFlag;
-			this.AddressBillingFlag = addressBillingFlag;
-			this.AddressNotificationFlag = addressNotificationFlag;
-			this.AddressOther = addressOther;
-			this.SuiteNumber = suiteNumber;
-			this.Street = streetName;
-			this.City = cityName;
-			this.Province = province;
-			this.Country = country;
-			this.PostalCode = postalCode;
-			this.POBox = postOfficeBox;
-		}
+    public class Company : DomainObject
+    {
+        public Company() { }
 
-		public int DrugCode { get; private set; }
+        public Company(int drugCode,
+                        string mfrCode,
+                        string companyCode,
+                        string companyName,
+                        string companyType,
+                        string addressMailingFlag,
+                        string addressBillingFlag,
+                        string addressNotificationFlag,
+                        string addressOther,
+                        string suiteNumber,
+                        string streetName,
+                        string cityName,
+                        string province,
+                        string country,
+                        string postalCode,
+                        string postOfficeBox)
+        {
+            this.DrugCode = drugCode;
+            this.MFRCode = mfrCode;
+            this.CompanyCode = companyCode;
+            this.CompanyName = companyName;
+            this.CompanyType = companyType;
+            this.AddressMailingFlag = addressMailingFlag;
+            this.AddressBillingFlag = addressBillingFlag;
+            this.AddressNotificationFlag = addressNotificationFlag;
+            this.AddressOther = addressOther;
+            this.SuiteNumber = suiteNumber;
+            this.Street = streetName;
+            this.City = cityName;
+            this.Province = province;
+            this.Country = country;
+            this.PostalCode = postalCode;
+            this.POBox = postOfficeBox;
+        }
 
-		public string MFRCode { get; private set; }
+        public int DrugCode { get;  set; }
 
-		public string CompanyCode { get; private set; }
+        public string MFRCode { get;  set; }
 
-		public string CompanyName { get; private set; }
+        public string CompanyCode { get;  set; }
 
-		public string CompanyType { get; private set; }
+        public string CompanyName { get;  set; }
 
-		public string AddressMailingFlag { get; private set; }
+        public string CompanyType { get;  set; }
 
-		public string AddressBillingFlag { get; private set; }
+        public string AddressMailingFlag { get;  set; }
 
-		public string AddressNotificationFlag	 { get; private set; }
+        public string AddressBillingFlag { get;  set; }
 
-		public string AddressOther { get; private set; }
+        public string AddressNotificationFlag { get;  set; }
 
-		public string SuiteNumber { get; private set; }
+        public string AddressOther { get;  set; }
 
-		public string Street { get; private set; }
+        public string SuiteNumber { get;  set; }
 
-		public string City { get; private set; }
+        public string Street { get;  set; }
 
-		public string Province { get; private set; }
+        public string City { get;  set; }
 
-		public string Country { get; private set; }
+        public string Province { get;  set; }
 
-		public string PostalCode { get; private set; }
+        public string Country { get;  set; }
 
-		public string POBox { get; private set; }
-	}
+        public string PostalCode { get;  set; }
+
+        public string POBox { get;  set; }
+
+        
+    }
 }
 

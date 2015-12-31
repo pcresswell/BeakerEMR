@@ -27,7 +27,7 @@ using NUnit.Framework;
 namespace Beaker.Core.Test
 {
     [TestFixture]
-    public class TestEmailAddress
+    public class TestEmailAddress : TestDomainObject<EmailAddress>
     {
         [Test]
         public void EmailAddressHasOwnerAndValue()
@@ -44,5 +44,13 @@ namespace Beaker.Core.Test
             Assert.AreEqual(patient, email.Owner);
             Assert.AreEqual(EmailAddressType.Home, email.Type);
         }
+        [TestCase("Value", "something@somwhere.com", "different@somewhere.com")]
+        [TestCase("Type", "Home", "Work")]
+        public void TestEmailSameAsAttributes(string property, object v1, object v2)
+        {
+            base.AttributeTest(property, v1, v2);
+            base.AttributeTest("Owner", new Person(), new Person());
+        }
+        
     }
 }

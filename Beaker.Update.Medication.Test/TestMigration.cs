@@ -25,10 +25,12 @@ SOFTWARE.
 using System;
 using NUnit.Framework;
 using Beaker.Core.Medication;
-using Beaker.Repository.Memory;
+using Beaker.Repository.SQLite;
 using Beaker.Update.Medication.June2015;
 using System.Linq;
-
+using SQLite;
+using AutoMapper;
+using Beaker.Repository.SQLite.Tables.Medication;
 
 namespace Beaker.Repository.Test
 {
@@ -38,26 +40,38 @@ namespace Beaker.Repository.Test
         [Test]
         public void ApplyMedicationMigration()
         {
-            Medication20150601Migration migration = new Medication20150601Migration();
-            Database memoryDatabase = new Database();
-            memoryDatabase.Apply(migration);
-            IMedicationRepository medicationRepository = memoryDatabase.Repository<IMedicationRepository>();
-            Assert.AreEqual(16153, medicationRepository.Count);
-            Assert.IsTrue(memoryDatabase.HasMigration(migration.ID));
+            using (BeakerSQLiteConnection connection = new BeakerSQLiteConnection(new SQLiteConnection(":memory:")))
+            {
+                Medication20150601Migration migration = new Medication20150601Migration();
 
-            Medication medication = memoryDatabase.Repository<IMedicationRepository>().FindByDrugCode(47738);
-            Assert.IsNotNull(medication);
-            Assert.AreEqual("SUCRETS FOR KIDS", medication.Product.BrandName);
-            Assert.AreEqual("INSIGHT PHARMACEUTICALS LLC", medication.Company.CompanyName);
-            Assert.AreEqual("LOZENGE", medication.Forms.First().PharmaceuticalForm);
-            Assert.AreEqual("MG", medication.Ingredients.First().StrengthUnit);
-            Assert.AreEqual("18", medication.Packages.First().ProductInformation);
-            Assert.AreEqual("MFR", medication.Pharmaceuticals.First().PharmaceuticalSTD);
-            Assert.AreEqual("ORAL", medication.Routes.First().RouteOfAdministration);
-            Assert.AreEqual("OTC", medication.Schedules.First().ScheduleCode);
-            Assert.AreEqual("MARKETED (NOTIFIED)", medication.Statuses.First().StatusCode);
-            Assert.AreEqual("52:16.00", medication.Therapeutics.First().TCAHFSNumber);
-            
+                SQLiteDatabase database = new SQLiteDatabase(connection);
+                database.Initialize();
+                IMigratable m = (IMigratable)database;
+
+                Mapper.AssertConfigurationIsValid();
+
+                CompanyTable t = Mapper.Map<CompanyTable>(new Company());
+                Assert.IsNotNull(t);
+                IMedicationRepository medicationRepository = database.Repository<IMedicationRepository>();
+                m.Apply(migration);
+
+                Assert.AreEqual(16153, medicationRepository.Count);
+               
+                Medication medication = medicationRepository.FindByDrugCode(47738);
+                Assert.IsNotNull(medication);
+                Assert.AreEqual("SUCRETS FOR KIDS", medication.Product.BrandName);
+                Assert.AreEqual("INSIGHT PHARMACEUTICALS LLC", medication.Company.CompanyName);
+                Assert.AreEqual("LOZENGE", medication.Forms.First().PharmaceuticalForm);
+                Assert.AreEqual("MG", medication.Ingredients.First().StrengthUnit);
+                Assert.AreEqual("18", medication.Packages.First().ProductInformation);
+                Assert.AreEqual("MFR", medication.Pharmaceuticals.First().PharmaceuticalSTD);
+                Assert.AreEqual("ORAL", medication.Routes.First().RouteOfAdministration);
+                Assert.AreEqual("OTC", medication.Schedules.First().ScheduleCode);
+                Assert.AreEqual("MARKETED (NOTIFIED)", medication.Statuses.First().StatusCode);
+                Assert.AreEqual("52:16.00", medication.Therapeutics.First().TCAHFSNumber);
+                Assert.IsTrue(m.HasMigration(migration));
+            }
         }
     }
 }
+

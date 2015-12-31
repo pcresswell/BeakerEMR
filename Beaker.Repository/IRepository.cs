@@ -34,14 +34,16 @@ namespace Beaker.Repository
     public interface IRepository
     {
         int Count { get; }
+        void Initialize();
     }
 
     public interface IRepository<TPersistable> : IRepository where TPersistable : IPersistable
     {
         void Save(TPersistable persistable);
         void Delete(TPersistable persistable);
-        TPersistable Find(Guid guid);
-        TPersistable Find(Guid entityID, DateTime onDateTime);
+        TPersistable Find(Guid domainObjectID);
+        TPersistable Find(Guid domainObjectID, DateTime onDateTime);
         bool IsPersisted(TPersistable persistable);
+        void Initialize();
     }
 }

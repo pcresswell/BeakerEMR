@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,15 +29,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Beaker.Core;
 
-namespace Beaker.Repository.Memory
+namespace Beaker.Repository
 {
-    public class PatientMemoryPersistentStore : MemoryPersistentStore<Patient>
+    public interface IUserRepository : IRepository<User>
     {
-        protected override void Copy(Patient source, Patient destination)
-        {
-            destination.Note = source.Note;
-            destination.Person = source.Person;
-            destination.User = source.User;
-        }
+        User FindByUsername(string username);
     }
 }

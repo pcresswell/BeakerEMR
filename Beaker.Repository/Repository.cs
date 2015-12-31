@@ -30,82 +30,134 @@ using Beaker.Core;
 
 namespace Beaker.Repository
 {
-    public class Repository<TPersistable> : IRepository<TPersistable> where TPersistable : IPersistable
+    public abstract class Repository<TPersistable> : IRepository<TPersistable> where TPersistable : IPersistable
     {
-        public Repository(IPersistentStore<TPersistable> store)
+        public Repository()
         {
-            this.Store = store;
+            
         }
 
-        /// <summary>
-        /// The storage facility that persists and retrieves the object to disk.
-        /// </summary>
-        protected IPersistentStore<TPersistable> Store { get; set; }
-
-        public int Count
+        public abstract int Count
         {
-            get
+            get;           
+        }
+
+       
+
+        /// <summary>
+        /// Returns true if the object is different from the previous version
+        /// persisted to disk. Returns false otherwise.
+        /// </summary>
+        /// <param name="persistable">The persistable object to compare to disk.</param>
+        /// <returns></returns>
+        public virtual bool IsChanged(TPersistable persistable)
+        {
+            if (!this.IsPersisted(persistable))
             {
-                return this.Store.Count;
+                // If it's not saved, then it's different.
+                return true;
+            }
+
+            TPersistable otherPersistable = this.Get(persistable.ID);
+            return (!otherPersistable.SameAs(persistable));
+        }
+
+        public abstract bool IsPersisted(TPersistable persistable);
+     
+        /// <summary>
+        /// Deletes the persistable record. Override if more than one record needs to be deleted
+        /// in the event of a delete.
+        /// </summary>
+        /// <param name="persistable"></param>
+        protected virtual void Delete(TPersistable persistable)
+        {
+            persistable.ValidEndDateTime = DateTime.UtcNow;
+            persistable.RecordEndDateTime = DateTime.UtcNow;
+            if (this.IsPersisted(persistable))
+            {
+                this.Update(persistable);
             }
         }
 
-        public void Save(TPersistable persistable)
+        protected abstract TPersistable Find(Guid domainObjectID, DateTime onDateTime);
+
+        // protected abstract void Persist(TPersistable persistable);
+
+        protected abstract void Insert(TPersistable persistable);
+
+        protected abstract void Update(TPersistable persistable);
+
+        void IRepository<TPersistable>.Initialize()
         {
+            this.Initialize();
+        }
+
+        /// <summary>
+        /// Save the persistable object. Inserts new record if there are any changes.
+        /// </summary>
+        /// <param name="persistable"></param>
+        void IRepository<TPersistable>.Save(TPersistable persistable)
+        {
+            
             // First, discontinue the current version
-            var currentVersion = this.Find(persistable.DomainObjectID);
+            var currentVersion = this.Find(persistable.DomainObjectID, Beaker.Core.Dates.Infinity);
             if (currentVersion != null)
             {
-                // There is a current version
-                this.Discontinue(currentVersion);
+                // Discontinue the current version
+                // TODO: Consider the sitation of doing a sync from another system. This 
+                // will need to change here as the Valid date time will NOT be set to now.
+                this.Delete(currentVersion);
             }
 
             persistable.RecordStartDateTime = DateTime.UtcNow;
             persistable.ValidStartDateTime = DateTime.UtcNow;
             persistable.RecordEndDateTime = Beaker.Core.Dates.Infinity;
             persistable.ValidEndDateTime = Beaker.Core.Dates.Infinity;
-            this.Store.PersistWithNewID(persistable);
+            persistable.ID = Guid.NewGuid();
+            this.Insert(persistable);
         }
 
-        public void Delete(TPersistable persistable)
+        /// <summary>
+        /// Delete the persistable object.
+        /// </summary>
+        /// <param name="persistable"></param>
+        void IRepository<TPersistable>.Delete(TPersistable persistable)
         {
             if (Beaker.Core.Dates.Infinity.Equals(persistable.ValidEndDateTime) || DateTime.MinValue.Equals(persistable.ValidEndDateTime))
             {
-                Discontinue(persistable);
+                this.Delete(persistable);
             }
         }
- 
+
         /// <summary>
         /// Find the current version of the entity.
         /// </summary>
         /// <param name="entityID">The entity id.</param>
         /// <returns></returns>
-        public TPersistable Find(Guid entityID)
+        TPersistable IRepository<TPersistable>.Find(Guid entityID)
         {
-            return this.Store.Find(entityID);
+            return this.Find(entityID, Beaker.Core.Dates.Infinity);
         }
 
         /// <summary>
-        /// Find the version of the entity which was valid at the given date and time.
+        /// Find the version of the entity as it was on the given date and time.
         /// </summary>
         /// <param name="entityID">The entity id.</param>
         /// <param name="onDateTime">The date and time for which the record was valid.</param>
         /// <returns></returns>
-        public TPersistable Find(Guid entityID, DateTime onDateTime)
+        TPersistable IRepository<TPersistable>.Find(Guid domainObjectID, DateTime onDateTime)
         {
-            return this.Store.Find(entityID, onDateTime.ToUniversalTime());
+            return this.Find(domainObjectID, onDateTime.ToUniversalTime());
         }
 
-        public bool IsPersisted(TPersistable persistable)
-        {
-            return this.Store.IsPersisted(persistable);
-        }
+        public abstract void Initialize();
 
-        private void Discontinue(TPersistable persistable)
-        {
-            persistable.ValidEndDateTime = DateTime.UtcNow;
-            persistable.RecordEndDateTime = DateTime.UtcNow;
-            this.Store.Persist(persistable);
-        }
+        /// <summary>
+        /// Retrieve the object with the given ID from persistence.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        abstract protected TPersistable Get(Guid id);
+        
     }
 }

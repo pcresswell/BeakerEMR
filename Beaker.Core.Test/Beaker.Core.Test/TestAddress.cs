@@ -23,11 +23,12 @@ SOFTWARE.
 */
 using System;
 using NUnit.Framework;
+using System.Reflection;
 
 namespace Beaker.Core.Test
 {
     [TestFixture]
-    public class TestAddress
+    public class TestAddress : TestDomainObject<Address>
     {
         [Test]
         public void AddressProperties()
@@ -52,6 +53,22 @@ namespace Beaker.Core.Test
             Assert.AreEqual("Ontario", address.Province);
             Assert.AreEqual("Canada", address.Country);
             Assert.AreEqual(patient, address.Resident);
+        }
+
+        [TestCase("City", "Toronto", "Brampton")]
+        [TestCase("Country", "Canada", "America")]
+        [TestCase("PostalCode", "123", "456")]
+        [TestCase("Street", "Samsung", "Toshiba")]
+        [TestCase("Type", "Home", "Work")]
+        public void TestAddressSameAsAttributes(string propertyName, object valueOne, object valueTwo)
+        {
+            base.AttributeTest(propertyName, valueOne, valueTwo);
+        }
+
+        [Test]
+        public void TestSameAsResident()
+        {
+            base.AttributeTest("Resident", new Person() { FirstName = "Peter" }, new Person() { FirstName = "Susana" });
         }
     }
 }

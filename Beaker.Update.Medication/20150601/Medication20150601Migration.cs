@@ -25,6 +25,7 @@ namespace Beaker.Update.Medication.June2015
             foreach (var product in productList)
             {
                 Beaker.Core.Medication.Medication medication = new Core.Medication.Medication();
+                medication.DrugCode = product.DRUG_CODE;
                 int drugCode = product.DRUG_CODE;
                 Beaker.Update.Medication.Company company = companyList.Where(c => c.DRUG_CODE == drugCode).SingleOrDefault();
                 AssignCompany(medication, company);

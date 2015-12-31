@@ -41,17 +41,7 @@ namespace Beaker.Repository
 
         public void Apply(IMigratable migratableDatabase)
         {
-            try
-            {
-                migratableDatabase.StartTransaction();
-                this.ApplyMigration(migratableDatabase);
-                migratableDatabase.CommitTransaction();
-            }
-            catch (RollbackException ex)
-            {
-                migratableDatabase.RollbackTransaction();
-                throw ex;
-            }
+            this.ApplyMigration(migratableDatabase);
         }
 
         protected abstract void ApplyMigration(IMigratable migratableDatabase);

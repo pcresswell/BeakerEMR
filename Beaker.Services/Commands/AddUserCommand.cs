@@ -32,29 +32,24 @@ using Beaker.Core;
 
 namespace Beaker.Services.Commands
 {
-    public class AddUserCommand
+    public class AddUserCommand : Command
     {
-        private string Username { get; set; }
-        private string EmailAddress { get; set; }
-        private string Password { get; set; }
-        private IUnitOfWork UnitOfWork { get; set; }
+        public string Username { get; set; }
+        public string EmailAddress { get; set; }
+        public string Password { get; set; }
+    
 
-        public AddUserCommand(string username, string emailAddress, string password, IUnitOfWork unitOfWork)
+        public AddUserCommand(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException("username");
-            if (string.IsNullOrEmpty(emailAddress)) throw new ArgumentNullException("emailAddress");
-            if (string.IsNullOrEmpty(password)) throw new ArgumentNullException("password");
-            if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
-            if ("root".Equals(username)) throw new ArgumentException("Username cannot be root as this is a reserved username");
-
-            this.Username = username;
-            this.EmailAddress = emailAddress;
-            this.Password = password;
-            this.UnitOfWork = unitOfWork;
         }
 
-        public void Run()
+        protected override void Run()
         {
+            if (string.IsNullOrEmpty(Username)) throw new ArgumentNullException("username");
+            if (string.IsNullOrEmpty(EmailAddress)) throw new ArgumentNullException("emailAddress");
+            if (string.IsNullOrEmpty(Password)) throw new ArgumentNullException("password");
+            if ("root".Equals(Username)) throw new ArgumentException("Username cannot be root as this is a reserved username");
+
             User user = UnitOfWork.Create<User>();
             user.Username = this.Username;
             user.EmailAddress = this.EmailAddress;

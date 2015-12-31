@@ -37,30 +37,37 @@ namespace Beaker.Core
         /// <summary>
         /// The city.
         /// </summary>
+        [SameAs]
         public string City { get; set; }
         /// <summary>
         /// The country.
         /// </summary>
+        [SameAs]
         public string Country { get; set; }
         /// <summary>
         /// Postal code or zip code.
         /// </summary>
+        [SameAs]
         public string PostalCode { get; set; }
         /// <summary>
         /// Province or state.
         /// </summary>
+        [SameAs]
         public string Province { get; set; }
         /// <summary>
         /// The person associated with the address.
         /// </summary>
+        [SameAs]
         public Person Resident { get; set; }
         /// <summary>
         /// The street.
         /// </summary>
+        [SameAs]
         public string Street { get; set; }
         /// <summary>
         /// The type of address. See AddressType.
         /// </summary>
+        [SameAs]
         public string Type { get; set; }
     }
 

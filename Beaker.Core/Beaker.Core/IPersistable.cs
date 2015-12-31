@@ -43,7 +43,7 @@ namespace Beaker.Core
         /// <summary>
         /// Identifier at the table/row level. Globally unique.
         /// </summary>
-        int ID { get; set; }
+        Guid ID { get; set; }
 
         /// <summary>
         /// Represents the author of the current version of the entity. Not necessarily the 
@@ -84,5 +84,13 @@ namespace Beaker.Core
         /// Recorded in UTC.
         /// </summary>
         DateTime RecordEndDateTime { get; set; }
+
+        /// <summary>
+        /// Returns true if this object contains the same values
+        /// as the persistable object. Returns false if they are they are different. 
+        /// </summary>
+        /// <param name="persistable">The persistable object of comparison.</param>
+        /// <returns></returns>
+        bool SameAs(object persistable);
     }
 }

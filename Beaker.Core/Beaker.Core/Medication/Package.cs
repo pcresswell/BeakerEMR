@@ -27,6 +27,8 @@ namespace Beaker.Core.Medication
 {
 	public class Package : DomainObject
 	{
+        public Package() { }
+
 		public Package  (int drugCode, 
 			string upc,
 			string packageSizeUnit,
@@ -42,17 +44,17 @@ namespace Beaker.Core.Medication
 			this.ProductInformation = productInformation;
 		}
 
-		public int DrugCode { get; private set; }
+		public int DrugCode { get;  set; }
 
-		public string UPC { get; private set; }
+		public string UPC { get;  set; }
 
-		public string PackageSizeUnit { get; private set; }
+		public string PackageSizeUnit { get;  set; }
 
-		public string PackageType { get; private set; }
+		public string PackageType { get;  set; }
 
-		public string PackageSize { get; private set; }
+		public string PackageSize { get;  set; }
 
-		public string ProductInformation { get ; private set; }
+		public string ProductInformation { get ;  set; }
 	
 	}
 }

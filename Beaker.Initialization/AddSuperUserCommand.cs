@@ -40,10 +40,10 @@ namespace Beaker.Initialization
             user.Username = this.Username;
             user.EmailAddress = this.EmailAddress;
             user.Password = this.Password;
-            UnitOfWork.Save<User>(user);
+            UnitOfWork.Save(user);
             UserPermission userPermission = UnitOfWork.Create<UserPermission>();
             userPermission.AddAuthorization(Actions.Manage);
-            UnitOfWork.Save<UserPermission>(userPermission);
+            UnitOfWork.Save(userPermission);
         }
     }
 }

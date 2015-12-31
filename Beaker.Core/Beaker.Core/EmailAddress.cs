@@ -41,14 +41,17 @@ namespace Beaker.Core
         /// <summary>
         /// The owner of the email.
         /// </summary>
+        [SameAs]
         public Person Owner { get; set; }
         /// <summary>
         /// The type of the email.
         /// </summary>
+        [SameAs]
         public string Type { get; set; }
         /// <summary>
         /// The email address itself.
         /// </summary>
+        [SameAs]
         public string Value { get; set; }
     }
 }

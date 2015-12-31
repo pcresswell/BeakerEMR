@@ -27,6 +27,8 @@ namespace Beaker.Core.Medication
 {
 	public class Route : DomainObject
 	{
+        public Route() { }
+
 		public Route (int drugCode, int routeOfAdministrationCode, string routeOfAdministration)
 		{
 			this.DrugCode = drugCode;
@@ -34,11 +36,11 @@ namespace Beaker.Core.Medication
 			this.RouteOfAdministration = routeOfAdministration;
 		}
 
-		public int DrugCode { get; private set; }
+		public int DrugCode { get; set; }
 
-		public int RouteOfAdministrationCode { get; private set; }
+		public int RouteOfAdministrationCode { get; set; }
 
-		public string RouteOfAdministration { get; private set; }
+		public string RouteOfAdministration { get; set; }
 	}
 }
 

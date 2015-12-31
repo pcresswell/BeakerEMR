@@ -27,6 +27,8 @@ namespace Beaker.Core.Medication
 {
 	public class Ingredient : DomainObject
 	{
+        public Ingredient() { }
+
 		public Ingredient (int drugCode, 
 			int activeIngredientCode,
 			string ingredient,
@@ -52,27 +54,27 @@ namespace Beaker.Core.Medication
 			this.Notes = notes;
 		}
 
-		public int DrugCode { get; private set; }
+		public int DrugCode { get;  set; }
 
-		public int ActiveIngredientCode { get; private set; }
+		public int ActiveIngredientCode { get;  set; }
 
-		public string IngredientCode { get; private set; }
+		public string IngredientCode { get;  set; }
 
-		public string IngredientSuppliedInd { get; private set; }
+		public string IngredientSuppliedInd { get;  set; }
 
-		public double Strength { get; private set; }
+		public double Strength { get;  set; }
 
-		public string StrengthUnit { get; private set; }
+		public string StrengthUnit { get;  set; }
 
-		public string StrengthType { get; private set; }
+		public string StrengthType { get;  set; }
 
-		public string DosageValue { get; private set; }
+		public string DosageValue { get;  set; }
 
-		public string Base { get; private set; }
+		public string Base { get;  set; }
 
-		public string DosageUnit { get; private set; }
+		public string DosageUnit { get;  set; }
 
-		public string Notes{ get; private set; }
+		public string Notes{ get;  set; }
 
 	}
 }

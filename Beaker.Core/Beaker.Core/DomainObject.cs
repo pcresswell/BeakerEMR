@@ -26,36 +26,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Beaker.Core
 {
+    /// <summary>
+    /// Base class for all domain objects. 
+    /// </summary>
     public abstract class DomainObject : IPersistable
     {
+        /// <summary>
+        /// Instantiate a new DomainObject with a DomainObjectID GUID.
+        /// </summary>
+        /// <param name="domainObjectID">The DomainObjectID value.</param>
         public DomainObject(Guid domainObjectID)
         {
             this.DomainObjectID = domainObjectID;
-            this.ID = int.MinValue;
+            this.ID = Guid.Empty;
             this.RecordEndDateTime = DateTime.MinValue;
             this.RecordStartDateTime = DateTime.MinValue;
             this.ValidEndDateTime = DateTime.MinValue;
             this.ValidStartDateTime = DateTime.MinValue;
         }
 
+        /// <summary>
+        /// Creates a brand new DomainObject that does not currently have
+        /// a DomainObjectID. Assigns a new GUID to the DomainObjectID.
+        /// </summary>
         public DomainObject() : this(Guid.NewGuid())
         {
         
         }
 
         /// <summary>
-        /// Represents the identity of an entity. Storage independent identity. 
-        /// Used for tracking identity across systems.
+        /// Represents the identity of the domain object. Storage independent identity. 
+        /// Used for tracking identity across systems and over time.
         /// </summary>
         public Guid DomainObjectID { get; set; }
 
         /// <summary>
-        /// Row id.
+        /// Row identifier. Unique per record.
         /// </summary>
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         /// <summary>
         /// Represents the author of the current version of the entity. Not necessarily the 
@@ -96,5 +108,70 @@ namespace Beaker.Core
         /// Recorded in UTC.
         /// </summary>
         public DateTime RecordEndDateTime { get; set; }
+
+        /// <summary>
+        /// Returns true if the objects have the same values.
+        /// Returns false otherwise.
+        /// </summary>
+        /// <param name="persistable">The persistable object to compare against.</param>
+        /// <returns></returns>
+        public virtual bool SameAs(object persistable)
+        {
+            if (persistable == null)
+            {
+                return false;
+            }
+
+            if (!this.GetType().Equals(persistable.GetType()))
+            {
+                return false;
+            }
+
+            DomainObject other = (DomainObject)persistable;
+            if(other.ID != this.ID)
+            {
+                return false;
+            }
+
+            var properties = this.GetType().GetRuntimeProperties();
+            foreach (var prop in properties)
+            {
+                // Only compare properties with the SameAs attribute
+                var att = prop.GetCustomAttribute<SameAsAttribute>();
+                if (att == null) continue;
+
+                var propertyValue = prop.GetValue(this);
+                var otherPropertyValue = other.GetType().GetRuntimeProperty(prop.Name).GetValue(other);
+
+                if (propertyValue == null)
+                {
+                    if (otherPropertyValue != null) return false;
+                }
+                else if (!propertyValue.Equals(otherPropertyValue))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (!obj.GetType().Equals(this.GetType())) return false;
+
+            var other = obj as DomainObject;
+            if (Guid.Empty.Equals(other.ID)) return base.Equals(obj);
+            if (Guid.Empty.Equals(this.ID)) return base.Equals(obj);
+
+            return other.ID.Equals(this.ID);
+        }
+
+        public override int GetHashCode()
+        {
+            if (Guid.Empty.Equals(this.ID)) return base.GetHashCode();
+            return this.ID.GetHashCode();
+        }
     }
 }

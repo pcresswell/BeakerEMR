@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 using System;
+using System.Reflection;
 
 namespace Beaker.Core.Medication
 {
@@ -52,27 +53,29 @@ namespace Beaker.Core.Medication
 			this.AIGroupNumber = aiGroupNo;
 		}
 
-		public int DrugCode { get; private set; }
+        public DrugProduct() { }
 
-		public string ProductCategorization { get; private set; }
+		public int DrugCode { get;  set; }
 
-		public string ProductClass { get; private set; }
+		public string ProductCategorization { get;  set; }
 
-		public string DrugIdentificationNumber { get; private set; }
+		public string ProductClass { get;  set; }
 
-		public string BrandName { get; private set; }
+		public string DrugIdentificationNumber { get;  set; }
 
-		public string Descriptor { get; private set; }
+		public string BrandName { get;  set; }
 
-		public string PediatricFlag { get; private set; }
+		public string Descriptor { get;  set; }
 
-		public string AccessionNumber { get; private set; }
+		public string PediatricFlag { get;  set; }
 
-		public string NumberOfAIS { get; private set; }
+		public string AccessionNumber { get;  set; }
 
-		public DateTime LastUpdateDate { get; private set; }
+		public string NumberOfAIS { get;  set; }
 
-		public string AIGroupNumber { get; private set; }
+		public DateTime LastUpdateDate { get;  set; }
+
+		public string AIGroupNumber { get;  set; }
 	}
 }
 

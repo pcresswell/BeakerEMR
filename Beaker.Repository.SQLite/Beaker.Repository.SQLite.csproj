@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7E20A621-AF82-42B6-BB03-B3E3F029969B}</ProjectGuid>
@@ -13,9 +13,8 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,13 +34,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Beaker.Repository.SQLite.licenseheader" />
     <None Include="project.json" />
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeakerSQLiteConnection.cs" />
+    <Compile Include="MedicationRepository.cs" />
+    <Compile Include="PatientRepository.cs" />
+    <Compile Include="SQLiteDatabase.cs" />
+    <Compile Include="SQLiteRepository.cs" />
+    <Compile Include="Tables\Medication\CompanyTable.cs" />
+    <Compile Include="Tables\Medication\DrugProductTable.cs" />
+    <Compile Include="Tables\Medication\IngredientTable.cs" />
+    <Compile Include="Tables\Medication\FormTable.cs" />
+    <Compile Include="Tables\Medication\ScheduleTable.cs" />
+    <Compile Include="Tables\Medication\MedicationTable.cs" />
+    <Compile Include="Tables\Medication\PackageTable.cs" />
+    <Compile Include="Tables\Medication\StatusTable.cs" />
+    <Compile Include="Tables\Medication\TherapeuticTable.cs" />
+    <Compile Include="Tables\MigrationTable.cs" />
+    <Compile Include="Tables\PatientTable.cs" />
+    <Compile Include="PersonRepository.cs" />
+    <Compile Include="Tables\PersonTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Table.cs" />
+    <Compile Include="Tables\Medication\PharmaceuticalTable.cs" />
+    <Compile Include="Tables\Medication\RouteTable.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Beaker.Authorize\Beaker.Authorize.csproj">
+      <Project>{7fa31657-7d0e-4924-be6b-61f3743d6116}</Project>
+      <Name>Beaker.Authorize</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
       <Project>{065ff225-b832-4a42-9c0d-2df7cae4fef6}</Project>
       <Name>Beaker.Core</Name>

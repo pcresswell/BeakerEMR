@@ -34,31 +34,48 @@ namespace Beaker.Services.Test
     public class TestAddUserCommand
     {
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CreateAUserMustHaveAUsername()
         {
-            AddUserCommand addUser = new AddUserCommand(string.Empty, string.Empty, string.Empty, null);
+            Assert.Throws<ArgumentNullException>(()=>
+            {
+                ICommand addUser = new AddUserCommand(null);
+                addUser.Run();
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CreateAUserMustHaveAnEmailAddress()
         {
-            AddUserCommand addUser = new AddUserCommand("Peter", string.Empty, string.Empty, null);
+            Assert.Throws<ArgumentNullException>(() => {
+                ICommand addUser = new AddUserCommand(null) { Username = "Peter" };
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CreateAUserMustHaveAPassword()
         {
-            AddUserCommand addUser = new AddUserCommand("Peter", "pcresswell@gmail.com", string.Empty, null);
+            Assert.Throws<ArgumentNullException>(() => 
+            {
+            ICommand addUser = new AddUserCommand(null) {
+                Username = "Peter",
+                EmailAddress = "pcresswell@gmail.com" };
+            });
+            
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CreateAUserMustHaveAUnitOfWork()
         {
-            AddUserCommand addUser = new AddUserCommand("Peter", "pcresswell@gmail.com", "password", null);
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ICommand addUser = new AddUserCommand(null)
+                {
+                    Username = "Peter",
+                    EmailAddress = "pcresswell@gmail.com",
+                    Password = "password"
+                };
+                addUser.Run();
+            });
         }
 
         [Test]
@@ -66,7 +83,13 @@ namespace Beaker.Services.Test
         {
             var moqUOW = new Mock<IUnitOfWork>();
             moqUOW.Setup(f => f.Create<User>()).Returns(() => new User());
-            AddUserCommand addUser = new AddUserCommand("Peter", "pcresswell@gmail.com", "password", moqUOW.Object);
+            ICommand addUser = new AddUserCommand(moqUOW.Object)
+            {
+                Username = "Peter",
+                EmailAddress = "pcresswell@gmail.com",
+                Password = "password"
+            };
+
             addUser.Run();
             moqUOW.Verify(f => f.Save<User>(It.Is<User>(
                 u=> u.Username == "Peter" &&
@@ -75,11 +98,18 @@ namespace Beaker.Services.Test
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void UsernameCannotBeRoot()
         {
-            var moq = new Mock<IUnitOfWork>();
-            AddUserCommand addUser = new AddUserCommand("root", "something@somewhere.com", "password",moq.Object );
+            Assert.Throws<ArgumentException>(() => {
+                var moq = new Mock<IUnitOfWork>();
+                ICommand addUser = new AddUserCommand(moq.Object)
+                {
+                    Username = "root",
+                    EmailAddress = "pcresswell@gmail.com",
+                    Password = "password"
+                };
+                addUser.Run();
+            });
         }
 
     }
