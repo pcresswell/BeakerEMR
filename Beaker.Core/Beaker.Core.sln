@@ -12,6 +12,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.travis.yml = ..\.travis.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beaker.Repository", "..\Beaker.Repository\Beaker.Repository.csproj", "{F4BEB033-A085-4E5D-B5BC-BB21F57E3BB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beaker.Repository.Test", "..\Beaker.Repository.Test\Beaker.Repository.Test.csproj", "{F9DA2F44-5525-4F75-AE4B-69E3919782AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beaker.Repository.Memory", "..\Beaker.Repository.Memory\Beaker.Repository.Memory.csproj", "{8C7E8E99-355C-4818-9EAE-FBE1CC0FD9F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beaker.Repository.SQLite", "..\Beaker.Repository.SQLite\Beaker.Repository.SQLite.csproj", "{7E20A621-AF82-42B6-BB03-B3E3F029969B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beaker.Repository.Entity", "..\Beaker.Repository.Entity\Beaker.Repository.Entity.csproj", "{100179E3-3872-4D9E-95E8-CA71D32AA808}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +36,26 @@ Global
 		{A8471435-A352-483E-AF5C-CFBB5B261A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8471435-A352-483E-AF5C-CFBB5B261A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8471435-A352-483E-AF5C-CFBB5B261A4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4BEB033-A085-4E5D-B5BC-BB21F57E3BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4BEB033-A085-4E5D-B5BC-BB21F57E3BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4BEB033-A085-4E5D-B5BC-BB21F57E3BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4BEB033-A085-4E5D-B5BC-BB21F57E3BB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9DA2F44-5525-4F75-AE4B-69E3919782AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DA2F44-5525-4F75-AE4B-69E3919782AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DA2F44-5525-4F75-AE4B-69E3919782AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DA2F44-5525-4F75-AE4B-69E3919782AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C7E8E99-355C-4818-9EAE-FBE1CC0FD9F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7E8E99-355C-4818-9EAE-FBE1CC0FD9F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7E8E99-355C-4818-9EAE-FBE1CC0FD9F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7E8E99-355C-4818-9EAE-FBE1CC0FD9F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E20A621-AF82-42B6-BB03-B3E3F029969B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E20A621-AF82-42B6-BB03-B3E3F029969B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E20A621-AF82-42B6-BB03-B3E3F029969B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E20A621-AF82-42B6-BB03-B3E3F029969B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{100179E3-3872-4D9E-95E8-CA71D32AA808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{100179E3-3872-4D9E-95E8-CA71D32AA808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{100179E3-3872-4D9E-95E8-CA71D32AA808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{100179E3-3872-4D9E-95E8-CA71D32AA808}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

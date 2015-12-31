@@ -27,58 +27,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Beaker.Core;
-using Beaker.Core.Medication;
-using Beaker.Repository;
 
-namespace Beaker.Repository.Memory
+namespace Beaker.Services.Commands
 {
-    public class Database : IMigratable
+
+    public abstract class Command : ICommand
     {
-        private IDictionary<Type, object> repositories = new Dictionary<Type, object>();
-        private IDictionary<string, Migration> migrations = new Dictionary<string, Migration>();
+        protected IUnitOfWork UnitOfWork { get; set; }
 
-        public Database()
+        public Command(IUnitOfWork unitOfWork)
         {
-            IMedicationRepository medicationRepository = new MedicationRepository();
-            this.repositories[typeof(IMedicationRepository)] = medicationRepository;
+            if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
+            this.UnitOfWork = unitOfWork;
         }
 
-        public void Apply(Migration migration)
+        void ICommand.Run()
         {
-            if (this.HasMigration(migration.ID))
-            {
-                return;
-            }
-
-            this.migrations[migration.ID] = migration;
-
-            migration.Apply(this);
+            this.Run();
         }
 
-        public void CommitTransaction()
-        {
-            // do nothing
-        }
-
-        public bool HasMigration(string id)
-        {
-            return migrations.ContainsKey(id);
-        }
-
-        public T Repository<T>() where T : IRepository
-        {
-            return (T) this.repositories[typeof(T)];
-        }
-
-        public void RollbackTransaction()
-        {
-            // do nothing
-        }
-
-        public void StartTransaction()
-        {
-            // do nothing
-        }
+        protected abstract void Run();
     }
 }

@@ -1,0 +1,21 @@
+{
+    "version": "1.2015.06.01",
+    "description": "Beaker.Medication Class Library",
+    "authors": [ "Peter Cresswell" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "dependencies": {
+        "System.Collections": "4.0.10-beta-23019",
+        "System.Linq": "4.0.0-beta-23019",
+        "System.Threading": "4.0.10-beta-23019",
+        "System.Runtime": "4.0.10-beta-23019",
+        "Microsoft.CSharp": "4.0.0-beta-23019",
+        "Beaker.Medication": "1.2015.6.1"
+    },
+
+    "frameworks": {
+        "dotnet": { }
+    }
+}
