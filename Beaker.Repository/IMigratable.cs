@@ -33,8 +33,8 @@ namespace Beaker.Repository
         void StartTransaction();
         void CommitTransaction();
         void RollbackTransaction();
-        bool HasMigration(Migration migration);
+        bool HasMigration(IMigration migration);
         T Repository<T>() where T : IRepository;
-        void Apply(Migration migration);
+        void Apply(IMigration migration);
     }
 }

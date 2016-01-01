@@ -8,13 +8,19 @@ using Beaker.Core;
 using SQLite;
 using Beaker.Repository.SQLite.Tables;
 
+
 namespace Beaker.Repository.SQLite
 {
     public class PersonRepository : SQLiteRepository<Person, PersonTable>, IPersonRepository
     {
-        public PersonRepository(BeakerSQLiteConnection connection) : base(connection)
+        public PersonRepository()
+        { }
+
+        public override void Register(IRepositoryRegistrar registrar)
         {
-           
+            if (registrar == null) throw new ArgumentNullException("registrar");
+
+            registrar.RegisterRepository<IPersonRepository>(this);
         }
 
         protected override Person Find(Guid domainObjectID, DateTime onDateTime)

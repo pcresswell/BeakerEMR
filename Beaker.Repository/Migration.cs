@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 
 namespace Beaker.Repository
 {
-    public abstract class Migration
+    public abstract class Migration : IMigration
     {
         public string ID { get; private set; }
 

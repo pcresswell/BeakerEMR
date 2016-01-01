@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D71FA6C-76EB-40CD-82A1-25415CE6CBF7}</ProjectGuid>
+    <ProjectGuid>{2B54BC5C-B0DF-41E9-90B4-F12F25866D6D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Beaker.Update.Medication.Test</RootNamespace>
-    <AssemblyName>Beaker.Update.Medication.Test</AssemblyName>
+    <RootNamespace>Beaker.Plugins.Test</RootNamespace>
+    <AssemblyName>Beaker.Plugins.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -37,10 +37,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\Beaker.Desktop.Windows\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="nunit.framework, Version=3.0.5813.39031, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\Beaker.Desktop.Windows\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -54,6 +50,26 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Composition.AttributedModel, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Beaker.Desktop.Windows\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.Convention, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Beaker.Desktop.Windows\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Convention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.Hosting, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Beaker.Desktop.Windows\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.Runtime, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Beaker.Desktop.Windows\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Composition.TypedParts, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Beaker.Desktop.Windows\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -68,10 +84,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestRepositories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestMigration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Beaker.Authorize\Beaker.Authorize.csproj">
+      <Project>{7fa31657-7d0e-4924-be6b-61f3743d6116}</Project>
+      <Name>Beaker.Authorize</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
       <Project>{065ff225-b832-4a42-9c0d-2df7cae4fef6}</Project>
       <Name>Beaker.Core</Name>
@@ -92,14 +115,10 @@
       <Project>{f4beb033-a085-4e5d-b5bc-bb21f57e3bb6}</Project>
       <Name>Beaker.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Beaker.Update.Medication\Beaker.Update.Medication.csproj">
-      <Project>{dffb1cb6-4d70-49fa-b06d-42d3bd0b7af8}</Project>
-      <Name>Beaker.Update.Medication</Name>
+    <ProjectReference Include="..\Beaker.Services\Beaker.Services.csproj">
+      <Project>{8d31752e-11b5-40d3-b9d7-74f963131391}</Project>
+      <Name>Beaker.Services</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Beaker.Update.Medication.Test.licenseheader" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

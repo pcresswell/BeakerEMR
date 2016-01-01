@@ -42,8 +42,6 @@ namespace Beaker.Repository
             get;           
         }
 
-       
-
         /// <summary>
         /// Returns true if the object is different from the previous version
         /// persisted to disk. Returns false otherwise.
@@ -86,11 +84,6 @@ namespace Beaker.Repository
         protected abstract void Insert(TPersistable persistable);
 
         protected abstract void Update(TPersistable persistable);
-
-        void IRepository<TPersistable>.Initialize()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Save the persistable object. Inserts new record if there are any changes.
@@ -158,6 +151,12 @@ namespace Beaker.Repository
         /// <param name="id"></param>
         /// <returns></returns>
         abstract protected TPersistable Get(Guid id);
+
+        /// <summary>
+        /// Register this repository against the registrar.
+        /// </summary>
+        /// <param name="registrar"></param>
+        public abstract void Register(IRepositoryRegistrar registrar);
         
     }
 }

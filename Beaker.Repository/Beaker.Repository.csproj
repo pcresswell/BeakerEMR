@@ -40,11 +40,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="IInitializable.cs" />
     <Compile Include="IMedicationRepository.cs" />
     <Compile Include="IMigratable.cs" />
+    <Compile Include="IMigration.cs" />
     <Compile Include="IPatientRepository.cs" />
     <Compile Include="IPersonRepository.cs" />
+    <Compile Include="IRegisterableRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IRepositoryRegistrar.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="Migration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,9 +14,7 @@ namespace Beaker.Repository.SQLite
     {
         public IPersonRepository PersonRepository { get; set; }
 
-        public PatientRepository(BeakerSQLiteConnection connection) : base(connection)
-        {
-        }
+        public PatientRepository() { }
 
         protected override Patient Find(Guid domainObjectID, DateTime onDateTime)
         {
@@ -61,6 +59,11 @@ namespace Beaker.Repository.SQLite
             PatientTable patientTable = this.Connection.Get<PatientTable>(persistable.ID);
             patientTable.Update(persistable, this.PersonRepository);
             this.Connection.Update(patientTable);
+        }
+
+        public override void Register(IRepositoryRegistrar registrar)
+        {
+            registrar.RegisterRepository<IPatientRepository>(this);
         }
     }
 }

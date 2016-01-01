@@ -19,7 +19,7 @@ namespace Beaker.Repository.SQLite
 
         }
 
-        public MedicationRepository(BeakerSQLiteConnection connection) : base(connection) { }
+        public MedicationRepository() { }
 
         protected override Medication Find(Guid domainObjectID, DateTime onDateTime)
         {
@@ -314,6 +314,11 @@ namespace Beaker.Repository.SQLite
             if (t == null) return default(Medication);
 
             return this.Find(t.DomainObjectID, Beaker.Core.Dates.Infinity);
+        }
+
+        public override void Register(IRepositoryRegistrar registrar)
+        {
+            registrar.RegisterRepository<IMedicationRepository>(this);
         }
     }
 }

@@ -21,10 +21,11 @@ namespace Beaker.Repository.SQLite.Test
         {
             using (BeakerSQLiteConnection connection = new BeakerSQLiteConnection(new SQLiteConnection(":memory:")))
             {
-                IPersonRepository personRepository = new PersonRepository(connection);
+                IPersonRepository personRepository = new PersonRepository() { Connection = connection };
 
-                IPatientRepository patientRepository = new PatientRepository(connection) {
-                    PersonRepository = personRepository
+                IPatientRepository patientRepository = new PatientRepository() {
+                    PersonRepository = personRepository,
+                    Connection = connection
                 };
                
                 patientRepository.Initialize();

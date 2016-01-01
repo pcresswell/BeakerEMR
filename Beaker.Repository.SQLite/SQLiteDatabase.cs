@@ -12,12 +12,11 @@ namespace Beaker.Repository.SQLite
 {
     public class SQLiteDatabase : Database
     {
-        public BeakerSQLiteConnection Connection { get; private set; }
+        internal BeakerSQLiteConnection Connection { get; private set; }
 
         public SQLiteDatabase(BeakerSQLiteConnection connection)
         {
             this.Connection = connection;
-            this.Repositories[typeof(IMedicationRepository)] = new MedicationRepository(this.Connection);
             this.Connection.Initialize<MigrationTable>();
         }
 
@@ -26,7 +25,7 @@ namespace Beaker.Repository.SQLite
             this.Connection.CommitTransaction();
         }
 
-        protected override bool HasMigration(Migration migration)
+        protected override bool HasMigration(IMigration migration)
         {
             return this.Connection.HasMigration(migration.ID);
         }
@@ -41,7 +40,7 @@ namespace Beaker.Repository.SQLite
             this.Connection.StartTransaction();
         }
 
-        protected override void Persist(Migration migration)
+        protected override void Persist(IMigration migration)
         {
             MigrationTable t = new MigrationTable();
             t.MigrationID = migration.ID;
@@ -52,6 +51,12 @@ namespace Beaker.Repository.SQLite
             t.RecordEndDateTime = Beaker.Core.Dates.Infinity;
             t.ValidEndDateTime = Beaker.Core.Dates.Infinity;
             this.Connection.Insert(t);
+        }
+
+        protected override void AfterRegistration<TRepository>(TRepository repository)
+        {
+           var sqlRepo =  (ISQLiteRepository)repository;
+           sqlRepo.Connection = this.Connection;
         }
     }
 }

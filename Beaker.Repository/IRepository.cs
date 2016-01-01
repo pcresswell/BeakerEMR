@@ -31,10 +31,9 @@ using Beaker.Core;
 
 namespace Beaker.Repository
 {
-    public interface IRepository
+    public interface IRepository : IInitializable, IRegisterableRepository
     {
         int Count { get; }
-        void Initialize();
     }
 
     public interface IRepository<TPersistable> : IRepository where TPersistable : IPersistable
@@ -44,6 +43,5 @@ namespace Beaker.Repository
         TPersistable Find(Guid domainObjectID);
         TPersistable Find(Guid domainObjectID, DateTime onDateTime);
         bool IsPersisted(TPersistable persistable);
-        void Initialize();
     }
 }

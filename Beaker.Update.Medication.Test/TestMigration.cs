@@ -31,6 +31,8 @@ using System.Linq;
 using SQLite;
 using AutoMapper;
 using Beaker.Repository.SQLite.Tables.Medication;
+using Beaker.Plugins.Repository.SQLite;
+using Beaker.Plugins;
 
 namespace Beaker.Repository.Test
 {
@@ -45,13 +47,15 @@ namespace Beaker.Repository.Test
                 Medication20150601Migration migration = new Medication20150601Migration();
 
                 SQLiteDatabase database = new SQLiteDatabase(connection);
+                IPlugin plugin = new Beaker.Plugins.Repository.SQLite.Plugin();
+                foreach (var repo in plugin.Repositories)
+                {
+                    repo.Register(database);
+                }
+
                 database.Initialize();
                 IMigratable m = (IMigratable)database;
 
-                Mapper.AssertConfigurationIsValid();
-
-                CompanyTable t = Mapper.Map<CompanyTable>(new Company());
-                Assert.IsNotNull(t);
                 IMedicationRepository medicationRepository = database.Repository<IMedicationRepository>();
                 m.Apply(migration);
 

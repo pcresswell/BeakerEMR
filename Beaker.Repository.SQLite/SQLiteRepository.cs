@@ -6,22 +6,31 @@ using System.Threading.Tasks;
 using SQLite;
 using Beaker.Core;
 using Beaker.Repository;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Beaker.Repository.SQLite.Test")]
+[assembly: InternalsVisibleTo("Beaker.Repository.Test")]
 namespace Beaker.Repository.SQLite
 {
-    public abstract class SQLiteRepository<TPersistable, TTable> : Repository<TPersistable> where TPersistable : IPersistable, new() where TTable : Table, new()
+    public abstract class SQLiteRepository<TPersistable, TTable> : Repository<TPersistable>, ISQLiteRepository where TPersistable : IPersistable, new() where TTable : Table, new()
     {
-        protected BeakerSQLiteConnection Connection { get; private set; }
-        public SQLiteRepository(BeakerSQLiteConnection connection)
-        {
-            this.Connection = connection;
-        }
+        internal BeakerSQLiteConnection Connection { get; set; }
+
+        public SQLiteRepository() {}
 
         public override int Count
         {
             get
             {
                 return this.Connection.Count<TTable>();  
+            }
+        }
+
+        BeakerSQLiteConnection ISQLiteRepository.Connection
+        {
+            set
+            {
+                this.Connection = value;
             }
         }
 

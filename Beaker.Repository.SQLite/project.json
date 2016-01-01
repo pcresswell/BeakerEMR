@@ -2,6 +2,7 @@
   "supports": {},
   "dependencies": {
     "AutoMapper": "4.1.1",
+    "Microsoft.Composition": "1.0.30",
     "sqlite-net": "1.0.8",
     "sqlite-net-pcl": "1.0.11"
   },

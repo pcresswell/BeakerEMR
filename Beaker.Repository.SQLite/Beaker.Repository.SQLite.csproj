@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BeakerSQLiteConnection.cs" />
+    <Compile Include="ISQLiteRepository.cs" />
+    <Compile Include="ISQLiteRepositoryFactory.cs" />
     <Compile Include="MedicationRepository.cs" />
     <Compile Include="PatientRepository.cs" />
     <Compile Include="SQLiteDatabase.cs" />

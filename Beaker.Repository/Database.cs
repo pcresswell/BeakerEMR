@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Beaker.Repository
 {
-    public abstract class Database : IMigratable
+    public abstract class Database : IMigratable , IRepositoryRegistrar
     {
         protected IDictionary<Type, IRepository> Repositories { get; private set; }
 
@@ -27,7 +27,7 @@ namespace Beaker.Repository
         /// Apply the migration but only if it hasn't already been applied.
         /// </summary>
         /// <param name="migration"></param>
-        void IMigratable.Apply(Migration migration)
+        void IMigratable.Apply(IMigration migration)
         {
             IMigratable m = (IMigratable)this;
             if (m.HasMigration(migration)) return;
@@ -51,7 +51,7 @@ namespace Beaker.Repository
             }
         }
 
-        protected abstract void Persist(Migration migration);
+        protected abstract void Persist(IMigration migration);
 
         /// <summary>
         /// Commit the current transaction.
@@ -66,7 +66,7 @@ namespace Beaker.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        bool IMigratable.HasMigration(Migration migration)
+        bool IMigratable.HasMigration(IMigration migration)
         {
             return this.HasMigration(migration);
         }
@@ -83,7 +83,14 @@ namespace Beaker.Repository
 
         public T Repository<T>() where T : IRepository
         {
-            return ((IMigratable)this).Repository<T>();
+            try
+            {
+                return ((IMigratable)this).Repository<T>();
+            }
+            catch (KeyNotFoundException)
+            {
+                return default(T);
+            }            
         }
 
         /// <summary>
@@ -102,9 +109,25 @@ namespace Beaker.Repository
         protected abstract void StartTransaction();
         protected abstract void RollbackTransaction();
         protected abstract void CommitTransaction();
-        protected abstract bool HasMigration(Migration migration);
+        protected abstract bool HasMigration(IMigration migration);
 
+        void IRepositoryRegistrar.RegisterRepository<TRepository>(TRepository repository)
+        {
+            RegisterRepository(repository);
+        }
 
+        TRepository IRepositoryRegistrar.Repository<TRepository>()
+        {
+            return (TRepository)this.Repositories[typeof(TRepository)];
+        }
+
+        protected abstract void AfterRegistration<TRepository>(TRepository repository) where TRepository : IRepository;
+        
+        private void RegisterRepository<TRepository>(TRepository repository) where TRepository : IRepository
+        {
+            this.Repositories[typeof(TRepository)] = repository;
+            this.AfterRegistration<TRepository>(repository);
+        }
     }
 
     public class FailedToApplyMigrationException : Exception

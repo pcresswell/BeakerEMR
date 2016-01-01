@@ -40,8 +40,8 @@ namespace Beaker.Repository.Test
         {
             this.patient = new Patient();
             BeakerSQLiteConnection c = new BeakerSQLiteConnection(new SQLiteConnection(":memory:"));
-            var personRepository = new PersonRepository(c);
-            this.patientRepository = new PatientRepository(c) { PersonRepository = personRepository };
+            var personRepository = new PersonRepository() { Connection = c };
+            this.patientRepository = new PatientRepository() {Connection = c, PersonRepository = personRepository };
             
 
             patientRepository.Initialize();
