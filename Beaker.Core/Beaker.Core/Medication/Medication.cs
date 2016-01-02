@@ -22,28 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Beaker.Core.Medication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Medication.
+    /// </summary>
     public class Medication : DomainObject
     {
-        public int DrugCode { get; set; }
-        public Company Company { get; set; }
-        public DrugProduct Product { get; set; }
-        public IList<Form> Forms { get; private set; }
-        public IList<Ingredient> Ingredients { get; private set; }
-        public IList<Package> Packages { get; private set; }
-        public IList<Pharmaceutical> Pharmaceuticals { get; private set; }
-        public IList<Route> Routes { get; private set; }
-        public IList<Schedule> Schedules { get; private set; }
-        public IList<Status> Statuses { get; private set; }
-        public IList<Therapeutic> Therapeutics { get; private set; }
-       
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Medication"/> class.
+        /// </summary>
         public Medication()
         {
             this.Ingredients = new List<Ingredient>();
@@ -56,41 +50,139 @@ namespace Beaker.Core.Medication
             this.Therapeutics = new List<Therapeutic>();
         }
 
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the company.
+        /// </summary>
+        /// <value>The company.</value>
+        public Company Company { get; set; }
+
+        /// <summary>
+        /// Gets or sets the product.
+        /// </summary>
+        /// <value>The product.</value>
+        public DrugProduct Product { get; set; }
+
+        /// <summary>
+        /// Gets the forms.
+        /// </summary>
+        /// <value>The forms.</value>
+        public IList<Form> Forms { get; private set; }
+
+        /// <summary>
+        /// Gets the ingredients.
+        /// </summary>
+        /// <value>The ingredients.</value>
+        public IList<Ingredient> Ingredients { get; private set; }
+
+        /// <summary>
+        /// Gets the packages.
+        /// </summary>
+        /// <value>The packages.</value>
+        public IList<Package> Packages { get; private set; }
+
+        /// <summary>
+        /// Gets the pharmaceuticals.
+        /// </summary>
+        /// <value>The pharmaceuticals.</value>
+        public IList<Pharmaceutical> Pharmaceuticals { get; private set; }
+
+        /// <summary>
+        /// Gets the routes.
+        /// </summary>
+        /// <value>The routes.</value>
+        public IList<Route> Routes { get; private set; }
+
+        /// <summary>
+        /// Gets the schedules.
+        /// </summary>
+        /// <value>The schedules.</value>
+        public IList<Schedule> Schedules { get; private set; }
+
+        /// <summary>
+        /// Gets the statuses.
+        /// </summary>
+        /// <value>The statuses.</value>
+        public IList<Status> Statuses { get; private set; }
+
+        /// <summary>
+        /// Gets the therapeutics.
+        /// </summary>
+        /// <value>The therapeutics.</value>
+        public IList<Therapeutic> Therapeutics { get; private set; }
+
+        /// <summary>
+        /// Adds the form.
+        /// </summary>
+        /// <param name="form">Form.</param>
         public void AddForm(Form form)
         {
             this.Forms.Add(form);
         }
 
+        /// <summary>
+        /// Adds the ingredient.
+        /// </summary>
+        /// <param name="ingredient">Ingredient.</param>
         public void AddIngredient(Ingredient ingredient)
         {
             this.Ingredients.Add(ingredient);
         }
 
+        /// <summary>
+        /// Adds the package.
+        /// </summary>
+        /// <param name="package">Package.</param>
         public void AddPackage(Package package)
         {
             this.Packages.Add(package);
         }
 
+        /// <summary>
+        /// Adds the pharmaceutical.
+        /// </summary>
+        /// <param name="pharmaceutical">Pharmaceutical.</param>
         public void AddPharmaceutical(Pharmaceutical pharmaceutical)
         {
             this.Pharmaceuticals.Add(pharmaceutical);
         }
 
+        /// <summary>
+        /// Adds the route.
+        /// </summary>
+        /// <param name="route">Route.</param>
         public void AddRoute(Route route)
         {
             this.Routes.Add(route);
         }
 
+        /// <summary>
+        /// Adds the schedule.
+        /// </summary>
+        /// <param name="schedule">Schedule.</param>
         public void AddSchedule(Schedule schedule)
         {
             this.Schedules.Add(schedule);
         }
 
+        /// <summary>
+        /// Adds the status.
+        /// </summary>
+        /// <param name="status">Status.</param>
         public void AddStatus(Status status)
         {
             this.Statuses.Add(status);
         }
 
+        /// <summary>
+        /// Adds the therapeutic.
+        /// </summary>
+        /// <param name="therapeutic">Therapeutic.</param>
         public void AddTherapeutic(Therapeutic therapeutic)
         {
             this.Therapeutics.Add(therapeutic);

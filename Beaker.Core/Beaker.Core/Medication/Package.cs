@@ -21,41 +21,82 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
 
 namespace Beaker.Core.Medication
 {
-	public class Package : DomainObject
-	{
-        public Package() { }
+    using System;
 
-		public Package  (int drugCode, 
-			string upc,
-			string packageSizeUnit,
-			string packageType,
-			string packageSize, 
-			string productInformation)
-		{
-			this.DrugCode = drugCode;
-			this.UPC = upc;
-			this.PackageSizeUnit = packageSizeUnit;
-			this.PackageType = packageType;
-			this.PackageSize = packageSize;
-			this.ProductInformation = productInformation;
-		}
+    /// <summary>
+    /// Package for the medication.
+    /// </summary>
+    public class Package : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Package"/> class.
+        /// </summary>
+        public Package()
+        {
+        }
 
-		public int DrugCode { get;  set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Package"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="upc">Upc.</param>
+        /// <param name="packageSizeUnit">Package size unit.</param>
+        /// <param name="packageType">Package type.</param>
+        /// <param name="packageSize">Package size.</param>
+        /// <param name="productInformation">Product information.</param>
+        public Package(
+            int drugCode, 
+            string upc,
+            string packageSizeUnit,
+            string packageType,
+            string packageSize, 
+            string productInformation)
+        {
+            this.DrugCode = drugCode;
+            this.UPC = upc;
+            this.PackageSizeUnit = packageSizeUnit;
+            this.PackageType = packageType;
+            this.PackageSize = packageSize;
+            this.ProductInformation = productInformation;
+        }
 
-		public string UPC { get;  set; }
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
 
-		public string PackageSizeUnit { get;  set; }
+        /// <summary>
+        /// Gets or sets UPC
+        /// </summary>
+        /// <value>UP.</value>
+        public string UPC { get; set; }
 
-		public string PackageType { get;  set; }
+        /// <summary>
+        /// Gets or sets the package size unit.
+        /// </summary>
+        /// <value>The package size unit.</value>
+        public string PackageSizeUnit { get; set; }
 
-		public string PackageSize { get;  set; }
+        /// <summary>
+        /// Gets or sets the type of the package.
+        /// </summary>
+        /// <value>The type of the package.</value>
+        public string PackageType { get; set; }
 
-		public string ProductInformation { get ;  set; }
-	
-	}
+        /// <summary>
+        /// Gets or sets the size of the package.
+        /// </summary>
+        /// <value>The size of the package.</value>
+        public string PackageSize { get; set; }
+
+        /// <summary>
+        /// Gets or sets the product information.
+        /// </summary>
+        /// <value>The product information.</value>
+        public string ProductInformation { get; set; }
+    }
 }
-

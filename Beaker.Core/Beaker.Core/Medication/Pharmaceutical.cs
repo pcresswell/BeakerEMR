@@ -21,22 +21,44 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
 
 namespace Beaker.Core.Medication
 {
-	public class Pharmaceutical : DomainObject
-	{
-        public Pharmaceutical() { }
-		public Pharmaceutical (int drugCode, string pharmaceuticalStd)
-		{
-			this.DrugCode = drugCode;
-			this.PharmaceuticalSTD = pharmaceuticalStd;
-		}
+    using System;
 
-		public int DrugCode { get; set; }
+    /// <summary>
+    /// Pharmaceutical.
+    /// </summary>
+    public class Pharmaceutical : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Pharmaceutical"/> class.
+        /// </summary>
+        public Pharmaceutical()
+        {
+        }
 
-		public string PharmaceuticalSTD { get; set; }
-	}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Pharmaceutical"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="pharmaceuticalStd">Pharmaceutical std.</param>
+        public Pharmaceutical(int drugCode, string pharmaceuticalStd)
+        {
+            this.DrugCode = drugCode;
+            this.PharmaceuticalSTD = pharmaceuticalStd;
+        }
+
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pharmaceutical ST.
+        /// </summary>
+        /// <value>The pharmaceutical ST.</value>
+        public string PharmaceuticalSTD { get; set; }
+    }
 }
-

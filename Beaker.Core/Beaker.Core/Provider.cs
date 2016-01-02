@@ -21,31 +21,36 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// A provider.
+    /// </summary>
     public class Provider : DomainObject
     {
         /// <summary>
-        /// Provider role. The Provider contains the details of the provider.
+        /// Initializes a new instance of the <see cref="Beaker.Core.Provider"/> class.
         /// </summary>
         public Provider() : base()
         {
             this.Person = new Person();
         }
+
         /// <summary>
         /// The user that manages this provider.
         /// </summary>
         public User User { get; set; }
+
         /// <summary>
         /// The person.
         /// </summary>
         public Person Person { get; set; }
-
     }
 }

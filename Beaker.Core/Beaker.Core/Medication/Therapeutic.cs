@@ -21,32 +21,68 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
 
 namespace Beaker.Core.Medication
 {
-	public class Therapeutic : DomainObject
-	{
-        public Therapeutic() { }
+    using System;
 
-		public Therapeutic (int drugCode, string tcAtcNumber, string tcAtc, string tcAhfsNumber, string tcAhfs)
-		{
-			this.DrugCode = drugCode;
-			this.TCATCNumber = tcAtcNumber;
-			this.TCATC = tcAtc;
-			this.TCAHFSNumber = tcAhfsNumber;
-			this.TCAHFS = tcAhfs;
-		}
+    /// <summary>
+    /// Therapeutic.
+    /// </summary>
+    public class Therapeutic : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Therapeutic"/> class.
+        /// </summary>
+        public Therapeutic()
+        {
+        }
 
-		public int DrugCode	{ get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Therapeutic"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="tcAtcNumber">Tc atc number.</param>
+        /// <param name="tcAtc">Tc atc.</param>
+        /// <param name="tcAhfsNumber">Tc ahfs number.</param>
+        /// <param name="tcAhfs">Tc ahfs.</param>
+        public Therapeutic(int drugCode, string tcAtcNumber, string tcAtc, string tcAhfsNumber, string tcAhfs)
+        {
+            this.DrugCode = drugCode;
+            this.TCATCNumber = tcAtcNumber;
+            this.TCATC = tcAtc;
+            this.TCAHFSNumber = tcAhfsNumber;
+            this.TCAHFS = tcAhfs;
+        }
 
-		public string TCATCNumber { get; set; }
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
 
-		public string TCATC { get; set; }
+        /// <summary>
+        /// Gets or sets the TCATC number.
+        /// </summary>
+        /// <value>The TCATC number.</value>
+        public string TCATCNumber { get; set; }
 
-		public string TCAHFSNumber { get; set; }
+        /// <summary>
+        /// Gets or sets the TC ATC.
+        /// </summary>
+        /// <value>The TCAT.</value>
+        public string TCATC { get; set; }
 
-		public string TCAHFS { get; set; }
-	}
+        /// <summary>
+        /// Gets or sets the TC AHFS number.
+        /// </summary>
+        /// <value>The TCAHFS number.</value>
+        public string TCAHFSNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the TC AHFS
+        /// </summary>
+        /// <value>The TCAHF.</value>
+        public string TCAHFS { get; set; }
+    }
 }
-

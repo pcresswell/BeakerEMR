@@ -21,23 +21,44 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
 
 namespace Beaker.Core.Medication
 {
-	public class Schedule : DomainObject
-	{
-        public Schedule() { }
+    using System;
 
-		public Schedule (int drugCode, string schedule)
-		{
-			this.DrugCode = drugCode;
-			this.ScheduleCode = schedule;
-		}
+    /// <summary>
+    /// Schedule.
+    /// </summary>
+    public class Schedule : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Schedule"/> class.
+        /// </summary>
+        public Schedule()
+        {
+        }
 
-		public int DrugCode { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Schedule"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="schedule">Schedule.</param>
+        public Schedule(int drugCode, string schedule)
+        {
+            this.DrugCode = drugCode;
+            this.ScheduleCode = schedule;
+        }
 
-		public string ScheduleCode { get; set; }
-	}
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the schedule code.
+        /// </summary>
+        /// <value>The schedule code.</value>
+        public string ScheduleCode { get; set; }
+    }
 }
-

@@ -21,25 +21,52 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
 
 namespace Beaker.Core.Medication
 {
-	public class Form : DomainObject
-	{
-        public Form() { }
-		public Form (int drugCode, int pharmFormCode, string pharmaceuticalForm)
-		{
-			this.DrugCode = drugCode;
-			this.PharmaceuticalFormCode = pharmFormCode;
-			this.PharmaceuticalForm = pharmaceuticalForm;
-		}
+    using System;
 
-		public int DrugCode { get;  set; }
+    /// <summary>
+    /// Form of medication.
+    /// </summary>
+    public class Form : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Form"/> class.
+        /// </summary>
+        public Form()
+        {
+        }
 
-		public int PharmaceuticalFormCode { get;  set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Form"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="pharmFormCode">Pharm form code.</param>
+        /// <param name="pharmaceuticalForm">Pharmaceutical form.</param>
+        public Form(int drugCode, int pharmFormCode, string pharmaceuticalForm)
+        {
+            this.DrugCode = drugCode;
+            this.PharmaceuticalFormCode = pharmFormCode;
+            this.PharmaceuticalForm = pharmaceuticalForm;
+        }
 
-		public string PharmaceuticalForm { get;  set; }
-	}
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pharmaceutical form code.
+        /// </summary>
+        /// <value>The pharmaceutical form code.</value>
+        public int PharmaceuticalFormCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pharmaceutical form.
+        /// </summary>
+        /// <value>The pharmaceutical form.</value>
+        public string PharmaceuticalForm { get; set; }
+    }
 }
-

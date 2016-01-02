@@ -21,28 +21,66 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public static class PatientContactPurpose
-    {
-        public static readonly string Emergency = "Emergency";
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
+    /// <summary>
+    /// Patient contact.
+    /// </summary>
     public class PatientContact : DomainObject
     {
+        /// <summary>
+        /// Gets or sets the cell phone number.
+        /// </summary>
+        /// <value>The cell phone number.</value>
         public PhoneNumber CellPhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the contact person.
+        /// </summary>
+        /// <value>The contact person.</value>
         public Person ContactPerson { get; set; }
+
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
+        /// <value>The email.</value>
         public EmailAddress Email { get; set; }
+
+        /// <summary>
+        /// Gets or sets the home phone number.
+        /// </summary>
+        /// <value>The home phone number.</value>
         public PhoneNumber HomePhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the note.
+        /// </summary>
+        /// <value>The note.</value>
         public string Note { get; set; }
+
+        /// <summary>
+        /// Gets or sets the patient.
+        /// </summary>
+        /// <value>The patient.</value>
         public Patient Patient { get; set; }
+
+        /// <summary>
+        /// Gets or sets the purpose.
+        /// </summary>
+        /// <value>The purpose.</value>
         public string Purpose { get; set; }
+
+        /// <summary>
+        /// Gets or sets the work phone number.
+        /// </summary>
+        /// <value>The work phone number.</value>
         public PhoneNumber WorkPhoneNumber { get; set; }
     }
 }

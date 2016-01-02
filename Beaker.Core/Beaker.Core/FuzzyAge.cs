@@ -21,38 +21,47 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// A fuzzy age.
     /// </summary>
     public class FuzzyAge
     {
         /// <summary>
-        /// The age.
+        /// Initializes a new instance of the <see cref="Beaker.Core.FuzzyAge"/> class.
         /// </summary>
-        public int Age { get; private set; }
-        /// <summary>
-        /// The accuracy of the age recording.
-        /// </summary>
-        public FuzzyAgeAccuracy Accuracy { get; private set; }
-        /// <summary>
-        /// Creates a new FuzzyAge.
-        /// </summary>
-        /// <param name="age"></param>
-        /// <param name="accuracy"></param>
+        /// <param name="age">Age.</param>
+        /// <param name="accuracy">Accuracy.</param>
         public FuzzyAge(int age, FuzzyAgeAccuracy accuracy)
         {
             this.Age = age;
             this.Accuracy = accuracy;
         }
 
+        /// <summary>
+        /// The age.
+        /// </summary>
+        public int Age { get; private set; }
+
+        /// <summary>
+        /// The accuracy of the age recording.
+        /// </summary>
+        public FuzzyAgeAccuracy Accuracy { get; private set; }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object"/> is equal to the current <see cref="Beaker.Core.FuzzyAge"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object"/> to compare with the current <see cref="Beaker.Core.FuzzyAge"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to the current
+        /// <see cref="Beaker.Core.FuzzyAge"/>; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             FuzzyAge otherAge = (FuzzyAge)obj;
@@ -61,39 +70,17 @@ namespace Beaker.Core
                 return false;
             }
 
-            return (otherAge.Age.Equals(this.Age) && otherAge.Accuracy.Equals(this.Accuracy));
+            return otherAge.Age.Equals(this.Age) && otherAge.Accuracy.Equals(this.Accuracy);
         }
 
+        /// <summary>
+        /// Serves as a hash function for a <see cref="Beaker.Core.FuzzyAge"/> object.
+        /// </summary>
+        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.</returns>
         public override int GetHashCode()
         {
-            return (this.Age.GetHashCode() + (1000 * this.Accuracy.GetHashCode()));
+            return this.Age.GetHashCode() + (1000 * this.Accuracy.GetHashCode());
         }
-    }
-
-    /// <summary>
-    /// The accuracy of the age.
-    /// </summary>
-    public enum FuzzyAgeAccuracy
-    {
-        /// <summary>
-        /// Exact.
-        /// </summary>
-        Exact = 0,
-        /// <summary>
-        /// Roughly accurate to +/- one year.
-        /// </summary>
-        OneYear = 1,
-        /// <summary>
-        /// Roughly accurate to +/- five years.
-        /// </summary>
-        FiveYears = 2,
-        /// <summary>
-        /// Roughly accurate to +/- a decade
-        /// </summary>
-        Decade = 3,
-        /// <summary>
-        /// Unknown accuracy.
-        /// </summary>
-        Unknown = 4
     }
 }

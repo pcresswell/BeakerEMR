@@ -21,14 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+
     /// <summary>
     /// Represents a health condition for a patient.
     /// </summary>
@@ -81,11 +78,5 @@ namespace Beaker.Core
         /// </summary>
         [SameAs]
         public string Status { get; set; }
-    }
-
-    public static class HealthConditionStatus
-    {
-        public static readonly string Active = "Active";
-        public static readonly string Inactive = "Inactive";
     }
 }

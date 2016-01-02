@@ -21,21 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public static class EmailAddressType
-    {
-        public static readonly string Home = "Home";
-        public static readonly string Work = "Work";
-        public static readonly string Other = "Other";
-    }
+    using System;
 
+    /// <summary>
+    /// Email address.
+    /// </summary>
     public class EmailAddress : DomainObject
     {
         /// <summary>
@@ -43,11 +36,13 @@ namespace Beaker.Core
         /// </summary>
         [SameAs]
         public Person Owner { get; set; }
+
         /// <summary>
         /// The type of the email.
         /// </summary>
         [SameAs]
         public string Type { get; set; }
+
         /// <summary>
         /// The email address itself.
         /// </summary>

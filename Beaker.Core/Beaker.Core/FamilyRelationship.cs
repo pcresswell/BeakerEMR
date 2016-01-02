@@ -21,23 +21,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+
     /// <summary>
     /// Represents the relationship between two family members.
     /// </summary>
     public class FamilyRelationship : DomainObject
     {
         /// <summary>
-        /// Contruct a new Family Relationship.
+        /// Initializes a new instance of the <see cref="Beaker.Core.FamilyRelationship"/> class.
         /// </summary>
-        /// <param name="type">The type of relationship.</param>
+        /// <param name="type">Type of relationship.</param>
         public FamilyRelationship(string type)
         {
             this.Type = type;
@@ -47,27 +44,16 @@ namespace Beaker.Core
         /// Person one. 
         /// </summary>
         public Person One { get; set; }
+
         /// <summary>
         /// Person two.
         /// </summary>
         public Person Two { get; set; }
+
         /// <summary>
         /// The type of relationship. Follows a convension of "One-Two" such as "Child-Parent" where 
         /// person one is the child and person two is the parent.
         /// </summary>
         public string Type { get; private set; }
-    }
-
-    public static class FamilyRelationshipType
-    {
-        public static readonly string ChildFather = "Child-Father";
-        public static readonly string ChildMother = "Child-Mother";
-        public static readonly string Sibling = "Sibling-Sibling";
-        public static readonly string NeiceUncle = "Neice-Uncle";
-        public static readonly string NeiceAunt = "Neice-Aunt";
-        public static readonly string NephewUncle = "Nephew-Uncle";
-        public static readonly string NephewAunt = "Nephew-Aunt";
-        public static readonly string ChildGrandParent = "Child-GrandParent";
-        public static readonly string Spouse = "Spouse-Spouse";
     }
 }

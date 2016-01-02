@@ -21,14 +21,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// An address.
     /// </summary>
@@ -39,54 +40,41 @@ namespace Beaker.Core
         /// </summary>
         [SameAs]
         public string City { get; set; }
+
         /// <summary>
         /// The country.
         /// </summary>
         [SameAs]
         public string Country { get; set; }
+
         /// <summary>
         /// Postal code or zip code.
         /// </summary>
         [SameAs]
         public string PostalCode { get; set; }
+
         /// <summary>
         /// Province or state.
         /// </summary>
         [SameAs]
         public string Province { get; set; }
+
         /// <summary>
         /// The person associated with the address.
         /// </summary>
         [SameAs]
         public Person Resident { get; set; }
+
         /// <summary>
         /// The street.
         /// </summary>
         [SameAs]
         public string Street { get; set; }
+
         /// <summary>
         /// The type of address. See AddressType.
         /// </summary>
         [SameAs]
         public string Type { get; set; }
-    }
-
-    /// <summary>
-    /// Types of addresses.
-    /// </summary>
-    public static class AddressType
-    {
-        /// <summary>
-        /// Home address.
-        /// </summary>
-        public static readonly string Home = "Home";
-        /// <summary>
-        /// Work address.
-        /// </summary>
-        public static readonly string Work = "Work";
-        /// <summary>
-        /// Other address.
-        /// </summary>
-        public static readonly string Other = "Other";
     }
 }

@@ -20,12 +20,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
 
 namespace Beaker.Core
 {
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -53,19 +51,25 @@ namespace Beaker.Core
         public static readonly Gender Unknown = new Gender("Unknown");
 
         /// <summary>
-        /// The name of the gender. For example "Male" or "Female".
+        /// Initializes a new instance of the <see cref="Beaker.Core.Gender"/> class.
         /// </summary>
-        public string Name { get; private set; }
-
-        /// <summary>
-        /// Gender.
-        /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Name of the gender.</param>
         public Gender(string name)
         {
             this.Name = name;
         }
 
+        /// <summary>
+        /// The name of the gender. For example "Male" or "Female".
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object"/> is equal to the current <see cref="Beaker.Core.Gender"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object"/> to compare with the current <see cref="Beaker.Core.Gender"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to the current
+        /// <see cref="Beaker.Core.Gender"/>; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             Gender otherGender = obj as Gender;
@@ -77,6 +81,11 @@ namespace Beaker.Core
             return this.Name.Equals(otherGender.Name);
         }
 
+        /// <summary>
+        /// Serves as a hash function for a <see cref="Beaker.Core.Gender"/> object.
+        /// </summary>
+        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.</returns>
         public override int GetHashCode()
         {
             return this.Name.GetHashCode();

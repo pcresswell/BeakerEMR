@@ -21,21 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
-    public static class PhoneNumberType
-    {
-        public static readonly string Home = "Home";
-        public static readonly string Work = "Work";
-        public static readonly string Other = "Other";
-        public static readonly string Mobile = "Mobile";
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// A phone number.
@@ -46,18 +39,22 @@ namespace Beaker.Core
         /// The area code.
         /// </summary>
         public string AreaCode { get; set; }
+
         /// <summary>
         /// The extension.
         /// </summary>
         public string Extension { get; set; }
+
         /// <summary>
         /// The phone number.
         /// </summary>
         public string Number { get; set; }
+
         /// <summary>
         /// The owner of the phone number.
         /// </summary>
         public Person Owner { get; set; }
+
         /// <summary>
         /// The type of phone number. For example, "Home" or "Work".
         /// </summary>

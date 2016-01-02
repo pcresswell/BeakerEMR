@@ -21,14 +21,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Anything that would be persisted must implement this interface.
     /// </summary>
@@ -54,9 +55,7 @@ namespace Beaker.Core
         /// <summary>
         /// Represents when the entity came into existance in real time. Does NOT represent
         /// when the entity was recorded. Repesents when the entity became true.
-        /// 
         /// This is the date that represents a truth REGARDLESS of when it was recorded.
-        /// 
         /// Recorded in UTC.
         /// </summary>
         DateTime ValidStartDateTime { get; set; }
@@ -64,33 +63,28 @@ namespace Beaker.Core
         /// <summary>
         /// Represents when the entity existence was no longer true. Does NOT represent
         /// when the entity was deleted. Represents when the entity is no longer true.
-        /// 
         /// This is the date that represents when a truth ceases to be true, REGARDLESS of when it was recorded.
-        /// 
         /// Recoreded in UTC.
         /// </summary>
         DateTime ValidEndDateTime { get; set; }
 
         /// <summary>
         /// Represents when the entity became known to be true according to this system.
-        /// 
         /// Recorded in UTC.
         /// </summary>
         DateTime RecordStartDateTime { get; set; }
 
         /// <summary>
-        /// Represents when the entity becamse known to be false according to this system.
-        /// 
+        /// Represents when the entity becamse known to be false according to this system. 
         /// Recorded in UTC.
         /// </summary>
         DateTime RecordEndDateTime { get; set; }
 
         /// <summary>
-        /// Returns true if this object contains the same values
-        /// as the persistable object. Returns false if they are they are different. 
+        /// Sames as.
         /// </summary>
-        /// <param name="persistable">The persistable object of comparison.</param>
-        /// <returns></returns>
+        /// <returns><c>true</c>, if as was samed, <c>false</c> otherwise.</returns>
+        /// <param name="persistable">Persistable.</param>
         bool SameAs(object persistable);
     }
 }

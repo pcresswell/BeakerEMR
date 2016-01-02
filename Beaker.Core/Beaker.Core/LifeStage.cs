@@ -21,36 +21,45 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// A life stage.
     /// </summary>
     public enum LifeStage
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+
         /// <summary>
         /// Up to 28 days old
         /// </summary>
         Newborn = 1,
+
         /// <summary>
         /// 29 days to 2 years
         /// </summary>
         Infant = 2,
+
         /// <summary>
         /// 2 years to 15 years
         /// </summary>
         Child = 3,
+
         /// <summary>
         /// 16 years to 17 years
         /// </summary>
         Adolescent = 4,
+
         /// <summary>
         /// 18 years and over.
         /// </summary>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
@@ -82,6 +82,14 @@
     <Compile Include="ProviderRole.cs" />
     <Compile Include="SurgicalHealthCondition.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="AddressType.cs" />
+    <Compile Include="EmailAddressType.cs" />
+    <Compile Include="FamilyRelationshipType.cs" />
+    <Compile Include="FuzzyAgeAccuracy.cs" />
+    <Compile Include="FuzzyDateTimeAccuracy.cs" />
+    <Compile Include="HealthConditionStatus.cs" />
+    <Compile Include="PatientContactPurpose.cs" />
+    <Compile Include="PhoneNumberType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

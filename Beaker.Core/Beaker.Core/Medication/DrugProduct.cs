@@ -21,61 +21,128 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Reflection;
 
 namespace Beaker.Core.Medication
 {
-	public class DrugProduct : DomainObject
-	{
-		public DrugProduct (int drugCode,
-		                    string productCategorization,
-		                    string classValue,
-		                    string drugIdentificationNumber,
-		                    string brandName,
-		                    string descriptor,
-		                    string pediatricFlag,
-		                    string accessionNumber,
-		                    string numberOfAIS,
-		                    DateTime lastUpdateDate,
-		                    string aiGroupNo)
-		{
-			this.DrugCode = drugCode;
-			this.ProductCategorization = productCategorization;
-			this.ProductClass = classValue;
-			this.DrugIdentificationNumber = drugIdentificationNumber;
-			this.BrandName = brandName;
-			this.Descriptor = descriptor;
-			this.PediatricFlag = pediatricFlag;
-			this.AccessionNumber = accessionNumber;
-			this.NumberOfAIS = numberOfAIS;
-			this.LastUpdateDate = lastUpdateDate;
-			this.AIGroupNumber = aiGroupNo;
-		}
+    using System;
+    using System.Reflection;
 
-        public DrugProduct() { }
+    /// <summary>
+    /// Drug product.
+    /// </summary>
+    public class DrugProduct : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.DrugProduct"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="productCategorization">Product categorization.</param>
+        /// <param name="classValue">Class value.</param>
+        /// <param name="drugIdentificationNumber">Drug identification number.</param>
+        /// <param name="brandName">Brand name.</param>
+        /// <param name="descriptor">Descriptor.</param>
+        /// <param name="pediatricFlag">Pediatric flag.</param>
+        /// <param name="accessionNumber">Accession number.</param>
+        /// <param name="numberOfAIS">Number of AI.</param>
+        /// <param name="lastUpdateDate">Last update date.</param>
+        /// <param name="aiGroupNo">Ai group no.</param>
+        public DrugProduct(
+            int drugCode,
+            string productCategorization,
+            string classValue,
+            string drugIdentificationNumber,
+            string brandName,
+            string descriptor,
+            string pediatricFlag,
+            string accessionNumber,
+            string numberOfAIS,
+            DateTime lastUpdateDate,
+            string aiGroupNo)
+        {
+            this.DrugCode = drugCode;
+            this.ProductCategorization = productCategorization;
+            this.ProductClass = classValue;
+            this.DrugIdentificationNumber = drugIdentificationNumber;
+            this.BrandName = brandName;
+            this.Descriptor = descriptor;
+            this.PediatricFlag = pediatricFlag;
+            this.AccessionNumber = accessionNumber;
+            this.NumberOfAIS = numberOfAIS;
+            this.LastUpdateDate = lastUpdateDate;
+            this.AIGroupNumber = aiGroupNo;
+        }
 
-		public int DrugCode { get;  set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.DrugProduct"/> class.
+        /// </summary>
+        public DrugProduct()
+        {
+        }
 
-		public string ProductCategorization { get;  set; }
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
 
-		public string ProductClass { get;  set; }
+        /// <summary>
+        /// Gets or sets the product categorization.
+        /// </summary>
+        /// <value>The product categorization.</value>
+        public string ProductCategorization { get; set; }
 
-		public string DrugIdentificationNumber { get;  set; }
+        /// <summary>
+        /// Gets or sets the product class.
+        /// </summary>
+        /// <value>The product class.</value>
+        public string ProductClass { get; set; }
 
-		public string BrandName { get;  set; }
+        /// <summary>
+        /// Gets or sets the drug identification number.
+        /// </summary>
+        /// <value>The drug identification number.</value>
+        public string DrugIdentificationNumber { get; set; }
 
-		public string Descriptor { get;  set; }
+        /// <summary>
+        /// Gets or sets the name of the brand.
+        /// </summary>
+        /// <value>The name of the brand.</value>
+        public string BrandName { get; set; }
 
-		public string PediatricFlag { get;  set; }
+        /// <summary>
+        /// Gets or sets the descriptor.
+        /// </summary>
+        /// <value>The descriptor.</value>
+        public string Descriptor { get; set; }
 
-		public string AccessionNumber { get;  set; }
+        /// <summary>
+        /// Gets or sets the pediatric flag.
+        /// </summary>
+        /// <value>The pediatric flag.</value>
+        public string PediatricFlag { get; set; }
 
-		public string NumberOfAIS { get;  set; }
+        /// <summary>
+        /// Gets or sets the accession number.
+        /// </summary>
+        /// <value>The accession number.</value>
+        public string AccessionNumber { get; set; }
 
-		public DateTime LastUpdateDate { get;  set; }
+        /// <summary>
+        /// Gets or sets the number of AI.
+        /// </summary>
+        /// <value>The number of AI.</value>
+        public string NumberOfAIS { get; set; }
 
-		public string AIGroupNumber { get;  set; }
-	}
+        /// <summary>
+        /// Gets or sets the last update date.
+        /// </summary>
+        /// <value>The last update date.</value>
+        public DateTime LastUpdateDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the AI group number.
+        /// </summary>
+        /// <value>The AI group number.</value>
+        public string AIGroupNumber { get; set; }
+    }
 }
-

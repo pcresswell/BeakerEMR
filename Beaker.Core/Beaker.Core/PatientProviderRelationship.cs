@@ -21,46 +21,51 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// A general relationship between a provider and a patient.
     /// </summary>
     public class PatientProviderRelationship : DomainObject
     {
         /// <summary>
-        /// The patient.
-        /// </summary>
-        public Patient Patient { get; set; }
-        /// <summary>
-        /// The provider.
-        /// </summary>
-        public Provider Provider { get; set; }
-        /// <summary>
-        /// The date on which the relationship started.
-        /// </summary>
-        public DateTime StartDate { get; set; }
-        /// <summary>
-        /// The type of relationship.
-        /// </summary>
-        public string Type { get; set; }
-        /// <summary>
-        /// The date on which the relationship ended.
-        /// </summary>
-        public DateTime EndDate { get; set; }
-
-        /// <summary>
-        /// Creates a new PatientProviderRelationship
+        /// Initializes a new instance of the <see cref="Beaker.Core.PatientProviderRelationship"/> class.
         /// </summary>
         public PatientProviderRelationship()
         {
             this.EndDate = Dates.Infinity;
         }
+
+        /// <summary>
+        /// The patient.
+        /// </summary>
+        public Patient Patient { get; set; }
+
+        /// <summary>
+        /// The provider.
+        /// </summary>
+        public Provider Provider { get; set; }
+
+        /// <summary>
+        /// The date on which the relationship started.
+        /// </summary>
+        public DateTime StartDate { get; set; }
+
+        /// <summary>
+        /// The type of relationship.
+        /// </summary>
+        public string Type { get; set; }
+
+        /// <summary>
+        /// The date on which the relationship ended.
+        /// </summary>
+        public DateTime EndDate { get; set; }
     }
 }

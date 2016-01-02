@@ -21,61 +21,127 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
 
 namespace Beaker.Core.Medication
 {
-	public class Ingredient : DomainObject
-	{
-        public Ingredient() { }
+    using System;
 
-		public Ingredient (int drugCode, 
-			int activeIngredientCode,
-			string ingredient,
-			string ingredientSuppliedInd,
-			double strength,
-			string strengthUnit,
-			string strengthType,
-			string dosageValue,
-			string baseValue,
-			string dosageUnit,
-			string notes)
-		{
-			this.DrugCode = drugCode;
-			this.ActiveIngredientCode = activeIngredientCode;
-			this.IngredientCode = ingredient;
-			this.IngredientSuppliedInd = ingredientSuppliedInd;
-			this.Strength = strength;
-			this.StrengthUnit = strengthUnit;
-			this.StrengthType = strengthType;
-			this.DosageValue = dosageValue;
-			this.Base = baseValue;
-			this.DosageUnit = dosageUnit;
-			this.Notes = notes;
-		}
+    /// <summary>
+    /// Ingredient.
+    /// </summary>
+    public class Ingredient : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Ingredient"/> class.
+        /// </summary>
+        public Ingredient()
+        {
+        }
 
-		public int DrugCode { get;  set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Ingredient"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="activeIngredientCode">Active ingredient code.</param>
+        /// <param name="ingredient">Ingredient.</param>
+        /// <param name="ingredientSuppliedInd">Ingredient supplied ind.</param>
+        /// <param name="strength">Strength.</param>
+        /// <param name="strengthUnit">Strength unit.</param>
+        /// <param name="strengthType">Strength type.</param>
+        /// <param name="dosageValue">Dosage value.</param>
+        /// <param name="baseValue">Base value.</param>
+        /// <param name="dosageUnit">Dosage unit.</param>
+        /// <param name="notes">Notes.</param>
+        public Ingredient(
+            int drugCode, 
+            int activeIngredientCode,
+            string ingredient,
+            string ingredientSuppliedInd,
+            double strength,
+            string strengthUnit,
+            string strengthType,
+            string dosageValue,
+            string baseValue,
+            string dosageUnit,
+            string notes)
+        {
+            this.DrugCode = drugCode;
+            this.ActiveIngredientCode = activeIngredientCode;
+            this.IngredientCode = ingredient;
+            this.IngredientSuppliedInd = ingredientSuppliedInd;
+            this.Strength = strength;
+            this.StrengthUnit = strengthUnit;
+            this.StrengthType = strengthType;
+            this.DosageValue = dosageValue;
+            this.Base = baseValue;
+            this.DosageUnit = dosageUnit;
+            this.Notes = notes;
+        }
 
-		public int ActiveIngredientCode { get;  set; }
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
 
-		public string IngredientCode { get;  set; }
+        /// <summary>
+        /// Gets or sets the active ingredient code.
+        /// </summary>
+        /// <value>The active ingredient code.</value>
+        public int ActiveIngredientCode { get; set; }
 
-		public string IngredientSuppliedInd { get;  set; }
+        /// <summary>
+        /// Gets or sets the ingredient code.
+        /// </summary>
+        /// <value>The ingredient code.</value>
+        public string IngredientCode { get; set; }
 
-		public double Strength { get;  set; }
+        /// <summary>
+        /// Gets or sets the ingredient supplied ind.
+        /// </summary>
+        /// <value>The ingredient supplied ind.</value>
+        public string IngredientSuppliedInd { get; set; }
 
-		public string StrengthUnit { get;  set; }
+        /// <summary>
+        /// Gets or sets the strength.
+        /// </summary>
+        /// <value>The strength.</value>
+        public double Strength { get; set; }
 
-		public string StrengthType { get;  set; }
+        /// <summary>
+        /// Gets or sets the strength unit.
+        /// </summary>
+        /// <value>The strength unit.</value>
+        public string StrengthUnit { get; set; }
 
-		public string DosageValue { get;  set; }
+        /// <summary>
+        /// Gets or sets the type of the strength.
+        /// </summary>
+        /// <value>The type of the strength.</value>
+        public string StrengthType { get; set; }
 
-		public string Base { get;  set; }
+        /// <summary>
+        /// Gets or sets the dosage value.
+        /// </summary>
+        /// <value>The dosage value.</value>
+        public string DosageValue { get; set; }
 
-		public string DosageUnit { get;  set; }
+        /// <summary>
+        /// Gets or sets the base.
+        /// </summary>
+        /// <value>The base.</value>
+        public string Base { get; set; }
 
-		public string Notes{ get;  set; }
+        /// <summary>
+        /// Gets or sets the dosage unit.
+        /// </summary>
+        /// <value>The dosage unit.</value>
+        public string DosageUnit { get; set; }
 
-	}
+        /// <summary>
+        /// Gets or sets the notes.
+        /// </summary>
+        /// <value>The notes.</value>
+        public string Notes { get; set; }
+    }
 }
-

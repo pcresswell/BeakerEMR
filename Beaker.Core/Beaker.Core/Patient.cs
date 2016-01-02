@@ -21,21 +21,21 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 
 namespace Beaker.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// The patient role. 
     /// </summary>
     public class Patient : DomainObject
     {
         /// <summary>
-        /// Creates a new Patient.
+        /// Initializes a new instance of the <see cref="Beaker.Core.Patient"/> class.
         /// </summary>
         public Patient() 
         {
@@ -46,10 +46,12 @@ namespace Beaker.Core
         /// The user that manages this patient.
         /// </summary>
         public User User { get; set; }
+
         /// <summary>
         /// A note about the patient.
         /// </summary>
         public string Note { get; set; }
+
         /// <summary>
         /// The person.
         /// </summary>

@@ -21,26 +21,51 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-
 namespace Beaker.Core.Medication
 {
-	public class Route : DomainObject
-	{
-        public Route() { }
+    using System;
 
-		public Route (int drugCode, int routeOfAdministrationCode, string routeOfAdministration)
-		{
-			this.DrugCode = drugCode;
-			this.RouteOfAdministrationCode = routeOfAdministrationCode;
-			this.RouteOfAdministration = routeOfAdministration;
-		}
+    /// <summary>
+    /// Route.
+    /// </summary>
+    public class Route : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Route"/> class.
+        /// </summary>
+        public Route()
+        {
+        }
 
-		public int DrugCode { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Route"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="routeOfAdministrationCode">Route of administration code.</param>
+        /// <param name="routeOfAdministration">Route of administration.</param>
+        public Route(int drugCode, int routeOfAdministrationCode, string routeOfAdministration)
+        {
+            this.DrugCode = drugCode;
+            this.RouteOfAdministrationCode = routeOfAdministrationCode;
+            this.RouteOfAdministration = routeOfAdministration;
+        }
 
-		public int RouteOfAdministrationCode { get; set; }
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
 
-		public string RouteOfAdministration { get; set; }
-	}
+        /// <summary>
+        /// Gets or sets the route of administration code.
+        /// </summary>
+        /// <value>The route of administration code.</value>
+        public int RouteOfAdministrationCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the route of administration.
+        /// </summary>
+        /// <value>The route of administration.</value>
+        public string RouteOfAdministration { get; set; }
+    }
 }
-

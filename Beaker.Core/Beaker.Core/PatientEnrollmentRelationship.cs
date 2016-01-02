@@ -21,26 +21,35 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beaker.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Patient enrollment relationship.
+    /// </summary>
     public class PatientEnrollmentRelationship : PatientProviderRelationship
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.PatientEnrollmentRelationship"/> class.
+        /// </summary>
+        public PatientEnrollmentRelationship() : base() 
+        {
+        }
+
         /// <summary>
         /// Reason for the termination of enrollment.
         /// </summary>
         public int TerminationReasonCode { get; set; }
+
         /// <summary>
         /// The enrollment status.
         /// </summary>
         public string EnrollmentStatus { get; set; }
-
-        public PatientEnrollmentRelationship() : base()
-        { }
     }
 }

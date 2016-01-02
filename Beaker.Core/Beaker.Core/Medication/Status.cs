@@ -21,29 +21,60 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
 
 namespace Beaker.Core.Medication
 {
-	public class Status : DomainObject
-	{
-        public Status() { }
+    using System;
 
-		public Status (int drugCode, string currentStatusFlag, string status, DateTime historyDate)
-		{
-			this.DrugCode = drugCode;
-			this.CurrentStatusFlag = currentStatusFlag;
-			this.StatusCode = status;
-			this.HistoryDate = historyDate;
-		}
+    /// <summary>
+    /// Status.
+    /// </summary>
+    public class Status : DomainObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Status"/> class.
+        /// </summary>
+        public Status()
+        {
+        }
 
-		public int DrugCode { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Core.Medication.Status"/> class.
+        /// </summary>
+        /// <param name="drugCode">Drug code.</param>
+        /// <param name="currentStatusFlag">Current status flag.</param>
+        /// <param name="status">Status.</param>
+        /// <param name="historyDate">History date.</param>
+        public Status(int drugCode, string currentStatusFlag, string status, DateTime historyDate)
+        {
+            this.DrugCode = drugCode;
+            this.CurrentStatusFlag = currentStatusFlag;
+            this.StatusCode = status;
+            this.HistoryDate = historyDate;
+        }
 
-		public string CurrentStatusFlag { get; set; }
+        /// <summary>
+        /// Gets or sets the drug code.
+        /// </summary>
+        /// <value>The drug code.</value>
+        public int DrugCode { get; set; }
 
-		public string StatusCode { get; set; }
+        /// <summary>
+        /// Gets or sets the current status flag.
+        /// </summary>
+        /// <value>The current status flag.</value>
+        public string CurrentStatusFlag { get; set; }
 
-		public DateTime HistoryDate { get; set; }
-	}
+        /// <summary>
+        /// Gets or sets the status code.
+        /// </summary>
+        /// <value>The status code.</value>
+        public string StatusCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the history date.
+        /// </summary>
+        /// <value>The history date.</value>
+        public DateTime HistoryDate { get; set; }
+    }
 }
-
