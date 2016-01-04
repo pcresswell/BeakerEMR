@@ -28,10 +28,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Beaker.Core;
+using Beaker.Repository;
 
 namespace Beaker.Services
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : ITransactable
     {
         TPersistable Create<TPersistable>() where TPersistable : IPersistable, new();
         void Save<TPersistable>(TPersistable persistable) where TPersistable : IPersistable;

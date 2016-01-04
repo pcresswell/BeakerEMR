@@ -9,6 +9,7 @@ using Beaker.Repository;
 using Beaker.Repository.SQLite.Tables.Medication;
 using AutoMapper;
 using Beaker.Core;
+using Beaker.Authorize;
 
 namespace Beaker.Repository.SQLite
 {
@@ -19,7 +20,10 @@ namespace Beaker.Repository.SQLite
 
         }
 
-        public MedicationRepository() { }
+        public MedicationRepository(ICan can, IAuthor author)
+            : base(can, author)
+        {
+        }
 
         protected override Medication Find(Guid domainObjectID, DateTime onDateTime)
         {
@@ -47,26 +51,28 @@ namespace Beaker.Repository.SQLite
             this.Connection.Initialize<StatusTable>();
             this.Connection.Initialize<TherapeuticTable>();
 
-            Mapper.Initialize(cfg =>
-            {
-                this.CreateTwoWayMap<Company, CompanyTable>(cfg);
-                this.CreateTwoWayMap<DrugProduct, DrugProductTable>(cfg);
-                this.CreateTwoWayMap<Form, FormTable>(cfg);
-                this.CreateTwoWayMap<Ingredient, IngredientTable>(cfg);
-                this.CreateTwoWayMap<Package, PackageTable>(cfg);
-                this.CreateTwoWayMap<Pharmaceutical, PharmaceuticalTable>(cfg);
-                this.CreateTwoWayMap<Route, RouteTable>(cfg);
-                this.CreateTwoWayMap<Schedule, ScheduleTable>(cfg);
-                this.CreateTwoWayMap<Status, StatusTable>(cfg);
-                this.CreateTwoWayMap<Therapeutic, TherapeuticTable>(cfg);
-            });
+
         }
 
-        private void CreateTwoWayMap<T1, T2>(IConfiguration cfg)
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void InitializeAutoMapper(IConfiguration autoMapper)
         {
-            cfg.CreateMap<T1, T2>();
-            cfg.CreateMap<T2, T1>();
+            this.CreateTwoWayMap<Company, CompanyTable>(autoMapper);
+            this.CreateTwoWayMap<DrugProduct, DrugProductTable>(autoMapper);
+            this.CreateTwoWayMap<Form, FormTable>(autoMapper);
+            this.CreateTwoWayMap<Ingredient, IngredientTable>(autoMapper);
+            this.CreateTwoWayMap<Package, PackageTable>(autoMapper);
+            this.CreateTwoWayMap<Pharmaceutical, PharmaceuticalTable>(autoMapper);
+            this.CreateTwoWayMap<Route, RouteTable>(autoMapper);
+            this.CreateTwoWayMap<Schedule, ScheduleTable>(autoMapper);
+            this.CreateTwoWayMap<Status, StatusTable>(autoMapper);
+            this.CreateTwoWayMap<Therapeutic, TherapeuticTable>(autoMapper);
         }
+
+        #endregion
+
+
 
         protected override Medication Get(Guid id)
         {
@@ -318,7 +324,7 @@ namespace Beaker.Repository.SQLite
 
         public override void Register(IRepositoryRegistrar registrar)
         {
-            registrar.RegisterRepository<IMedicationRepository>(this);
+            registrar.RegisterRepository<IMedicationRepository, Medication>(this);
         }
     }
 }

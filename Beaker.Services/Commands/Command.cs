@@ -33,12 +33,8 @@ namespace Beaker.Services.Commands
 
     public abstract class Command : ICommand
     {
-        protected IUnitOfWork UnitOfWork { get; set; }
-
-        public Command(IUnitOfWork unitOfWork)
+        public Command()
         {
-            if (unitOfWork == null) throw new ArgumentNullException("unitOfWork");
-            this.UnitOfWork = unitOfWork;
         }
 
         void ICommand.Run()

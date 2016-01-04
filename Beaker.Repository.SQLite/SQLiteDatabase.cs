@@ -14,9 +14,9 @@ namespace Beaker.Repository.SQLite
     {
         internal BeakerSQLiteConnection Connection { get; private set; }
 
-        public SQLiteDatabase(BeakerSQLiteConnection connection)
+        public SQLiteDatabase(string path)
         {
-            this.Connection = connection;
+            this.Connection = new BeakerSQLiteConnection(new SQLiteConnection(path));
             this.Connection.Initialize<MigrationTable>();
         }
 
@@ -24,6 +24,15 @@ namespace Beaker.Repository.SQLite
         {
             this.Connection.CommitTransaction();
         }
+
+        #region implemented abstract members of Database
+
+        protected override void Dispose()
+        {
+            this.Connection.Dispose();
+        }
+
+        #endregion
 
         protected override bool HasMigration(IMigration migration)
         {

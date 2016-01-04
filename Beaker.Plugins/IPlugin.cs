@@ -9,7 +9,7 @@ namespace Beaker.Plugins
 {
     public interface IPlugin
     {
-        IEnumerable<IRepository> Repositories { get; }
+		IEnumerable<IRepository> Repositories { get; }
         IEnumerable<IMigration> Migrations { get; }
     } 
 }

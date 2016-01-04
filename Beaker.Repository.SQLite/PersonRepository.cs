@@ -3,25 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Beaker.Repository;
+using Beaker.Authorize;
 using Beaker.Core;
-using SQLite;
+using Beaker.Repository;
 using Beaker.Repository.SQLite.Tables;
+using SQLite;
 
 
 namespace Beaker.Repository.SQLite
 {
     public class PersonRepository : SQLiteRepository<Person, PersonTable>, IPersonRepository
     {
-        public PersonRepository()
-        { }
+        public PersonRepository(ICan can, IAuthor author)
+            : base(can, author)
+        {
+        }
 
         public override void Register(IRepositoryRegistrar registrar)
         {
-            if (registrar == null) throw new ArgumentNullException("registrar");
+            if (registrar == null)
+                throw new ArgumentNullException("registrar");
 
-            registrar.RegisterRepository<IPersonRepository>(this);
+            registrar.RegisterRepository<IPersonRepository, Person>(this);
         }
+
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void InitializeAutoMapper(AutoMapper.IConfiguration autoMapper)
+        {
+            this.CreateTwoWayMap<Person, PersonTable>(autoMapper);
+        }
+
+        #endregion
 
         protected override Person Find(Guid domainObjectID, DateTime onDateTime)
         {

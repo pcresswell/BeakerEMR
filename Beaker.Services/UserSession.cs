@@ -22,30 +22,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Beaker.Core;
-using Beaker.Repository;
-
 namespace Beaker.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Beaker.Core;
+    using Beaker.Repository;
+    using Beaker.Authorize;
+
     /// <summary>
     /// A User Session handles logging in and out of the system
     /// as well as providing a unit of work interface.
     /// </summary>
-    public class UserSession
+    public class UserSession : ICan, IAuthor
     {
         /// <summary>
         /// User's username.
         /// </summary>
         public string Username { get; set; }
+
         /// <summary>
         /// User's password.
         /// </summary>
         public string Password { get; set; }
+
         /// <summary>
         /// Is there a user logged in?
         /// </summary>
@@ -57,18 +60,38 @@ namespace Beaker.Services
             }
         }
 
-        private IUserRepository UserRepository { get; set; }
+        /// <summary>
+        /// Gets or sets the user repository.
+        /// </summary>
+        /// <value>The user repository.</value>
+        private Database Database { get; set; }
+
+        /// <summary>
+        /// Gets or sets the active user.
+        /// </summary>
+        /// <value>The active user.</value>
         private User ActiveUser { get; set; }
+
+        private ICan UserPermission { get; set; }
+
+        /// <summary>
+        /// Gets or sets the unit of work.
+        /// </summary>
+        /// <value>The unit of work.</value>
         private UnitOfWork UnitOfWork { get; set; }
-        
+
         /// <summary>
         /// Creates a new UserSession.
         /// </summary>
         /// <param name="userRepository"></param>
-        public UserSession(IUserRepository userRepository)
+        public UserSession(Database database)
         {
-            if (null == userRepository) throw new ArgumentNullException("userRepository");
-            this.UserRepository = userRepository;  
+            if (null == database)
+            {
+                throw new ArgumentNullException("database");
+            }
+
+            this.Database = database;  
         }
 
         /// <summary>
@@ -77,7 +100,10 @@ namespace Beaker.Services
         /// <returns></returns>
         public IUnitOfWork GetUnitOfWork()
         {
-            if (null == this.UnitOfWork) throw new InvalidOperationException("Cannot get a UnitOfWork without a logged in User");
+            if (null == this.UnitOfWork)
+            {
+                throw new InvalidOperationException("Cannot get a UnitOfWork without a logged in User");
+            }
 
             return this.UnitOfWork;
         }
@@ -88,24 +114,80 @@ namespace Beaker.Services
         /// </summary>
         public void Login()
         {
-            User user = this.UserRepository.FindByUsername(this.Username);
+            User user = this.Database.Repository<IUserRepository>().FindByUsername(this.Username);
 
-            if (null == user) throw new FailedToLoginException("User not found");
-            if (user.Password != this.Password) throw new FailedToLoginException("Password does not match.");
+            if (null == user)
+            {
+                throw new FailedToLoginException("User not found");
+            }
+
+            if (user.Password != this.Password)
+            {
+                throw new FailedToLoginException("Password does not match.");
+            }
 
             this.ActiveUser = user;
-            this.UnitOfWork = new UnitOfWork(this.ActiveUser);
+            this.UserPermission = this.Database.Repository<IUserPermissionRepository>().FindByUser(this.ActiveUser);
+            this.UnitOfWork = new UnitOfWork(this.ActiveUser, this, this.Database);
         }
+
+        /// <summary>
+        /// Login the specified user.
+        /// </summary>
+        /// <param name="user">User.</param>
+        public void Login(User user)
+        {
+            this.Username = user.Username;
+            this.Password = user.Password;
+            this.Login();
+        }
+
+        #region ICan implementation
+
+        bool? ICan.Can(Beaker.Authorize.Action action, object subject)
+        {
+            return this.UserPermission.Can(action, subject);
+        }
+
+        #endregion
+
+        #region IAuthor implementation
+
+        Guid IAuthor.ID
+        {
+            get
+            {
+                if (this.IsLoggedIn)
+                {
+                    return this.ActiveUser.DomainObjectID;
+                }
+
+                return Guid.Empty;
+            }
+        }
+
+        #endregion
     }
+
 
     /// <summary>
     /// Failed to login Exception. Thrown when login fails.
     /// </summary>
     public class FailedToLoginException : Exception
     {
-        public FailedToLoginException() { }
-        public FailedToLoginException(string message) : base(message) { }
-        public FailedToLoginException(string message, Exception inner) : base(message, inner) { }
+        public FailedToLoginException()
+        {
+        }
+
+        public FailedToLoginException(string message)
+            : base(message)
+        {
+        }
+
+        public FailedToLoginException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
         
     }
 }

@@ -22,13 +22,30 @@
 // SOFTWARE.
 // */
 using System;
+using Beaker.Repository.SQLite;
+using Beaker.Services;
+using Beaker.Authorize;
+using Beaker.Repository;
 
 namespace Beaker.Initialization
 {
-    public class InitializeSQLiteDatabase
+    internal class InitializeSQLiteDatabase
     {
-        public InitializeSQLiteDatabase()
+        private SQLiteDatabase Database { get; set;}
+        private ICan UserPermission {get;set;}
+        private IAuthor Author { get; set; }
+
+        public InitializeSQLiteDatabase(SQLiteDatabase database, ICan userPermission, IAuthor author)
         {
+            this.Database = database;
+            this.UserPermission = userPermission;
+            this.Author = author;
+        }
+
+        public void Run()
+        {
+            SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
+            factory.RegisterRepositoriesWithDatabase(this.Database, this.UserPermission, this.Author);
         }
     }
 }

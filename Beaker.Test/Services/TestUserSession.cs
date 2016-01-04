@@ -31,8 +31,11 @@ using System.Threading.Tasks;
 using Moq;
 using Beaker.Repository;
 using Beaker.Core;
+using Beaker.Services;
+using SQLite;
+using Beaker.Repository.SQLite;
 
-namespace Beaker.Services.Test
+namespace Beaker.Test.Services
 {
     [TestFixture]
     public class TestUserSession
@@ -42,43 +45,55 @@ namespace Beaker.Services.Test
         [Test]
         public void LoginFailsIfUserIsNotFound()
         {
-            var mock = new Mock<IUserRepository>();
-            mock.Setup(m => m.FindByUsername(It.IsAny<string>())).Returns<User>(null);
-            this.UserSession = new UserSession(mock.Object);
-            UserSession.Username = "Peter";
-            UserSession.Password = "password";
-            Assert.Throws<FailedToLoginException>(() => this.UserSession.Login());
+            using (SQLiteDatabase db = new SQLiteDatabase(":memory:"))
+            {
+                SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
+                factory.RegisterRepositoriesWithDatabase(db, new TestPermissions(), new TestAuthor());
+                this.UserSession = new UserSession(db);
+                UserSession.Username = "Peter";
+                UserSession.Password = "password";
+                Assert.Throws<FailedToLoginException>(() => this.UserSession.Login());
+            }
+
         }
 
         [Test]
         public void LoginFailsIfPasswordIsWrong()
         {
-            var mock = new Mock<IUserRepository>();
-            mock.Setup(m => m.FindByUsername(It.IsAny<string>())).Returns(new User() { Username = "Peter", Password = "something" });
-            this.UserSession = new UserSession(mock.Object);
-            UserSession.Username = "Peter";
-            UserSession.Password = "password";
-            Assert.Throws<FailedToLoginException>(() => this.UserSession.Login());
+            using (SQLiteDatabase db = new SQLiteDatabase(":memory:"))
+            {
+                SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
+                factory.RegisterRepositoriesWithDatabase(db, new TestPermissions(), new TestAuthor());
+                this.UserSession = new UserSession(db);
+                db.Save<User>(new User() { Username = "Peter", Password = "something" });
+                UserSession.Username = "Peter";
+                UserSession.Password = "password";
+                Assert.Throws<FailedToLoginException>(() => this.UserSession.Login());
+            }
         }
 
         [Test]
         public void ExceptionThrownIfUserNotLoggedInWhenGettingUnitOfWork()
         {
-            Assert.Throws<InvalidOperationException>(() =>
+            using (SQLiteDatabase db = new SQLiteDatabase(":memory:"))
             {
-                var mock = new Mock<IUserRepository>();
-                this.UserSession = new UserSession(mock.Object);
-                this.UserSession.GetUnitOfWork();
-            });
+                Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
+                        factory.RegisterRepositoriesWithDatabase(db, new TestPermissions(), new TestAuthor());
+                        this.UserSession = new UserSession(db);
+                        this.UserSession.GetUnitOfWork();
+                    });
+            }
         }
 
         [Test]
         public void ConstructorThrowsExceptionIfNullRepositoryPassedIn()
         {
             Assert.Throws<ArgumentNullException>(() =>
-            {
-                this.UserSession = new UserSession(null);
-            });
+                {
+                    this.UserSession = new UserSession(null);
+                });
         }
     }
 }

@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Beaker.Core;
 
-namespace Beaker.Authorize.Test
+namespace Beaker.Test.Authorize
 {
     [TestFixture]
     public class TestPermission
@@ -112,7 +112,7 @@ namespace Beaker.Authorize.Test
         {
             UserPermission user = new UserPermission();
             AddressModel address = new AddressModel();
-            Update updateAction = new Update(address);
+            Beaker.Authorize.Update updateAction = new Beaker.Authorize.Update(address);
             user.AddAuthorization(updateAction);
 
             bool? canUpdate = user.Can(Actions.Update, address);
@@ -147,7 +147,7 @@ namespace Beaker.Authorize.Test
         public void AuthorizingAgainstTheTypeGivesAuthorityForAllInstances()
         {
             UserPermission user = new UserPermission();
-            Update updateAction = new Update();
+            Beaker.Authorize.Update updateAction = new Beaker.Authorize.Update();
             AddressModel address = new AddressModel();
 
             updateAction.AddSubject(typeof(AddressModel));
@@ -165,7 +165,7 @@ namespace Beaker.Authorize.Test
             // then even if we authorize against an instance
             // we are not authorized
             UserPermission user = new UserPermission();
-            Update updateAction = new Update(typeof(AddressModel));
+            Beaker.Authorize.Update updateAction = new Beaker.Authorize.Update(typeof(AddressModel));
             AddressModel address = new AddressModel();
 
             user.AddUnauthorization(updateAction);
@@ -175,7 +175,7 @@ namespace Beaker.Authorize.Test
 
             // now authorize against an instance
 
-            Update authorizeInstanceUpdateAction = new Update();
+            Beaker.Authorize.Update authorizeInstanceUpdateAction = new Beaker.Authorize.Update();
 
             authorizeInstanceUpdateAction.AddSubject(address);
             user.AddAuthorization(authorizeInstanceUpdateAction);

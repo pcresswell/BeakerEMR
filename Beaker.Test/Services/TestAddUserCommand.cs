@@ -27,8 +27,9 @@ using NUnit.Framework;
 using Beaker.Services.Commands;
 using Beaker.Core;
 using Moq;
+using Beaker.Services;
 
-namespace Beaker.Services.Test
+namespace Beaker.Test.Services
 {
     [TestFixture]
     public class TestAddUserCommand
@@ -36,30 +37,34 @@ namespace Beaker.Services.Test
         [Test]
         public void CreateAUserMustHaveAUsername()
         {
-            Assert.Throws<ArgumentNullException>(()=>
-            {
-                ICommand addUser = new AddUserCommand(null);
-                addUser.Run();
-            });
+            Assert.Throws<ArgumentNullException>(() =>
+                {
+                    ICommand addUser = new AddUserCommand(null);
+                    addUser.Run();
+                });
         }
 
         [Test]
         public void CreateAUserMustHaveAnEmailAddress()
         {
-            Assert.Throws<ArgumentNullException>(() => {
-                ICommand addUser = new AddUserCommand(null) { Username = "Peter" };
-            });
+            Assert.Throws<ArgumentNullException>(() =>
+                {
+                    ICommand addUser = new AddUserCommand(null) { Username = "Peter" };
+                });
         }
 
         [Test]
         public void CreateAUserMustHaveAPassword()
         {
-            Assert.Throws<ArgumentNullException>(() => 
-            {
-            ICommand addUser = new AddUserCommand(null) {
-                Username = "Peter",
-                EmailAddress = "pcresswell@gmail.com" };
-            });
+            Assert.Throws<ArgumentNullException>(() =>
+                {
+                    ICommand addUser = new AddUserCommand(null)
+                    {
+                        Username = "Peter",
+                        EmailAddress = "pcresswell@gmail.com" 
+                    };
+                    addUser.Run();
+                });
             
         }
 
@@ -67,15 +72,15 @@ namespace Beaker.Services.Test
         public void CreateAUserMustHaveAUnitOfWork()
         {
             Assert.Throws<ArgumentNullException>(() =>
-            {
-                ICommand addUser = new AddUserCommand(null)
                 {
-                    Username = "Peter",
-                    EmailAddress = "pcresswell@gmail.com",
-                    Password = "password"
-                };
-                addUser.Run();
-            });
+                    ICommand addUser = new AddUserCommand(null)
+                    {
+                        Username = "Peter",
+                        EmailAddress = "pcresswell@gmail.com",
+                        Password = "password"
+                    };
+                    addUser.Run();
+                });
         }
 
         [Test]
@@ -92,24 +97,25 @@ namespace Beaker.Services.Test
 
             addUser.Run();
             moqUOW.Verify(f => f.Save<User>(It.Is<User>(
-                u=> u.Username == "Peter" &&
-                u.EmailAddress == "pcresswell@gmail.com" &&
-                u.Password == "password")), Times.AtLeastOnce());
+                        u => u.Username == "Peter" &&
+                        u.EmailAddress == "pcresswell@gmail.com" &&
+                        u.Password == "password")), Times.AtLeastOnce());
         }
 
         [Test]
         public void UsernameCannotBeRoot()
         {
-            Assert.Throws<ArgumentException>(() => {
-                var moq = new Mock<IUnitOfWork>();
-                ICommand addUser = new AddUserCommand(moq.Object)
+            Assert.Throws<ArgumentException>(() =>
                 {
-                    Username = "root",
-                    EmailAddress = "pcresswell@gmail.com",
-                    Password = "password"
-                };
-                addUser.Run();
-            });
+                    var moq = new Mock<IUnitOfWork>();
+                    ICommand addUser = new AddUserCommand(moq.Object)
+                    {
+                        Username = "root",
+                        EmailAddress = "pcresswell@gmail.com",
+                        Password = "password"
+                    };
+                    addUser.Run();
+                });
         }
 
     }

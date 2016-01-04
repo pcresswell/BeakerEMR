@@ -30,6 +30,7 @@ namespace Beaker.Core
     using System.Text;
     using System.Threading.Tasks;
 
+
     /// <summary>
     /// An address.
     /// </summary>

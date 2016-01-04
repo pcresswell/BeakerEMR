@@ -10,26 +10,22 @@ using SQLite;
 using Beaker.Core.Medication;
 using Beaker.Repository.SQLite.Tables.Medication;
 using AutoMapper;
+using Beaker.Test;
+using Beaker.Authorize;
 
 namespace Beaker.Repository.SQLite.Test
 {
     [TestFixture]
-    public class TestPatientRepository
+    public class TestPatientRepository : TestHelper
     {
+        
         [Test]
         public void SaveAPatient()
         {
-            using (BeakerSQLiteConnection connection = new BeakerSQLiteConnection(new SQLiteConnection(":memory:")))
+            using (SQLiteDatabase database = new SQLiteDatabase(":memory:"))
             {
-                IPersonRepository personRepository = new PersonRepository() { Connection = connection };
+                Factory.RegisterRepositoriesWithDatabase(database, this.UserPermission, this.Author);
 
-                IPatientRepository patientRepository = new PatientRepository() {
-                    PersonRepository = personRepository,
-                    Connection = connection
-                };
-               
-                patientRepository.Initialize();
-                personRepository.Initialize();
                 Patient patient = new Patient();
                 patient.AuthorID = Guid.NewGuid();
                 patient.Note = "Some note";
@@ -38,10 +34,10 @@ namespace Beaker.Repository.SQLite.Test
                 Assert.IsTrue(Guid.Empty.Equals(patient.ID));
                 Assert.IsTrue(!Guid.Empty.Equals(patient.DomainObjectID));
 
-                patientRepository.Save(patient);
-                Assert.IsTrue(personRepository.IsPersisted(patient.Person));
-                Assert.AreEqual(1, patientRepository.Count);
-                Assert.IsTrue(patientRepository.IsPersisted(patient));
+                database.Save<Patient>(patient);
+                Assert.IsTrue(database.IsPersisted<Person>(patient.Person));
+                Assert.AreEqual(1, database.Count<Person>());
+                Assert.IsTrue(database.IsPersisted<Patient>(patient));
                 Assert.IsTrue(Guid.Empty != patient.ID);
                 Assert.AreEqual(Beaker.Core.Dates.Infinity, patient.RecordEndDateTime);
                 Assert.AreEqual(Beaker.Core.Dates.Infinity, patient.ValidEndDateTime);
@@ -49,7 +45,7 @@ namespace Beaker.Repository.SQLite.Test
                 Assert.That(patient.ValidStartDateTime, Is.EqualTo(DateTime.UtcNow).Within(TimeSpan.FromSeconds(1)));
 
                 // Verify properties are actually saved
-                Patient loadPatient = patientRepository.Find(patient.DomainObjectID);
+                Patient loadPatient = database.Find<Patient>(patient.DomainObjectID);
 
                 Assert.AreEqual(loadPatient.AuthorID, patient.AuthorID);
                 Assert.AreEqual(loadPatient.DomainObjectID, patient.DomainObjectID);

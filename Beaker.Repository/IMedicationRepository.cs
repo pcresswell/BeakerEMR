@@ -22,17 +22,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Beaker.Core.Medication;
-
 namespace Beaker.Repository
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Beaker.Core.Medication;
+
+    /// <summary>
+    /// Interface for a medication repository.
+    /// </summary>
     public interface IMedicationRepository : IRepository<Medication>
     {
+        /// <summary>
+        /// Finds the medication by drug code.
+        /// </summary>
+        /// <returns>The by drug code.</returns>
+        /// <param name="drugCode">Drug code.</param>
         Medication FindByDrugCode(int drugCode);
     }
 }

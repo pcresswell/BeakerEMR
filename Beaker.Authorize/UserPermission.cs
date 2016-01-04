@@ -35,7 +35,7 @@ namespace Beaker.Authorize
     /// would handle a single user's authorizations.
     /// </summary>
     [JsonObjectAttribute]
-    public class UserPermission : DomainObject
+    public class UserPermission : DomainObject, ICan
     {
         public UserPermission()
         {

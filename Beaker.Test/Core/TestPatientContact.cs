@@ -23,8 +23,9 @@ SOFTWARE.
 */
 using System;
 using NUnit.Framework;
+using Beaker.Core;
 
-namespace Beaker.Core.Test
+namespace Beaker.Test.Core
 {
     [TestFixture]
     public class TestPatientContact

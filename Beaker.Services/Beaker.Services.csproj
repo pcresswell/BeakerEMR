@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
@@ -50,15 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Beaker.Authorize\Beaker.Authorize.csproj">
-      <Project>{7fa31657-7d0e-4924-be6b-61f3743d6116}</Project>
+      <Project>{7FA31657-7D0E-4924-BE6B-61F3743D6116}</Project>
       <Name>Beaker.Authorize</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
-      <Project>{065ff225-b832-4a42-9c0d-2df7cae4fef6}</Project>
+      <Project>{065FF225-B832-4A42-9C0D-2DF7CAE4FEF6}</Project>
       <Name>Beaker.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beaker.Repository\Beaker.Repository.csproj">
-      <Project>{f4beb033-a085-4e5d-b5bc-bb21f57e3bb6}</Project>
+      <Project>{F4BEB033-A085-4E5D-B5BC-BB21F57E3BB6}</Project>
       <Name>Beaker.Repository</Name>
     </ProjectReference>
   </ItemGroup>

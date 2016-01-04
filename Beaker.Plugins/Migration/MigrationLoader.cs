@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace Beaker.Plugins.Repository.SQLite
 {
-    public class MigrationLoader
+    internal class MigrationLoader
     {
         private IMigratable Database { get; set; }
         

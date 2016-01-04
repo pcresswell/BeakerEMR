@@ -9,10 +9,12 @@ using System.Composition;
 using System.Composition.Hosting;
 using Beaker.Repository;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Beaker.Test")]
 namespace Beaker.Plugins.Repository.SQLite
 {
-    public class RepositoryLoader
+    internal class RepositoryLoader
     {
         private SQLiteDatabase Database { get; set; }
         

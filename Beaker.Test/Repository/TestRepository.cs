@@ -26,8 +26,9 @@ using NUnit.Framework;
 using Beaker.Core;
 using SQLite;
 using Beaker.Repository.SQLite;
+using Beaker.Repository;
 
-namespace Beaker.Repository.Test
+namespace Beaker.Test.Repository.SQLite
 {
     [TestFixture]
     public class TestRepository
@@ -40,13 +41,10 @@ namespace Beaker.Repository.Test
         {
             this.patient = new Patient();
             BeakerSQLiteConnection c = new BeakerSQLiteConnection(new SQLiteConnection(":memory:"));
-            var personRepository = new PersonRepository() { Connection = c };
-            this.patientRepository = new PatientRepository() {Connection = c, PersonRepository = personRepository };
-            
-
+            var personRepository = new PersonRepository(new TestPermissions(), new TestAuthor()) { Connection = c };
+            this.patientRepository = new PatientRepository(new TestPermissions(), new TestAuthor()) {Connection = c, PersonRepository = personRepository };
             patientRepository.Initialize();
             personRepository.Initialize();
-            
         }
 
         [Test]

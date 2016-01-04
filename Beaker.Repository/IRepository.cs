@@ -43,5 +43,6 @@ namespace Beaker.Repository
         TPersistable Find(Guid domainObjectID);
         TPersistable Find(Guid domainObjectID, DateTime onDateTime);
         bool IsPersisted(TPersistable persistable);
+        TPersistable Get(Guid id);
     }
 }

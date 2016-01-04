@@ -39,9 +39,12 @@ namespace Beaker.Services.Commands
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
+        private IUnitOfWork UnitOfWork { get; set;}
 
-        public AddPatientCommand(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {         
+
+        public AddPatientCommand(IUnitOfWork unitOfWork)
+        {
+            this.UnitOfWork = unitOfWork;
         }
 
         protected override void Run()

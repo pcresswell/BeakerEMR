@@ -26,6 +26,9 @@ using System;
 
 namespace Beaker.Repository
 {
+    /// <summary>
+    /// Exception used to trigger a database rollback.
+    /// </summary>
     internal class RollbackException : Exception
     {
         /// <summary>

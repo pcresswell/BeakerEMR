@@ -1,4 +1,4 @@
-﻿// /*
+﻿// 
 // The MIT License (MIT)
 //
 // Copyright (c) 2015 Peter Cresswell (pcresswell@gmail.com)
@@ -20,16 +20,42 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-// */
-using System;
 
 namespace Beaker.Initialization
 {
-    public class AddInitialMedication
-    {
-        public AddInitialMedication()
+    using System;
+    using Beaker.Core;
+    using Beaker.Repository;
+    using Beaker.Update.Medication.June2015;
+
+    /// <summary>
+    /// Add initial medication.
+    /// </summary>
+    internal class AddInitialMedication
+    {   
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Initialization.AddInitialMedication"/> class.
+        /// </summary>
+        /// <param name="migratable">Migratable.</param>
+        public AddInitialMedication(IMigratable migratable)
         {
+            this.Migratable = migratable;
+        }
+
+        /// <summary>
+        /// Gets or sets the migratable.
+        /// </summary>
+        /// <value>The migratable.</value>
+        private IMigratable Migratable { get; set;}
+
+        /// <summary>
+        /// Run this instance.
+        /// </summary>
+        public void Run()
+        {
+            Medication20150601Migration migration = new Medication20150601Migration();
+            this.Migratable.Apply(migration);
         }
     }
 }
-

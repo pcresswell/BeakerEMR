@@ -22,19 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System;
-using Beaker.Core.Medication;
-using Beaker.Core;
-
 namespace Beaker.Repository
 {
-    public interface IMigratable
+    using System;
+    using Beaker.Core.Medication;
+    using Beaker.Core;
+
+    /// <summary>
+    /// Migratable Interface. 
+    /// </summary>
+    public interface IMigratable : ITransactable
     {
-        void StartTransaction();
-        void CommitTransaction();
-        void RollbackTransaction();
+        /// <summary>
+        /// Determines whether this instance has migration the specified migration.
+        /// </summary>
+        /// <returns><c>true</c> if this instance has migration the specified migration; otherwise, <c>false</c>.</returns>
+        /// <param name="migration">Migration.</param>
         bool HasMigration(IMigration migration);
-        T Repository<T>() where T : IRepository;
+
+        /// <summary>
+        /// Repository this instance.
+        /// </summary>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        TRepository Repository<TRepository>();
+
+        /// <summary>
+        /// Apply the specified migration.
+        /// </summary>
+        /// <param name="migration">Migration.</param>
         void Apply(IMigration migration);
     }
 }

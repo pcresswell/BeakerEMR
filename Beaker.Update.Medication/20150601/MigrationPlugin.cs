@@ -22,14 +22,33 @@
 // SOFTWARE.
 // */
 using System;
+using Beaker.Plugins;
+using Beaker.Repository;
+using System.Composition;
+using System.Collections.Generic;
 
 namespace Beaker.Update.Medication
 {
-    public class MigrationPlugin
+    [Export(typeof(IPlugin))]
+    public class MigrationPlugin : Beaker.Plugins.Plugin
     {
         public MigrationPlugin()
         {
         }
+
+        protected override System.Collections.Generic.IEnumerable<IMigration> GetMigrations()
+        {
+            IList<IMigration> migrations = new List<IMigration>();
+            migrations.Add(new Medication.June2015.Medication20150601Migration());
+            return migrations;
+        }
+
+        #region implemented abstract members of Plugin
+        protected override IEnumerable<IRepository> GetRepositories()
+        {
+            return new List<IRepository>();
+        }
+        #endregion
     }
 }
 

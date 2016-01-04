@@ -7,14 +7,18 @@ using SQLite;
 using Beaker.Core;
 using Beaker.Repository;
 using Beaker.Repository.SQLite.Tables;
+using Beaker.Authorize;
 
 namespace Beaker.Repository.SQLite
-{ 
+{
     public class PatientRepository : SQLiteRepository<Patient, PatientTable>, IPatientRepository
     {
         public IPersonRepository PersonRepository { get; set; }
 
-        public PatientRepository() { }
+        public PatientRepository(ICan can, IAuthor author)
+            : base(can, author)
+        {
+        }
 
         protected override Patient Find(Guid domainObjectID, DateTime onDateTime)
         {
@@ -27,6 +31,15 @@ namespace Beaker.Repository.SQLite
 
             return this.CreatePatient(patientTable);
         }
+
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void InitializeAutoMapper(AutoMapper.IConfiguration autoMapper)
+        {
+            this.CreateTwoWayMap<Patient, PatientTable>(autoMapper);
+        }
+
+        #endregion
 
         protected override Patient Get(Guid id)
         {
@@ -63,7 +76,7 @@ namespace Beaker.Repository.SQLite
 
         public override void Register(IRepositoryRegistrar registrar)
         {
-            registrar.RegisterRepository<IPatientRepository>(this);
+            registrar.RegisterRepository<IPatientRepository, Patient>(this);
         }
     }
 }

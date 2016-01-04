@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
@@ -36,6 +36,7 @@
   <ItemGroup>
     <None Include="project.json" />
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="20150601\CompanyList.cs" />
@@ -61,19 +62,24 @@
     <Compile Include="Status.cs" />
     <Compile Include="Therapeutic.cs" />
     <Compile Include="VeterinarySpecies.cs" />
+    <Compile Include="20150601\MigrationPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Beaker.Authorize\Beaker.Authorize.csproj">
-      <Project>{7fa31657-7d0e-4924-be6b-61f3743d6116}</Project>
+      <Project>{7FA31657-7D0E-4924-BE6B-61F3743D6116}</Project>
       <Name>Beaker.Authorize</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
-      <Project>{065ff225-b832-4a42-9c0d-2df7cae4fef6}</Project>
+      <Project>{065FF225-B832-4A42-9C0D-2DF7CAE4FEF6}</Project>
       <Name>Beaker.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Beaker.Repository\Beaker.Repository.csproj">
-      <Project>{f4beb033-a085-4e5d-b5bc-bb21f57e3bb6}</Project>
+      <Project>{F4BEB033-A085-4E5D-B5BC-BB21F57E3BB6}</Project>
       <Name>Beaker.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Beaker.Plugins\Beaker.Plugins.csproj">
+      <Project>{DA61317C-5209-43CF-A70F-F41256A17D5E}</Project>
+      <Name>Beaker.Plugins</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -84,4 +90,21 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Reference Include="System.Composition.AttributedModel">
+      <HintPath>..\Beaker.Test\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Convention">
+      <HintPath>..\Beaker.Test\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Convention.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Hosting">
+      <HintPath>..\Beaker.Test\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Runtime">
+      <HintPath>..\Beaker.Test\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.TypedParts">
+      <HintPath>..\Beaker.Test\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

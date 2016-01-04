@@ -21,22 +21,36 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Beaker.Core;
+
 
 namespace Beaker.Repository
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Beaker.Core;
+    using Beaker.Authorize;
+
+    /// <summary>
+    /// Repository base class. All repositories must be a sub class.
+    /// </summary>
     public abstract class Repository<TPersistable> : IRepository<TPersistable> where TPersistable : IPersistable
     {
-        public Repository()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Repository.Repository`1"/> class.
+        /// </summary>
+        public Repository(ICan can, IAuthor author)
         {
-            
+            this.Authorizer = new RepositoryAuthority(can);
+            this.Author = author;
         }
 
+        /// <summary>
+        /// Gets the count.
+        /// </summary>
+        /// <value>The count.</value>
         public abstract int Count
         {
             get;           
@@ -60,8 +74,13 @@ namespace Beaker.Repository
             return (!otherPersistable.SameAs(persistable));
         }
 
+        /// <summary>
+        /// Determines whether this instance is persisted.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is persisted the specified persistable; otherwise, <c>false</c>.</returns>
+        /// <param name="persistable">Persistable.</param>
         public abstract bool IsPersisted(TPersistable persistable);
-     
+
         /// <summary>
         /// Deletes the persistable record. Override if more than one record needs to be deleted
         /// in the event of a delete.
@@ -69,6 +88,8 @@ namespace Beaker.Repository
         /// <param name="persistable"></param>
         protected virtual void Delete(TPersistable persistable)
         {
+            this.Authorizer.CanDelete<TPersistable>(persistable);
+
             persistable.ValidEndDateTime = DateTime.UtcNow;
             persistable.RecordEndDateTime = DateTime.UtcNow;
             if (this.IsPersisted(persistable))
@@ -77,13 +98,36 @@ namespace Beaker.Repository
             }
         }
 
+        /// <summary>
+        /// Find the specified domainObjectID on the given DateTime.
+        /// </summary>
+        /// <param name="domainObjectID">Domain object I.</param>
+        /// <param name="onDateTime">On date time.</param>
         protected abstract TPersistable Find(Guid domainObjectID, DateTime onDateTime);
 
-        // protected abstract void Persist(TPersistable persistable);
-
+        /// <summary>
+        /// Insert the specified persistable.
+        /// </summary>
+        /// <param name="persistable">Persistable.</param>
         protected abstract void Insert(TPersistable persistable);
 
+        /// <summary>
+        /// Update the specified persistable.
+        /// </summary>
+        /// <param name="persistable">Persistable.</param>
         protected abstract void Update(TPersistable persistable);
+
+        /// <summary>
+        /// Gets or sets the authorizer.
+        /// </summary>
+        /// <value>The authorizer.</value>
+        private RepositoryAuthority Authorizer { get; set; }
+
+        /// <summary>
+        /// Gets or sets the author.
+        /// </summary>
+        /// <value>The author.</value>
+        private IAuthor Author { get; set;}
 
         /// <summary>
         /// Save the persistable object. Inserts new record if there are any changes.
@@ -91,7 +135,8 @@ namespace Beaker.Repository
         /// <param name="persistable"></param>
         void IRepository<TPersistable>.Save(TPersistable persistable)
         {
-            
+            this.Authorizer.CanSave<TPersistable>(persistable);
+
             // First, discontinue the current version
             var currentVersion = this.Find(persistable.DomainObjectID, Beaker.Core.Dates.Infinity);
             if (currentVersion != null)
@@ -129,7 +174,9 @@ namespace Beaker.Repository
         /// <returns></returns>
         TPersistable IRepository<TPersistable>.Find(Guid entityID)
         {
-            return this.Find(entityID, Beaker.Core.Dates.Infinity);
+            TPersistable persistable = this.Find(entityID, Beaker.Core.Dates.Infinity);
+            this.Authorizer.CanFind(persistable);
+            return persistable;
         }
 
         /// <summary>
@@ -140,9 +187,14 @@ namespace Beaker.Repository
         /// <returns></returns>
         TPersistable IRepository<TPersistable>.Find(Guid domainObjectID, DateTime onDateTime)
         {
-            return this.Find(domainObjectID, onDateTime.ToUniversalTime());
+            TPersistable persistable = this.Find(domainObjectID, onDateTime.ToUniversalTime());
+            this.Authorizer.CanFind(persistable);
+            return persistable;
         }
 
+        /// <summary>
+        /// Initialize this instance.
+        /// </summary>
         public abstract void Initialize();
 
         /// <summary>
@@ -151,6 +203,18 @@ namespace Beaker.Repository
         /// <param name="id"></param>
         /// <returns></returns>
         abstract protected TPersistable Get(Guid id);
+
+        /// <summary>
+        /// Retrieve the object with the given ID from persistence.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        TPersistable IRepository<TPersistable>.Get(Guid id)
+        {
+            TPersistable persistable = this.Get(id);
+            this.Authorizer.CanFind(persistable);
+            return persistable;
+        }
 
         /// <summary>
         /// Register this repository against the registrar.

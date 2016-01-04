@@ -26,7 +26,7 @@ using NUnit.Framework;
 using System.Reflection;
 using Beaker.Core;
 
-namespace Beaker.Core.Test
+namespace Beaker.Test.Core
 {
     [TestFixture]
     public class TestAddress : TestDomainObject<Address>

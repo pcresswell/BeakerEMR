@@ -37,10 +37,16 @@ namespace Beaker.Services.Commands
         public string Username { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
-    
+        private IUnitOfWork UnitOfWork { get; set;}
 
-        public AddUserCommand(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public AddUserCommand(IUnitOfWork unitOfWork) 
         {
+            if (unitOfWork == null)
+            {
+                throw new ArgumentNullException("unitOfWork");
+            }
+
+            this.UnitOfWork = unitOfWork;
         }
 
         protected override void Run()
