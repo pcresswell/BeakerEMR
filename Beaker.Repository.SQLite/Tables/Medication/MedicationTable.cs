@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Beaker.Core.Medication;
 using SQLite;
 using AutoMapper;
+using Beaker.Core;
 
 namespace Beaker.Repository.SQLite.Tables.Medication
 {

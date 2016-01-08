@@ -46,17 +46,13 @@ namespace Beaker.Repository.Test
             {
                 Medication20150601Migration migration = new Medication20150601Migration();
 
-                SQLiteDatabase database = new SQLiteDatabase(connection);
-                IPlugin plugin = new Beaker.Plugins.Repository.SQLite.Plugin();
-                foreach (var repo in plugin.Repositories)
-                {
-                    repo.Register(database);
-                }
+                SQLiteDatabase database = new SQLiteDatabase(":memory:");
+                SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
+                factory.RegisterRepositoriesWithDatabase(database);
 
-                database.Initialize();
                 IMigratable m = (IMigratable)database;
 
-                IMedicationRepository medicationRepository = database.Repository<IMedicationRepository>();
+                IMedicationRepository medicationRepository = database.Queries<IMedicationRepository>();
                 m.Apply(migration);
 
                 Assert.AreEqual(16153, medicationRepository.Count);

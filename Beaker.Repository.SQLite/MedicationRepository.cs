@@ -66,22 +66,11 @@ namespace Beaker.Repository.SQLite
             this.Connection.Initialize<TherapeuticTable>();
         }
 
-//        protected override Medication Find(Guid domainObjectID, DateTime onDateTime)
-//        {
-//            // Find current medication
-//            MedicationTable medicationTable = this.Connection.Find<MedicationTable>(domainObjectID, onDateTime);
-//            if (medicationTable == null)
-//            {
-//                return default(Medication);
-//            }
-//
-//            return CreateMedication(medicationTable, onDateTime);
-//        }
-
         #region implemented abstract members of SQLiteRepository
 
         protected override void InitializeAutoMapper(IConfiguration autoMapper)
         {
+            
             this.CreateTwoWayMap<Company, CompanyTable>(autoMapper);
             this.CreateTwoWayMap<DrugProduct, DrugProductTable>(autoMapper);
             this.CreateTwoWayMap<Form, FormTable>(autoMapper);
@@ -100,6 +89,8 @@ namespace Beaker.Repository.SQLite
         {
             MedicationTable medicationTable = new MedicationTable();
             medicationTable.Update(persistable);
+            medicationTable.DrugCode = persistable.DrugCode;
+
             this.Connection.Insert(medicationTable);
             this.CopyDomainObjectProperties(persistable, persistable.Company);
             this.CopyDomainObjectProperties(persistable, persistable.Product);
@@ -202,6 +193,24 @@ namespace Beaker.Repository.SQLite
 
         #endregion
 
+        public override Medication Find(Guid domainObjectID, DateTime onDateTime)
+        {
+            MedicationTable table = this.Connection.Table<MedicationTable>().Where(t => t.DomainObjectID == domainObjectID && t.RecordStartDateTime <= onDateTime && t.RecordEndDateTime >= onDateTime).SingleOrDefault<MedicationTable>();
+            if (table == null)
+            {
+                return default(Medication);
+            }
+
+            return this.Get(table.ID);
+        }
+
+        public override Medication Get(Guid id)
+        {
+            MedicationTable table = this.Connection.Get<MedicationTable>(id);
+            Medication medication = this.CreateMedication(table, DateTime.UtcNow);
+            return medication;
+        }
+
         #region implemented abstract members of SQLiteRepository
 
         protected override void CustomMappingToTable(MedicationTable table, Medication persistable)
@@ -230,6 +239,7 @@ namespace Beaker.Repository.SQLite
             // Create the medication object
             Medication medication = new Medication();
             medicationTable.CopyTo(medication);
+            medication.DrugCode = medicationTable.DrugCode;
 
             // Now assign the associated values.
 
