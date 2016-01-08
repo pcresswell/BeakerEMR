@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Beaker.Core;
 using Beaker.Services;
 using System.Runtime.CompilerServices;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 
 [assembly: InternalsVisibleTo("Beaker.Initialization.Test")]
 namespace Beaker.Initialization
@@ -40,10 +40,12 @@ namespace Beaker.Initialization
             user.Username = this.Username;
             user.EmailAddress = this.EmailAddress;
             user.Password = this.Password;
-            UnitOfWork.Save(user);
-            UserPermission userPermission = UnitOfWork.Create<UserPermission>();
+
+            Permission userPermission = UnitOfWork.Create<Permission>();
             userPermission.AddAuthorization(Actions.Manage);
+            user.Permission = userPermission;
             UnitOfWork.Save(userPermission);
+            UnitOfWork.Save(user);
         }
     }
 }

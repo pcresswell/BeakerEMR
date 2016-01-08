@@ -22,30 +22,45 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Beaker.Authorize
+namespace Beaker.Core.Authorize
 {
     using System;
 
     /// <summary>
-    /// Delete action.
+    /// Manage Action is a super action. Granting this action authorization grants all 
+    /// types of actions.
     /// </summary>
-    public class Delete : Action
+    public class Manage : Action
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Delete"/> class.
+        /// Initializes a new instance of the <see cref="Authorize.Manage"/> class.
         /// </summary>
-        public Delete()
-            : base()
+        public Manage()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Delete"/> class.
+        /// Initializes a new instance of the <see cref="Authorize.Manage"/> class.
         /// </summary>
-        /// <param name="subject">Subject.</param>
-        public Delete(object subject)
+        /// <param name="subject">The subject.</param>
+        public Manage(object subject)
             : base(subject)
         {
+        }
+
+        /// <summary>
+        /// Determines whether this instance is type of the specified action.
+        /// A test to see if this action is the same as another action. Remember
+        /// that they don't have to have the same type to be of the same type. 
+        /// Consider the "Manage" action which covers ALL actions.
+        /// </summary>
+        /// <returns>true</returns>
+        /// <c>false</c>
+        /// <param name="action">The action</param>
+        public override bool IsTypeOf(Action action)
+        {
+            // The manage action is a type of all actions
+            return true;
         }
     }
 }

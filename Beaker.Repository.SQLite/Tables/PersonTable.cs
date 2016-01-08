@@ -15,15 +15,5 @@ namespace Beaker.Repository.SQLite.Tables
         {
 
         }
-
-        internal void CopyTo(Person person)
-        {
-            base.CopyTo(person);
-        }
-
-        internal void Update(Person persistable)
-        {
-            base.Update(persistable);
-        }
     }
 }

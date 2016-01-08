@@ -30,10 +30,10 @@ namespace Beaker.Initialization
 {
     class UnitOfWork : IUnitOfWork
     {
-        private SQLiteDatabase Database { get; set; }
+        private ISQLiteDatabase Database { get; set; }
         private ITransactable TransactionManager {get;set;}
 
-        public UnitOfWork(SQLiteDatabase database, User user)
+        public UnitOfWork(ISQLiteDatabase database, User user)
         {
             this.Database = database;
             this.TransactionManager = database;

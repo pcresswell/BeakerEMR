@@ -47,6 +47,12 @@ namespace Beaker.Repository.SQLite
         /// </summary>
         /// <value>The email address.</value>
         [Column("email_address")]
-        public string EmailAddress { get; set; } 
+        public string EmailAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the permission.
+        /// </summary>
+        /// <value>The permission.</value>
+        public Guid PermissionID { get; set; }
     }
 }

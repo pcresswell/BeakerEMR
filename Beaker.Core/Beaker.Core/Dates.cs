@@ -34,6 +34,6 @@ namespace Beaker.Core
         /// <summary>
         /// Represents an infinite date.
         /// </summary>
-        public static readonly DateTime Infinity = new DateTime(3000, 1, 1);
+        public static readonly DateTime Infinity = new DateTime(3000, 1, 1,0,0,0,DateTimeKind.Utc);
     }
 }

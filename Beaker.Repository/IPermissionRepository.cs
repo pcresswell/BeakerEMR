@@ -20,25 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-using System;
-using Beaker.Authorize;
 
-namespace Beaker.Test
+namespace Beaker.Repository
 {
-    public class TestPermissions : ICan
+    using System;
+    using Beaker.Core;
+    using Beaker.Repository;
+    using Beaker.Core.Authorize;
+
+    public interface IPermissionRepository : IRepository<Permission>
     {
-        public TestPermissions()
-        {
-        }
-
-        #region ICan implementation
-
-        bool? ICan.Can(Beaker.Authorize.Action action, object subject)
-        {
-            return true;
-        }
-
-        #endregion
+        
     }
 }
-

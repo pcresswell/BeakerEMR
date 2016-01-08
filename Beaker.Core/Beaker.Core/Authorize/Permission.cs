@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Beaker.Core;
 
-namespace Beaker.Authorize
+namespace Beaker.Core.Authorize
 {
     /// <summary>
     /// Represents a collection of authorized and unauthorized actions.
@@ -35,13 +35,14 @@ namespace Beaker.Authorize
     /// would handle a single user's authorizations.
     /// </summary>
     [JsonObjectAttribute]
-    public class UserPermission : DomainObject, ICan
+    public class Permission : DomainObject, ICan
     {
-        public UserPermission()
+        public Permission()
         {
             this.AuthorizedActions = new List<Action>();
             this.UnauthorizedActions = new List<Action>();
         }
+
         [JsonPropertyAttribute]
         public IList<Action> AuthorizedActions { get; private set; }
 

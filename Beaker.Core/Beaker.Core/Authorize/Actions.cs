@@ -22,29 +22,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Beaker.Authorize
+namespace Beaker.Core.Authorize
 {
     using System;
 
     /// <summary>
-    /// Create action.
+    /// Static class for Actions.
     /// </summary>
-    public class Create : Action
+    public class Actions
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Create"/> class.
+        /// The Create action.
         /// </summary>
-        public Create()
-            : base()
-        {
-        }
+        public static readonly Create Create = new Create();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Create"/> class.
+        /// The Read action.
         /// </summary>
-        /// <param name="subject">The subject.</param>
-        public Create(object subject)
-            : base(subject)
+        public static readonly Read Read = new Read();
+
+        /// <summary>
+        /// The update action.
+        /// </summary>
+        public static readonly Update Update = new Update();
+
+        /// <summary>
+        /// The Delete action.
+        /// </summary>
+        public static readonly Delete Delete = new Delete();
+
+        /// <summary>
+        /// The Share action.
+        /// </summary>
+        public static readonly Share Share = new Share();
+
+        /// <summary>
+        /// The Manage action.
+        /// </summary>
+        public static readonly Manage Manage = new Manage();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Authorize.Actions"/> class.
+        /// </summary>
+        private Actions()
         {
         }
     }

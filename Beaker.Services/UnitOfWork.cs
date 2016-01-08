@@ -28,7 +28,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Beaker.Core;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 using Beaker.Repository;
 
 namespace Beaker.Services
@@ -45,7 +45,7 @@ namespace Beaker.Services
         /// <param name="database">Database.</param>
         public UnitOfWork(User currentUser, ICan userPermissions, Database database)
         {
-            this.UserPermissions = userPermissions;
+            this.Can = userPermissions;
             this.Database = database;
             this.TransactionManager = database;
             this.Author = currentUser;
@@ -55,7 +55,7 @@ namespace Beaker.Services
         /// Gets or sets the user permissions.
         /// </summary>
         /// <value>The user permissions.</value>
-        private ICan UserPermissions { get; set; }
+        private ICan Can { get; set; }
 
         /// <summary>
         /// The author of all actions.
@@ -67,7 +67,7 @@ namespace Beaker.Services
         /// Gets or sets the database.
         /// </summary>
         /// <value>The database.</value>
-        private Database Database {get;set;}
+        private IDatabase Database {get;set;}
 
         /// <summary>
         /// Gets or sets the transaction manager.
@@ -92,7 +92,7 @@ namespace Beaker.Services
         /// <typeparam name="TPersistable">The 1st type parameter.</typeparam>
         public TPersistable Create<TPersistable>() where TPersistable : IPersistable, new()
         {
-            if (this.UserPermissions.Can(Actions.Create,typeof(TPersistable)) != true)
+            if (this.Can.Can(Actions.Create,typeof(TPersistable)) != true)
             {
                 throw new ActionNotPermittedException("Cannot create the requested object as the user does not have permissions to do this action");
             }
@@ -115,7 +115,6 @@ namespace Beaker.Services
                 this.TransactionManager.StartTransaction();
                 this.InTransaction = true;
             }
-
         }
 
         /// <summary>

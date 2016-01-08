@@ -25,16 +25,18 @@ using Beaker.Repository;
 using Beaker.Core;
 using AutoMapper;
 using System.Linq;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 
 namespace Beaker.Repository.SQLite
 {
-    public class UserRepository : SQLiteRepository<User, UserTable> , IUserRepository
+    public class UserRepository : SQLiteRepository<User, UserTable>, IUserRepository, IUserQueries
     {
-        public UserRepository(ICan can, IAuthor author)
-            : base(can, author)
+        public UserRepository()
+            : base()
         {
         }
+
+        public IPermissionRepository PermissionRepository { get; set; }
 
         /// <summary>
         /// Register this repository against the registrar.
@@ -47,76 +49,63 @@ namespace Beaker.Repository.SQLite
 
         #region implemented abstract members of SQLiteRepository
 
+        /// <summary>
+        /// Initializes the auto mapper.
+        /// </summary>
+        /// <param name="autoMapper">Auto mapper.</param>
         protected override void InitializeAutoMapper(IConfiguration autoMapper)
         {
-            this.CreateTwoWayMap<User,UserTable>(autoMapper);
+            autoMapper.CreateMap<User, UserTable>().ForMember(x => x.PermissionID, opt => opt.Ignore());
+            autoMapper.CreateMap<UserTable, User>().ForMember(x => x.Permission, opt => opt.Ignore());
         }
 
         #endregion
 
         #region implemented abstract members of Repository
 
-        protected override User Find(Guid domainObjectID, DateTime onDateTime)
-        {
-            UserTable t = this.Connection.Find<UserTable>(domainObjectID, onDateTime);
-            if (null == t)
-            {
-                return default(User);
-            }
-
-            return Mapper.Map<User>(t);
-        }
-
-        /// <summary>
-        /// Insert the specified persistable.
-        /// </summary>
-        /// <param name="persistable">Persistable.</param>
-        protected override void Insert(User persistable)
-        {
-            UserTable t = Mapper.Map<UserTable>(persistable);
-            this.Connection.Insert(t);
-        }
-
-        /// <summary>
-        /// Update the specified persistable.
-        /// </summary>
-        /// <param name="persistable">Persistable.</param>
-        protected override void Update(User persistable)
-        {
-            UserTable t = Mapper.Map<UserTable>(persistable);
-            this.Connection.Update(t);
-        }
-
-        /// <summary>
-        /// Retrieve the object with the given ID from persistence.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected override User Get(Guid id)
-        {
-            UserTable t = base.Connection.Get<UserTable>(id);
-            if (t == null)
-            {
-                return default(User);
-            }
-
-            return Mapper.Map<User>(t);
-        }
-
         /// <summary>
         /// Finds the user by username.
         /// </summary>
         /// <returns>The by username.</returns>
         /// <param name="username">Username.</param>
-        User IUserRepository.FindByUsername(string username)
+        public User FindByUsername(string username)
         {
-            var userTable = this.Connection.Table<UserTable>().SingleOrDefault<UserTable>(u => u.Username.Equals(username));
+            var userTable = this.Connection.Table<UserTable>().FirstOrDefault<UserTable>(u => u.Username.Equals(username));
             if (null == userTable)
             {
                 return default(User);
             }
 
-            return this.Find(userTable.DomainObjectID, Dates.Infinity);
+            return this.Find(userTable.DomainObjectID);
+        }
+
+        #endregion
+
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void CustomMappingToPersistable(User persistable, UserTable table)
+        {
+            if (!Guid.Empty.Equals(table.PermissionID))
+            {
+                persistable.Permission = ((IQuery<Permission>)this.PermissionRepository).Find(table.PermissionID, persistable.RecordEndDateTime);
+            }
+        }
+
+        #endregion
+
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void CustomMappingToTable(UserTable table, User persistable)
+        {
+            if (persistable.Permission != null)
+            {
+                if (!this.PermissionRepository.IsPersisted(persistable.Permission))
+                {
+                    this.PermissionRepository.Save(persistable.Permission);
+                }
+
+                table.PermissionID = persistable.Permission.DomainObjectID;
+            }
         }
 
         #endregion

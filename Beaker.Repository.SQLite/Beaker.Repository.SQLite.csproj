@@ -67,12 +67,11 @@
     <Compile Include="SQLiteRepositoryFactory.cs" />
     <Compile Include="Tables\UserTable.cs" />
     <Compile Include="UserRepository.cs" />
+    <Compile Include="ISQLiteDatabase.cs" />
+    <Compile Include="Tables\PermissionTable.cs" />
+    <Compile Include="PermissionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Beaker.Authorize\Beaker.Authorize.csproj">
-      <Project>{7FA31657-7D0E-4924-BE6B-61F3743D6116}</Project>
-      <Name>Beaker.Authorize</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
       <Project>{065FF225-B832-4A42-9C0D-2DF7CAE4FEF6}</Project>
       <Name>Beaker.Core</Name>
@@ -100,5 +99,11 @@
     <Reference Include="AutoMapper">
       <HintPath>..\Beaker.Test\packages\AutoMapper.4.1.1\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+Xamarin.iOS10+MonoTouch10\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Beaker.Test\packages\Newtonsoft.Json.8.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Queries\" />
   </ItemGroup>
 </Project>

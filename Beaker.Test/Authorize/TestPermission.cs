@@ -26,7 +26,7 @@
 using System;
 using NUnit;
 using NUnit.Framework;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Beaker.Core;
@@ -43,7 +43,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void UncertainWithoutAnyIndication()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             bool? canCreate = user.Can(Actions.Create, typeof(AddressModel));
             Assert.IsNull(canCreate);
         }
@@ -51,7 +51,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void TestCanCreateAnything()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             user.AddAuthorization(Actions.Create);
             bool? canCreate = user.Can(Actions.Create, typeof(AddressModel));
             Assert.IsTrue(canCreate == true);
@@ -60,7 +60,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void TestUserCanDoAnything()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             user.AddAuthorization(Actions.Manage);
             bool? canCreate = user.Can(Actions.Create, typeof(AddressModel));
             Assert.IsTrue(canCreate == true);
@@ -71,7 +71,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void TestCannotCreateAnything()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             user.AddUnauthorization(Actions.Create);
             bool? canCreate = user.Can(Actions.Create, typeof(AddressModel));
             Assert.IsTrue(canCreate == false);
@@ -80,7 +80,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void TestNotCertainIfCanCreate()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             bool? canCreate = user.Can(Actions.Create, typeof(AddressModel));
             Assert.IsTrue(canCreate == null);
         }
@@ -88,7 +88,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void UnauthorizedDominatesOverAuthorized()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             user.AddUnauthorization(Actions.Create);
             user.AddAuthorization(Actions.Create);
             bool? canCreate = user.Can(Actions.Create, typeof(AddressModel));
@@ -98,7 +98,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void CanAuthorizeAgainstAType()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             Create createAction = new Create();
             createAction.AddSubject(typeof(AddressModel));
             user.AddAuthorization(createAction);
@@ -110,9 +110,9 @@ namespace Beaker.Test.Authorize
         [Test]
         public void CanAuthorizedAgainstAnInstance()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             AddressModel address = new AddressModel();
-            Beaker.Authorize.Update updateAction = new Beaker.Authorize.Update(address);
+            Beaker.Core.Authorize.Update updateAction = new Beaker.Core.Authorize.Update(address);
             user.AddAuthorization(updateAction);
 
             bool? canUpdate = user.Can(Actions.Update, address);
@@ -128,7 +128,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void CanAuthorizedAgainstAnInstanceButNotAgainstAnotherInstance()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             AddressModel address = new AddressModel();
             Create createAction = new Create();
             createAction.AddSubject(address);
@@ -146,8 +146,8 @@ namespace Beaker.Test.Authorize
         [Test]
         public void AuthorizingAgainstTheTypeGivesAuthorityForAllInstances()
         {
-            UserPermission user = new UserPermission();
-            Beaker.Authorize.Update updateAction = new Beaker.Authorize.Update();
+            Permission user = new Permission();
+            Beaker.Core.Authorize.Update updateAction = new Beaker.Core.Authorize.Update();
             AddressModel address = new AddressModel();
 
             updateAction.AddSubject(typeof(AddressModel));
@@ -164,8 +164,8 @@ namespace Beaker.Test.Authorize
             // If we are unauthorized against a type,
             // then even if we authorize against an instance
             // we are not authorized
-            UserPermission user = new UserPermission();
-            Beaker.Authorize.Update updateAction = new Beaker.Authorize.Update(typeof(AddressModel));
+            Permission user = new Permission();
+            Beaker.Core.Authorize.Update updateAction = new Beaker.Core.Authorize.Update(typeof(AddressModel));
             AddressModel address = new AddressModel();
 
             user.AddUnauthorization(updateAction);
@@ -175,7 +175,7 @@ namespace Beaker.Test.Authorize
 
             // now authorize against an instance
 
-            Beaker.Authorize.Update authorizeInstanceUpdateAction = new Beaker.Authorize.Update();
+            Beaker.Core.Authorize.Update authorizeInstanceUpdateAction = new Beaker.Core.Authorize.Update();
 
             authorizeInstanceUpdateAction.AddSubject(address);
             user.AddAuthorization(authorizeInstanceUpdateAction);
@@ -188,7 +188,7 @@ namespace Beaker.Test.Authorize
         {
             // When we have a Manage Action,
             // we can do all actions
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             Manage manageAction = new Manage();
             AddressModel address = new AddressModel();
 
@@ -202,7 +202,7 @@ namespace Beaker.Test.Authorize
         [Test]
         public void GetAuthorizationsForPersistance()
         {
-            UserPermission user = new UserPermission();
+            Permission user = new Permission();
             Create createAction = new Create(typeof(AddressModel));
             user.AddAuthorization(createAction);
 
@@ -211,8 +211,9 @@ namespace Beaker.Test.Authorize
                 TypeNameHandling = TypeNameHandling.All,
                 Formatting = Formatting.Indented 
             };
+            
             string serialized = JsonConvert.SerializeObject(user, settings);
-            UserPermission deserializedUser = JsonConvert.DeserializeObject<UserPermission>(serialized, settings);
+            Permission deserializedUser = JsonConvert.DeserializeObject<Permission>(serialized, settings);
 
             // Now make sure deserialized object has same behaviour
             Assert.IsTrue(user.Can(Actions.Create, typeof(AddressModel)) == true);
@@ -224,7 +225,7 @@ namespace Beaker.Test.Authorize
         {
             Provider doctor = new Provider();
             Patient patient = new Patient();
-            UserPermission permission = new UserPermission();
+            Permission permission = new Permission();
             Manage manage = new Manage(patient);
             permission.AddAuthorization(manage);
             Assert.IsTrue(permission.Can(Actions.Update, patient) == true);

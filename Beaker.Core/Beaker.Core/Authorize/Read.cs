@@ -22,45 +22,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Beaker.Authorize
+namespace Beaker.Core.Authorize
 {
     using System;
 
     /// <summary>
-    /// Manage Action is a super action. Granting this action authorization grants all 
-    /// types of actions.
+    /// Read action.
     /// </summary>
-    public class Manage : Action
+    public class Read : Action
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Manage"/> class.
+        /// Initializes a new instance of the <see cref="Authorize.Read"/> class.
         /// </summary>
-        public Manage()
+        public Read()
+            : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Manage"/> class.
+        /// Initializes a new instance of the <see cref="Authorize.Read"/> class.
         /// </summary>
         /// <param name="subject">The subject.</param>
-        public Manage(object subject)
+        public Read(object subject)
             : base(subject)
         {
-        }
-
-        /// <summary>
-        /// Determines whether this instance is type of the specified action.
-        /// A test to see if this action is the same as another action. Remember
-        /// that they don't have to have the same type to be of the same type. 
-        /// Consider the "Manage" action which covers ALL actions.
-        /// </summary>
-        /// <returns>true</returns>
-        /// <c>false</c>
-        /// <param name="action">The action</param>
-        public override bool IsTypeOf(Action action)
-        {
-            // The manage action is a type of all actions
-            return true;
         }
     }
 }

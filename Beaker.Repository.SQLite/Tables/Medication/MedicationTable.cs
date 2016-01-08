@@ -14,17 +14,5 @@ namespace Beaker.Repository.SQLite.Tables.Medication
     {
         [Column("drug_code")]
         public int DrugCode { get; set; }
-
-        internal void Update(Core.Medication.Medication medication)
-        {
-            base.Update(medication);
-            this.DrugCode = medication.DrugCode;
-        }
-
-        internal void CopyTo(Core.Medication.Medication medication)
-        {
-            base.CopyTo(medication);
-            medication.DrugCode = this.DrugCode;
-        }
     }
 }

@@ -31,7 +31,8 @@ namespace Beaker.Services
     using System.Threading.Tasks;
     using Beaker.Core;
     using Beaker.Repository;
-    using Beaker.Authorize;
+    using Beaker.Core.Authorize;
+    using Beaker.Repository;
 
     /// <summary>
     /// A User Session handles logging in and out of the system
@@ -114,8 +115,9 @@ namespace Beaker.Services
         /// </summary>
         public void Login()
         {
-            User user = this.Database.Repository<IUserRepository>().FindByUsername(this.Username);
-
+            //User user = this.Database.Queries<Find>().FindByUsername(this.Username).Run();
+            var user = this.Database.Queries<IUserQueries>().FindByUsername(this.Username);
+           
             if (null == user)
             {
                 throw new FailedToLoginException("User not found");
@@ -125,9 +127,8 @@ namespace Beaker.Services
             {
                 throw new FailedToLoginException("Password does not match.");
             }
-
             this.ActiveUser = user;
-            this.UserPermission = this.Database.Repository<IUserPermissionRepository>().FindByUser(this.ActiveUser);
+            this.UserPermission = this.ActiveUser.Permission;
             this.UnitOfWork = new UnitOfWork(this.ActiveUser, this, this.Database);
         }
 
@@ -144,7 +145,7 @@ namespace Beaker.Services
 
         #region ICan implementation
 
-        bool? ICan.Can(Beaker.Authorize.Action action, object subject)
+        bool? ICan.Can(Beaker.Core.Authorize.Action action, object subject)
         {
             return this.UserPermission.Can(action, subject);
         }

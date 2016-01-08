@@ -48,7 +48,7 @@ namespace Beaker.Test.Services
             using (SQLiteDatabase db = new SQLiteDatabase(":memory:"))
             {
                 SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
-                factory.RegisterRepositoriesWithDatabase(db, new TestPermissions(), new TestAuthor());
+                factory.RegisterRepositoriesWithDatabase(db);
                 this.UserSession = new UserSession(db);
                 UserSession.Username = "Peter";
                 UserSession.Password = "password";
@@ -63,7 +63,7 @@ namespace Beaker.Test.Services
             using (SQLiteDatabase db = new SQLiteDatabase(":memory:"))
             {
                 SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
-                factory.RegisterRepositoriesWithDatabase(db, new TestPermissions(), new TestAuthor());
+                factory.RegisterRepositoriesWithDatabase(db);
                 this.UserSession = new UserSession(db);
                 db.Save<User>(new User() { Username = "Peter", Password = "something" });
                 UserSession.Username = "Peter";
@@ -80,7 +80,7 @@ namespace Beaker.Test.Services
                 Assert.Throws<InvalidOperationException>(() =>
                     {
                         SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
-                        factory.RegisterRepositoriesWithDatabase(db, new TestPermissions(), new TestAuthor());
+                        factory.RegisterRepositoriesWithDatabase(db);
                         this.UserSession = new UserSession(db);
                         this.UserSession.GetUnitOfWork();
                     });

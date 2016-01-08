@@ -35,16 +35,21 @@ namespace Beaker.Test.Repository.SQLite
     {
         Patient patient;
         IPatientRepository patientRepository;
+        IQuery<Patient> patientQuery;
+        IQuery<Person> personQuery;
 
         [SetUp]
         public void Setup()
         {
             this.patient = new Patient();
             BeakerSQLiteConnection c = new BeakerSQLiteConnection(new SQLiteConnection(":memory:"));
-            var personRepository = new PersonRepository(new TestPermissions(), new TestAuthor()) { Connection = c };
-            this.patientRepository = new PatientRepository(new TestPermissions(), new TestAuthor()) {Connection = c, PersonRepository = personRepository };
+            var personRepository = new PersonRepository() { Connection = c };
+
+            this.patientRepository = new PatientRepository() {Connection = c, PersonRepository = personRepository };
             patientRepository.Initialize();
             personRepository.Initialize();
+            this.patientQuery = (IQuery<Patient>)patientRepository;
+            this.personQuery = (IQuery<Person>)personRepository;
         }
 
         [Test]
@@ -129,7 +134,7 @@ namespace Beaker.Test.Repository.SQLite
         public void FindTheCurrentVersionOfAnEntity()
         {
             patientRepository.Save(patient);
-            Assert.AreEqual(patient.ID, patientRepository.Find(patient.DomainObjectID).ID);
+            Assert.AreEqual(patient.ID, ((IQuery<Patient>)patientRepository).Find(patient.DomainObjectID).ID);
         }
 
         [Test]
@@ -137,7 +142,7 @@ namespace Beaker.Test.Repository.SQLite
         {
             patient.Note = "Some note";
             patientRepository.Save(patient);
-            Assert.AreEqual("Some note", patientRepository.Find(patient.DomainObjectID).Note);
+            Assert.AreEqual("Some note", patientQuery.Find(patient.DomainObjectID).Note);
 
             DateTime firstVersionRecordDateTime = patient.RecordStartDateTime;
 
@@ -148,7 +153,7 @@ namespace Beaker.Test.Repository.SQLite
             patient.Note = "Some different note";
             patientRepository.Save(patient);
 
-            Assert.AreEqual("Some different note", patientRepository.Find(patient.DomainObjectID).Note);
+            Assert.AreEqual("Some different note", patientQuery.Find(patient.DomainObjectID).Note);
         }
     }
     

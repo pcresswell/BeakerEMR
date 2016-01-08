@@ -27,31 +27,36 @@ using System.Collections.Generic;
 using Beaker.Core;
 using Beaker.Core.Medication;
 using AutoMapper;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 
 namespace Beaker.Repository.SQLite
 {
     public class SQLiteRepositoryFactory
     {
-        public IEnumerable<IRepository> RegisterRepositoriesWithDatabase(SQLiteDatabase database, ICan userPermission, IAuthor author)
+        public IEnumerable<IRepository> RegisterRepositoriesWithDatabase(SQLiteDatabase database)
         {
             IList<IRepository> repositories = new List<IRepository>();
 
-            var personRepo = new PersonRepository(userPermission, author);
+            var personRepo = new PersonRepository();
             this.RegisterWithDatabase<IPersonRepository, Person>(database, personRepo);
             repositories.Add(personRepo);
 
-            var medicationRepo = new MedicationRepository(userPermission, author);
+            var medicationRepo = new MedicationRepository();
             this.RegisterWithDatabase<IMedicationRepository, Medication>(database, medicationRepo);
             repositories.Add(medicationRepo);
 
-            var patientRepo = new PatientRepository(userPermission, author){ PersonRepository = personRepo };
+            var patientRepo = new PatientRepository(){ PersonRepository = personRepo };
             this.RegisterWithDatabase<IPatientRepository, Patient>(database, patientRepo);
             repositories.Add(patientRepo);
 
-            var userRepo = new UserRepository(userPermission, author);
+            var userRepo = new UserRepository();
             this.RegisterWithDatabase<IUserRepository, User>(database, userRepo);
             repositories.Add(userRepo);
+
+            var userPermissionRepo = new PermissionRepository();
+            userRepo.PermissionRepository = userPermissionRepo;
+            this.RegisterWithDatabase<IPermissionRepository, Permission>(database, userPermissionRepo);
+            repositories.Add(userPermissionRepo);
 
             Mapper.Initialize(cfg =>
                 {
@@ -59,6 +64,7 @@ namespace Beaker.Repository.SQLite
                     medicationRepo.Initialize(cfg);
                     patientRepo.Initialize(cfg);
                     userRepo.Initialize(cfg);
+                    userPermissionRepo.Initialize(cfg);
                 });
             
             return repositories;

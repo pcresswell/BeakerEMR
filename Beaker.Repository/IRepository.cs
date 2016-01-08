@@ -31,18 +31,13 @@ using Beaker.Core;
 
 namespace Beaker.Repository
 {
-    public interface IRepository : IInitializable, IRegisterableRepository
+    public interface IRepository : IInitializable, IRegisterableRepository, ITransactionTimestamp
     {
         int Count { get; }
     }
 
-    public interface IRepository<TPersistable> : IRepository where TPersistable : IPersistable
+    public interface IRepository<TPersistable> : IRepository, IPersister<TPersistable>, IQuery<TPersistable> where TPersistable : IPersistable
     {
-        void Save(TPersistable persistable);
-        void Delete(TPersistable persistable);
-        TPersistable Find(Guid domainObjectID);
-        TPersistable Find(Guid domainObjectID, DateTime onDateTime);
-        bool IsPersisted(TPersistable persistable);
-        TPersistable Get(Guid id);
+        
     }
 }

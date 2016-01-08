@@ -11,7 +11,7 @@ using Beaker.Core.Medication;
 using Beaker.Repository.SQLite.Tables.Medication;
 using AutoMapper;
 using Beaker.Test;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 
 namespace Beaker.Repository.SQLite.Test
 {
@@ -24,7 +24,7 @@ namespace Beaker.Repository.SQLite.Test
         {
             using (SQLiteDatabase database = new SQLiteDatabase(":memory:"))
             {
-                Factory.RegisterRepositoriesWithDatabase(database, this.UserPermission, this.Author);
+                Factory.RegisterRepositoriesWithDatabase(database);
 
                 Patient patient = new Patient();
                 patient.AuthorID = Guid.NewGuid();

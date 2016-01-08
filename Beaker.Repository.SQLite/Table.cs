@@ -37,7 +37,7 @@ namespace Beaker.Repository.SQLite
         /// Update the table with the values from the persistable.
         /// </summary>
         /// <param name="persistable"></param>
-        protected void Update(IPersistable persistable)
+        public virtual void Update(IPersistable persistable)
         {
             this.AuthorID = persistable.AuthorID;
             this.DomainObjectID = persistable.DomainObjectID;
@@ -52,7 +52,7 @@ namespace Beaker.Repository.SQLite
         /// Update the persistable with data from this table.
         /// </summary>
         /// <param name="persistable"></param>
-        protected void CopyTo(IPersistable persistable)
+        public virtual void CopyTo(IPersistable persistable)
         {
             persistable.AuthorID = this.AuthorID;
             persistable.DomainObjectID = this.DomainObjectID;

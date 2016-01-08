@@ -31,21 +31,21 @@ namespace Beaker.Repository
     using System.Text;
     using System.Threading.Tasks;
     using Beaker.Core;
-    using Beaker.Authorize;
+    using Beaker.Core.Authorize;
 
     /// <summary>
     /// Repository base class. All repositories must be a sub class.
     /// </summary>
-    public abstract class Repository<TPersistable> : IRepository<TPersistable> where TPersistable : IPersistable
+    public abstract class Repository<TPersistable> :  IRepository<TPersistable> where TPersistable : IPersistable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Beaker.Repository.Repository`1"/> class.
         /// </summary>
-        public Repository(ICan can, IAuthor author)
+        public Repository()
         {
-            this.Authorizer = new RepositoryAuthority(can);
-            this.Author = author;
+            ((ITransactionTimestamp)this).TransactionDateTime = DateTime.MinValue;
         }
+
 
         /// <summary>
         /// Gets the count.
@@ -88,10 +88,17 @@ namespace Beaker.Repository
         /// <param name="persistable"></param>
         protected virtual void Delete(TPersistable persistable)
         {
-            this.Authorizer.CanDelete<TPersistable>(persistable);
+            if (DateTime.MinValue.Equals(((ITransactionTimestamp)this).TransactionDateTime))
+            {
+                persistable.RecordEndDateTime = DateTime.UtcNow;
+                persistable.ValidEndDateTime = DateTime.UtcNow;
+            }
+            else
+            {
+                persistable.RecordEndDateTime = ((ITransactionTimestamp)this).TransactionDateTime;
+                persistable.ValidEndDateTime = ((ITransactionTimestamp)this).TransactionDateTime;
+            }
 
-            persistable.ValidEndDateTime = DateTime.UtcNow;
-            persistable.RecordEndDateTime = DateTime.UtcNow;
             if (this.IsPersisted(persistable))
             {
                 this.Update(persistable);
@@ -103,7 +110,7 @@ namespace Beaker.Repository
         /// </summary>
         /// <param name="domainObjectID">Domain object I.</param>
         /// <param name="onDateTime">On date time.</param>
-        protected abstract TPersistable Find(Guid domainObjectID, DateTime onDateTime);
+        public abstract TPersistable Find(Guid domainObjectID, DateTime onDateTime);
 
         /// <summary>
         /// Insert the specified persistable.
@@ -118,25 +125,11 @@ namespace Beaker.Repository
         protected abstract void Update(TPersistable persistable);
 
         /// <summary>
-        /// Gets or sets the authorizer.
-        /// </summary>
-        /// <value>The authorizer.</value>
-        private RepositoryAuthority Authorizer { get; set; }
-
-        /// <summary>
-        /// Gets or sets the author.
-        /// </summary>
-        /// <value>The author.</value>
-        private IAuthor Author { get; set;}
-
-        /// <summary>
         /// Save the persistable object. Inserts new record if there are any changes.
         /// </summary>
         /// <param name="persistable"></param>
-        void IRepository<TPersistable>.Save(TPersistable persistable)
+        void IPersister<TPersistable>.Save(TPersistable persistable)
         {
-            this.Authorizer.CanSave<TPersistable>(persistable);
-
             // First, discontinue the current version
             var currentVersion = this.Find(persistable.DomainObjectID, Beaker.Core.Dates.Infinity);
             if (currentVersion != null)
@@ -147,8 +140,8 @@ namespace Beaker.Repository
                 this.Delete(currentVersion);
             }
 
-            persistable.RecordStartDateTime = DateTime.UtcNow;
-            persistable.ValidStartDateTime = DateTime.UtcNow;
+            this.Timestamp(persistable);
+
             persistable.RecordEndDateTime = Beaker.Core.Dates.Infinity;
             persistable.ValidEndDateTime = Beaker.Core.Dates.Infinity;
             persistable.ID = Guid.NewGuid();
@@ -159,7 +152,7 @@ namespace Beaker.Repository
         /// Delete the persistable object.
         /// </summary>
         /// <param name="persistable"></param>
-        void IRepository<TPersistable>.Delete(TPersistable persistable)
+        void IPersister<TPersistable>.Delete(TPersistable persistable)
         {
             if (Beaker.Core.Dates.Infinity.Equals(persistable.ValidEndDateTime) || DateTime.MinValue.Equals(persistable.ValidEndDateTime))
             {
@@ -167,29 +160,10 @@ namespace Beaker.Repository
             }
         }
 
-        /// <summary>
-        /// Find the current version of the entity.
-        /// </summary>
-        /// <param name="entityID">The entity id.</param>
-        /// <returns></returns>
-        TPersistable IRepository<TPersistable>.Find(Guid entityID)
-        {
-            TPersistable persistable = this.Find(entityID, Beaker.Core.Dates.Infinity);
-            this.Authorizer.CanFind(persistable);
-            return persistable;
-        }
 
-        /// <summary>
-        /// Find the version of the entity as it was on the given date and time.
-        /// </summary>
-        /// <param name="entityID">The entity id.</param>
-        /// <param name="onDateTime">The date and time for which the record was valid.</param>
-        /// <returns></returns>
-        TPersistable IRepository<TPersistable>.Find(Guid domainObjectID, DateTime onDateTime)
+        public TPersistable Find(Guid entityID)
         {
-            TPersistable persistable = this.Find(domainObjectID, onDateTime.ToUniversalTime());
-            this.Authorizer.CanFind(persistable);
-            return persistable;
+            return this.Find(entityID, Beaker.Core.Dates.Infinity);
         }
 
         /// <summary>
@@ -202,25 +176,32 @@ namespace Beaker.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        abstract protected TPersistable Get(Guid id);
-
-        /// <summary>
-        /// Retrieve the object with the given ID from persistence.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        TPersistable IRepository<TPersistable>.Get(Guid id)
-        {
-            TPersistable persistable = this.Get(id);
-            this.Authorizer.CanFind(persistable);
-            return persistable;
-        }
+        public abstract TPersistable Get(Guid id);
 
         /// <summary>
         /// Register this repository against the registrar.
         /// </summary>
         /// <param name="registrar"></param>
         public abstract void Register(IRepositoryRegistrar registrar);
-        
+
+        DateTime ITransactionTimestamp.TransactionDateTime
+        {
+            get;
+            set;
+        }
+
+        private void Timestamp(TPersistable persistable)
+        {
+            if (DateTime.MinValue.Equals(((ITransactionTimestamp)this).TransactionDateTime))
+            {
+                persistable.RecordStartDateTime = DateTime.UtcNow;
+                persistable.ValidStartDateTime = DateTime.UtcNow;
+            }
+            else
+            {
+                persistable.RecordStartDateTime = ((ITransactionTimestamp)this).TransactionDateTime;
+                persistable.ValidStartDateTime = ((ITransactionTimestamp)this).TransactionDateTime;
+            }
+        }
     }
 }

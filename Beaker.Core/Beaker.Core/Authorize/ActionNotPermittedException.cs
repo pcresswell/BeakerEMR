@@ -20,35 +20,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-using System;
-using Beaker.Core.Authorize;
-using Beaker.Core;
-using Beaker.Repository.SQLite;
-using Beaker.Repository;
-using NUnit.Framework;
 
-namespace Beaker.Test
+namespace Beaker.Core.Authorize
 {
-    public class TestHelper
+    using System;
+
+    public class ActionNotPermittedException : Exception
     {
-        public TestHelper()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ActionNotPermittedException"/> class
+        /// </summary>
+        public ActionNotPermittedException()
         {
         }
 
-        protected ICan UserPermission { get; set; }
-
-        protected IAuthor Author { get; set; }
-
-        protected SQLiteRepositoryFactory Factory {get;set;}
-
-        [SetUp]
-        public void Setup()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ActionNotPermittedException"/> class
+        /// </summary>
+        /// <param name="message">A <see cref="T:System.String"/> that describes the exception. </param>
+        public ActionNotPermittedException(string message)
+            : base(message)
         {
-            this.UserPermission = new TestPermissions();
-            this.Author = new TestAuthor();
-            this.Factory = new SQLiteRepositoryFactory();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ActionNotPermittedException"/> class
+        /// </summary>
+        /// <param name="message">A <see cref="T:System.String"/> that describes the exception. </param>
+        /// <param name="inner">The exception that is the cause of the current exception. </param>
+        public ActionNotPermittedException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
     }
 }
 

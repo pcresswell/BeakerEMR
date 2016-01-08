@@ -56,18 +56,20 @@
     <Compile Include="RollbackException.cs" />
     <Compile Include="FailedToApplyMigrationException.cs" />
     <Compile Include="ITransactable.cs" />
-    <Compile Include="IUserPermissionRepository.cs" />
     <Compile Include="IAuthor.cs" />
-    <Compile Include="RepositoryAuthority.cs" />
+    <Compile Include="IRepositoryVisitor.cs" />
+    <Compile Include="IDatabase.cs" />
+    <Compile Include="IPermissionRepository.cs" />
+    <Compile Include="AuthorizedDatabaseAdaptor.cs" />
+    <Compile Include="ITransactionTimestamp.cs" />
+    <Compile Include="IUserQueries.cs" />
+    <Compile Include="IQuery.cs" />
+    <Compile Include="IPersister.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
       <Project>{065FF225-B832-4A42-9C0D-2DF7CAE4FEF6}</Project>
       <Name>Beaker.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Beaker.Authorize\Beaker.Authorize.csproj">
-      <Project>{7FA31657-7D0E-4924-BE6B-61F3743D6116}</Project>
-      <Name>Beaker.Authorize</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

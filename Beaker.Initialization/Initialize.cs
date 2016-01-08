@@ -102,7 +102,7 @@ namespace Beaker.Initialization
             sqlDatabase.Run();
 
             // Next, save the super user.
-            this.Database.Save<User>(this.SuperUser);
+            ((ISQLiteDatabase)this.Database).Save<User>(this.SuperUser);
 
             // now, log in as the super user.
             this.Session.Login(this.SuperUser);
@@ -110,9 +110,6 @@ namespace Beaker.Initialization
             // now, install initial medications
             AddInitialMedication medications = new AddInitialMedication(this.Database);
             medications.Run();
-
-
-
         }
     }
 }

@@ -21,34 +21,19 @@
 // SOFTWARE.
 //
 using System;
-using Beaker.Core.Authorize;
 using Beaker.Core;
-using Beaker.Repository.SQLite;
-using Beaker.Repository;
-using NUnit.Framework;
 
-namespace Beaker.Test
+namespace Beaker.Repository
 {
-    public class TestHelper
+    public interface IQuery 
     {
-        public TestHelper()
-        {
-        }
-
-        protected ICan UserPermission { get; set; }
-
-        protected IAuthor Author { get; set; }
-
-        protected SQLiteRepositoryFactory Factory {get;set;}
-
-        [SetUp]
-        public void Setup()
-        {
-            this.UserPermission = new TestPermissions();
-            this.Author = new TestAuthor();
-            this.Factory = new SQLiteRepositoryFactory();
-        }
-
+        
+    }
+    public interface IQuery<TPersistable> : IQuery where TPersistable : IPersistable
+    {
+        TPersistable Find(Guid domainObjectID);
+        TPersistable Find(Guid domainObjectID, DateTime onDateTime);
+        TPersistable Get(Guid id);
     }
 }
 

@@ -20,16 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
+using System;
 
-namespace Beaker.Repository
+namespace Beaker.Core.Authorize
 {
-    using System;
-    using Beaker.Core;
-    using Beaker.Repository;
-    using Beaker.Authorize;
-
-    public interface IUserPermissionRepository : IRepository<UserPermission>
+    public class Role : DomainObject
     {
-        UserPermission FindByUser(User user);
+        public Role()
+        {
+        }
+
+        public Permission Permission { get; set; }
     }
 }
+

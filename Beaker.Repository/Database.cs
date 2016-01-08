@@ -33,14 +33,14 @@ namespace Beaker.Repository
     /// <summary>
     /// Base class for all database implementations.
     /// </summary>
-    public abstract class Database : IMigratable, IRepositoryRegistrar, IDisposable
+    public abstract class Database : IDatabase, IMigratable, IRepositoryRegistrar, IDisposable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Beaker.Repository.Database"/> class.
         /// </summary>
         public Database()
         {
-            this.Repositories = new Dictionary<Type, IRepository>();
+            this.Repositories = new Dictionary<Type, object>();
             this.RepositoriesByDomainObjectDictionary = new Dictionary<Type, IRepository>();
         }
 
@@ -48,7 +48,7 @@ namespace Beaker.Repository
         /// Gets the repositories by repository interface,
         /// </summary>
         /// <value>The repositories.</value>
-        protected IDictionary<Type, IRepository> Repositories { get; private set; }
+        protected IDictionary<Type, object> Repositories { get; private set; }
 
         /// <summary>
         /// Gets the repositories by domain object dictionary.
@@ -63,13 +63,13 @@ namespace Beaker.Repository
         {
             foreach (var repo in this.Repositories.Values)
             {
-                repo.Initialize();
+                ((IRepository)repo).Initialize();
             }
         }
 
         public TPersistable Find<TPersistable>(Guid domainObjectID) where TPersistable : IPersistable
         {
-            IRepository<TPersistable> repo = (IRepository<TPersistable>)this.RepositoriesByDomainObjectDictionary[typeof(TPersistable)];
+            IQuery<TPersistable> repo = (IQuery<TPersistable>)this.RepositoriesByDomainObjectDictionary[typeof(TPersistable)];
             return repo.Find(domainObjectID);
         }
 
@@ -90,6 +90,16 @@ namespace Beaker.Repository
         /// </summary>
         /// <param name="persistable">Persistable.</param>
         /// <typeparam name="TPersistable">The 1st type parameter.</typeparam>
+        void IDatabase.Save<TPersistable>(TPersistable persistable)
+        {
+            this.Save(persistable);
+        }
+
+        /// <summary>
+        /// Save the specified persistable.
+        /// </summary>
+        /// <param name="persistable">Persistable.</param>
+        /// <typeparam name="TPersistable">The 1st type parameter.</typeparam>
         public void Save<TPersistable>(TPersistable persistable) where TPersistable : IPersistable
         {
             IRepository<TPersistable> repo = (IRepository<TPersistable>)this.RepositoriesByDomainObjectDictionary[typeof(TPersistable)];
@@ -101,27 +111,20 @@ namespace Beaker.Repository
         /// </summary>
         /// <param name="persistable">Persistable.</param>
         /// <typeparam name="TPersistable">The 1st type parameter.</typeparam>
+        void IDatabase.Delete<TPersistable>(TPersistable persistable)
+        {
+            this.Delete(persistable);
+        }
+
+        /// <summary>
+        /// Delete the specified persistable.
+        /// </summary>
+        /// <param name="persistable">Persistable.</param>
+        /// <typeparam name="TPersistable">The 1st type parameter.</typeparam>
         public void Delete<TPersistable>(TPersistable persistable) where TPersistable : IPersistable
         {
             IRepository<TPersistable> repo = (IRepository<TPersistable>)this.RepositoriesByDomainObjectDictionary[typeof(TPersistable)];
             repo.Delete(persistable);
-        }
-
-        /// <summary>
-        /// Repository this instance.
-        /// </summary>
-        /// <typeparam name="T">The 1st type parameter.</typeparam>
-        /// <typeparam name="TRepository">The 1st type parameter.</typeparam>
-        public TRepository Repository<TRepository>() where TRepository : IRepository
-        {
-            try
-            {
-                return ((IMigratable)this).Repository<TRepository>();
-            }
-            catch (KeyNotFoundException)
-            {
-                return default(TRepository);
-            }            
         }
 
         /// <summary>
@@ -195,6 +198,11 @@ namespace Beaker.Repository
         /// </summary>
         void ITransactable.CommitTransaction()
         {
+            foreach (var repository in this.Repositories.Values)
+            {
+                ((ITransactionTimestamp)repository).TransactionDateTime = DateTime.MinValue;
+            }
+
             this.CommitTransaction();
         }
 
@@ -222,6 +230,11 @@ namespace Beaker.Repository
         /// </summary>
         void ITransactable.RollbackTransaction()
         {
+            foreach (var repository in this.Repositories.Values)
+            {
+                ((ITransactionTimestamp)repository).TransactionDateTime = DateTime.MinValue;
+            }
+
             this.RollbackTransaction();
         }
 
@@ -230,6 +243,11 @@ namespace Beaker.Repository
         /// </summary>
         void ITransactable.StartTransaction()
         {
+            foreach (var repository in this.Repositories.Values)
+            {
+                ((ITransactionTimestamp)repository).TransactionDateTime = DateTime.UtcNow;
+            }
+
             this.StartTransaction();
         }
 
@@ -256,14 +274,32 @@ namespace Beaker.Repository
 
         #region IDisposable implementation
 
+        /// <summary>
+        /// Releases all resource used by the <see cref="Beaker.Repository.Database"/> object.
+        /// </summary>
+        /// <remarks>Call <see cref="Dispose"/> when you are finished using the <see cref="Beaker.Repository.Database"/>. The
+        /// <see cref="Dispose"/> method leaves the <see cref="Beaker.Repository.Database"/> in an unusable state. After
+        /// calling <see cref="Dispose"/>, you must release all references to the
+        /// <see cref="Beaker.Repository.Database"/> so the garbage collector can reclaim the memory that the
+        /// <see cref="Beaker.Repository.Database"/> was occupying.</remarks>
         void IDisposable.Dispose()
         {
             this.Dispose();
         }
 
+        /// <summary>
+        /// Releases all resource used by the <see cref="Beaker.Repository.Database"/> object.
+        /// </summary>
+        /// <remarks>Call <see cref="Dispose"/> when you are finished using the <see cref="Beaker.Repository.Database"/>. The
+        /// <see cref="Dispose"/> method leaves the <see cref="Beaker.Repository.Database"/> in an unusable state. After
+        /// calling <see cref="Dispose"/>, you must release all references to the
+        /// <see cref="Beaker.Repository.Database"/> so the garbage collector can reclaim the memory that the
+        /// <see cref="Beaker.Repository.Database"/> was occupying.</remarks>
         protected abstract void Dispose();
 
         #endregion
+
+
 
         /// <summary>
         /// Registers the repository.
@@ -277,5 +313,22 @@ namespace Beaker.Repository
             this.RepositoriesByDomainObjectDictionary[typeof(TPersistable)] = repository;
             this.AfterRegistration<TRepository>(repository);
         }
+
+        #region IQueryable implementation
+
+        public TQuery Queries<TQuery>() where TQuery : IQuery
+        {
+            foreach (var repository in this.Repositories.Values)
+            {
+                if (repository is TQuery)
+                {
+                    return (TQuery)repository;
+                }
+            }
+
+            throw new ArgumentException("No such Query interface exists.");
+        }
+
+        #endregion
     }
 }

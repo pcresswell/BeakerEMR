@@ -22,49 +22,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Beaker.Authorize
+namespace Beaker.Core.Authorize
 {
     using System;
 
     /// <summary>
-    /// Static class for Actions.
+    /// Delete action.
     /// </summary>
-    public class Actions
+    public class Delete : Action
     {
         /// <summary>
-        /// The Create action.
+        /// Initializes a new instance of the <see cref="Authorize.Delete"/> class.
         /// </summary>
-        public static readonly Create Create = new Create();
+        public Delete()
+            : base()
+        {
+        }
 
         /// <summary>
-        /// The Read action.
+        /// Initializes a new instance of the <see cref="Authorize.Delete"/> class.
         /// </summary>
-        public static readonly Read Read = new Read();
-
-        /// <summary>
-        /// The update action.
-        /// </summary>
-        public static readonly Update Update = new Update();
-
-        /// <summary>
-        /// The Delete action.
-        /// </summary>
-        public static readonly Delete Delete = new Delete();
-
-        /// <summary>
-        /// The Share action.
-        /// </summary>
-        public static readonly Share Share = new Share();
-
-        /// <summary>
-        /// The Manage action.
-        /// </summary>
-        public static readonly Manage Manage = new Manage();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Actions"/> class.
-        /// </summary>
-        private Actions()
+        /// <param name="subject">Subject.</param>
+        public Delete(object subject)
+            : base(subject)
         {
         }
     }

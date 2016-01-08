@@ -22,33 +22,23 @@
 //
 using System;
 using Beaker.Core.Authorize;
-using Beaker.Core;
-using Beaker.Repository.SQLite;
-using Beaker.Repository;
-using NUnit.Framework;
 
 namespace Beaker.Test
 {
-    public class TestHelper
+    public class TestPermissions : ICan
     {
-        public TestHelper()
+        public TestPermissions()
         {
         }
 
-        protected ICan UserPermission { get; set; }
+        #region ICan implementation
 
-        protected IAuthor Author { get; set; }
-
-        protected SQLiteRepositoryFactory Factory {get;set;}
-
-        [SetUp]
-        public void Setup()
+        bool? ICan.Can(Beaker.Core.Authorize.Action action, object subject)
         {
-            this.UserPermission = new TestPermissions();
-            this.Author = new TestAuthor();
-            this.Factory = new SQLiteRepositoryFactory();
+            return true;
         }
 
+        #endregion
     }
 }
 

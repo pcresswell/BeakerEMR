@@ -21,12 +21,13 @@
 // SOFTWARE.
 //
 using System;
+using Beaker.Core;
 
-namespace Beaker.Authorize
+namespace Beaker.Repository
 {
-    public interface ICan
+    public interface IRepositoryVisitor<TPersistable, TRepository> where TRepository : Beaker.Repository.Repository<TPersistable>  where TPersistable : IPersistable
     {
-        bool? Can(Action action, object subject);
+        void Visit(TRepository repository);   
     }
 }
 

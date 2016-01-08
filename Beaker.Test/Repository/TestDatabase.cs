@@ -1,6 +1,4 @@
-﻿extensions: designer.cs generated.cs
-extensions: .cs .cpp .h
-/*
+﻿/*
 The MIT License (MIT)
 
 Copyright (c) 2015 Peter Cresswell (pcresswell@gmail.com)
@@ -23,14 +21,34 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+using System;
+using NUnit.Framework;
+using Beaker.Core;
+using SQLite;
+using Beaker.Repository.SQLite;
+using Beaker.Repository;
 
-extensions: .aspx .ascx
-<%-- 
-Sample license text.
---%>
-extensions: .vb
-'Sample license text.
-extensions:  .xml .config .xsd
-<!--
-Sample license text.
--->
+namespace Beaker.Test.Repository.SQLite
+{
+    [TestFixture]
+    public class TestDatabase
+    {
+        [Test]
+        public void UserQueries()
+        {
+            using (SQLiteDatabase database = new SQLiteDatabase(":memory:"))
+            {
+                SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
+                factory.RegisterRepositoriesWithDatabase(database);
+
+                User user = new User(){ Username = "Peter" };
+                database.Save<User>(user);
+
+
+                var foundUser = database.Queries<IUserQueries>().FindByUsername("Peter");
+
+                Assert.AreEqual("Peter", foundUser.Username);
+            }
+        }
+    }
+}

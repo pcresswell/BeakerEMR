@@ -22,25 +22,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Beaker.Authorize
+namespace Beaker.Core.Authorize
 {
     using System;
 
-    public class Update : Action
+    /// <summary>
+    /// Create action.
+    /// </summary>
+    public class Create : Action
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Update"/> class.
+        /// Initializes a new instance of the <see cref="Authorize.Create"/> class.
         /// </summary>
-        public Update()
+        public Create()
             : base()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Authorize.Update"/> class.
+        /// Initializes a new instance of the <see cref="Authorize.Create"/> class.
         /// </summary>
-        /// <param name="subject">Subject.</param>
-        public Update(object subject)
+        /// <param name="subject">The subject.</param>
+        public Create(object subject)
             : base(subject)
         {
         }

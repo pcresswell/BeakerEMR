@@ -38,6 +38,7 @@
     <None Include="Beaker.Core.licenseheader" />
     <None Include="project.json" />
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
@@ -90,6 +91,19 @@
     <Compile Include="HealthConditionStatus.cs" />
     <Compile Include="PatientContactPurpose.cs" />
     <Compile Include="PhoneNumberType.cs" />
+    <Compile Include="Authorize\Action.cs" />
+    <Compile Include="Authorize\ActionNotPermittedException.cs" />
+    <Compile Include="Authorize\Actions.cs" />
+    <Compile Include="Authorize\Create.cs" />
+    <Compile Include="Authorize\Delete.cs" />
+    <Compile Include="Authorize\ICan.cs" />
+    <Compile Include="Authorize\Manage.cs" />
+    <Compile Include="Authorize\Read.cs" />
+    <Compile Include="Authorize\Share.cs" />
+    <Compile Include="Authorize\Subject.cs" />
+    <Compile Include="Authorize\Update.cs" />
+    <Compile Include="Authorize\Role.cs" />
+    <Compile Include="Authorize\Permission.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -99,4 +113,12 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Beaker.Test\packages\Newtonsoft.Json.8.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Authorize\" />
+  </ItemGroup>
 </Project>

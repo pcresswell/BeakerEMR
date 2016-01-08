@@ -24,7 +24,7 @@
 using System;
 using Beaker.Repository.SQLite;
 using Beaker.Services;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 using Beaker.Repository;
 
 namespace Beaker.Initialization
@@ -45,7 +45,7 @@ namespace Beaker.Initialization
         public void Run()
         {
             SQLiteRepositoryFactory factory = new SQLiteRepositoryFactory();
-            factory.RegisterRepositoriesWithDatabase(this.Database, this.UserPermission, this.Author);
+            factory.RegisterRepositoriesWithDatabase(this.Database);
         }
     }
 }

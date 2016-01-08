@@ -20,38 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
+using System;
 
-namespace Beaker.Authorize
+namespace Beaker.Core.Authorize
 {
-    using System;
-
-    public class ActionNotPermittedException : Exception
+    public interface ICan
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:ActionNotPermittedException"/> class
-        /// </summary>
-        public ActionNotPermittedException()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:ActionNotPermittedException"/> class
-        /// </summary>
-        /// <param name="message">A <see cref="T:System.String"/> that describes the exception. </param>
-        public ActionNotPermittedException(string message)
-            : base(message)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:ActionNotPermittedException"/> class
-        /// </summary>
-        /// <param name="message">A <see cref="T:System.String"/> that describes the exception. </param>
-        /// <param name="inner">The exception that is the cause of the current exception. </param>
-        public ActionNotPermittedException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+        bool? Can(Action action, object subject);
     }
 }
 

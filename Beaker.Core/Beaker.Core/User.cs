@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Authorize;
 
     /// <summary>
     /// A user. 
@@ -52,5 +53,11 @@ namespace Beaker.Core
         /// </summary>
         /// <value>The email address.</value>
         public string EmailAddress { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user permission.
+        /// </summary>
+        /// <value>The user permission.</value>
+        public Permission Permission { get; set; }
     }
 }

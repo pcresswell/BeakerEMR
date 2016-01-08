@@ -9,34 +9,48 @@ using Beaker.Repository;
 using Beaker.Repository.SQLite.Tables.Medication;
 using AutoMapper;
 using Beaker.Core;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 
 namespace Beaker.Repository.SQLite
 {
     public class MedicationRepository : SQLiteRepository<Medication, MedicationTable>, IMedicationRepository
     {
-        static MedicationRepository()
-        {
-
-        }
-
-        public MedicationRepository(ICan can, IAuthor author)
-            : base(can, author)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Beaker.Repository.SQLite.MedicationRepository"/> class.
+        /// </summary>
+        public MedicationRepository()
+            : base()
         {
         }
 
-        protected override Medication Find(Guid domainObjectID, DateTime onDateTime)
+        /// <summary>
+        /// Finds the medication by drug code.
+        /// </summary>
+        /// <returns>The by drug code.</returns>
+        /// <param name="drugCode">Drug code.</param>
+        public Medication FindByDrugCode(int drugCode)
         {
-            // Find current medication
-            MedicationTable medicationTable = this.Connection.Find<MedicationTable>(domainObjectID, onDateTime);
-            if (medicationTable == null)
+            MedicationTable t = this.Connection.Table<MedicationTable>().Where(m => m.DrugCode == drugCode).SingleOrDefault<MedicationTable>();
+            if (t == null)
             {
                 return default(Medication);
             }
 
-            return CreateMedication(medicationTable, onDateTime);
+            return this.Find(t.DomainObjectID);
         }
 
+        /// <summary>
+        /// Register this repository against the registrar.
+        /// </summary>
+        /// <param name="registrar"></param>
+        public override void Register(IRepositoryRegistrar registrar)
+        {
+            registrar.RegisterRepository<IMedicationRepository, Medication>(this);
+        }
+
+        /// <summary>
+        /// Initialize this instance.
+        /// </summary>
         public override void Initialize()
         {
             base.Initialize();
@@ -50,9 +64,19 @@ namespace Beaker.Repository.SQLite
             this.Connection.Initialize<ScheduleTable>();
             this.Connection.Initialize<StatusTable>();
             this.Connection.Initialize<TherapeuticTable>();
-
-
         }
+
+//        protected override Medication Find(Guid domainObjectID, DateTime onDateTime)
+//        {
+//            // Find current medication
+//            MedicationTable medicationTable = this.Connection.Find<MedicationTable>(domainObjectID, onDateTime);
+//            if (medicationTable == null)
+//            {
+//                return default(Medication);
+//            }
+//
+//            return CreateMedication(medicationTable, onDateTime);
+//        }
 
         #region implemented abstract members of SQLiteRepository
 
@@ -71,20 +95,6 @@ namespace Beaker.Repository.SQLite
         }
 
         #endregion
-
-
-
-        protected override Medication Get(Guid id)
-        {
-            // Find current medication
-            MedicationTable medicationTable = this.Connection.Get<MedicationTable>(id);
-            if (medicationTable == null)
-            {
-                return default(Medication);
-            }
-
-            return CreateMedication(medicationTable, medicationTable.RecordEndDateTime);
-        }
 
         protected override void Insert(Medication persistable)
         {
@@ -172,10 +182,41 @@ namespace Beaker.Repository.SQLite
             destination.ValidStartDateTime = source.ValidStartDateTime;
         }
 
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void CustomMappingToPersistable(Medication persistable, MedicationTable table)
+        {
+            DateTime onDateTime = persistable.RecordEndDateTime;
+
+            AssignCompany(onDateTime, persistable);
+            AssignDrugProduct(onDateTime, persistable);
+            AssignForm(onDateTime, persistable);
+            AssignIngredients(onDateTime, persistable);
+            AssignPackages(onDateTime, persistable);
+            AssignPharmaceuticals(onDateTime, persistable);
+            AssignRoutes(onDateTime, persistable);
+            AssignSchedules(onDateTime, persistable);
+            AssignStatuses(onDateTime, persistable);
+            AssignTherapeutics(onDateTime, persistable);
+        }
+
+        #endregion
+
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void CustomMappingToTable(MedicationTable table, Medication persistable)
+        {
+            // nothing to do.
+        }
+
+        #endregion
+
+        #region Assignments
+
         private void AssignTherapeutics(DateTime onDateTime, Medication medication)
         {
             IList<TherapeuticTable> therapeuticTables = this.Connection.Table<TherapeuticTable>()
-                           .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
 
             foreach (var therapeuticTable in therapeuticTables)
             {
@@ -209,7 +250,7 @@ namespace Beaker.Repository.SQLite
         private void AssignStatuses(DateTime onDateTime, Medication medication)
         {
             IList<StatusTable> statusTables = this.Connection.Table<StatusTable>()
-                           .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime).ToList();
 
             foreach (var statusTable in statusTables)
             {
@@ -221,7 +262,7 @@ namespace Beaker.Repository.SQLite
         private void AssignSchedules(DateTime onDateTime, Medication medication)
         {
             IList<ScheduleTable> scheduleTables = this.Connection.Table<ScheduleTable>()
-                           .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
 
             foreach (var scheduleTable in scheduleTables)
             {
@@ -233,7 +274,7 @@ namespace Beaker.Repository.SQLite
         private void AssignRoutes(DateTime onDateTime, Medication medication)
         {
             IList<RouteTable> routeTables = this.Connection.Table<RouteTable>()
-                            .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
 
             foreach (var routeTable in routeTables)
             {
@@ -245,7 +286,7 @@ namespace Beaker.Repository.SQLite
         private void AssignPharmaceuticals(DateTime onDateTime, Medication medication)
         {
             IList<PharmaceuticalTable> pharmaceuticalTables = this.Connection.Table<PharmaceuticalTable>()
-                            .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
 
             foreach (var pharmaceuticalTable in pharmaceuticalTables)
             {
@@ -257,7 +298,7 @@ namespace Beaker.Repository.SQLite
         private void AssignPackages(DateTime onDateTime, Medication medication)
         {
             IList<PackageTable> packageTables = this.Connection.Table<PackageTable>()
-                            .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
 
             foreach (var packageTable in packageTables)
             {
@@ -269,7 +310,7 @@ namespace Beaker.Repository.SQLite
         private void AssignIngredients(DateTime onDateTime, Medication medication)
         {
             IList<IngredientTable> ingredientTables = this.Connection.Table<IngredientTable>()
-                            .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime ).ToList();
 
             foreach (var ingredientTable in ingredientTables)
             {
@@ -281,7 +322,7 @@ namespace Beaker.Repository.SQLite
         private void AssignForm(DateTime onDateTime, Medication medication)
         {
             IList<FormTable> formTables = this.Connection.Table<FormTable>()
-                            .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime).ToList();
 
             foreach (var formTable in formTables)
             {
@@ -293,7 +334,7 @@ namespace Beaker.Repository.SQLite
         private void AssignDrugProduct(DateTime onDateTime, Medication medication)
         {
             IList<DrugProductTable> drugProductTables = this.Connection.Table<DrugProductTable>()
-                            .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime).ToList();
 
             foreach (var drugProductTable in drugProductTables)
             {
@@ -305,7 +346,7 @@ namespace Beaker.Repository.SQLite
         private void AssignCompany(DateTime onDateTime, Medication medication)
         {
             IList<CompanyTable> companyTables = this.Connection.Table<CompanyTable>()
-                            .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime).ToList();
+                .Where(c => c.DrugCode == medication.DrugCode && c.RecordStartDateTime <= onDateTime && c.RecordEndDateTime >= onDateTime).ToList();
 
             foreach (var companyTable in companyTables)
             {
@@ -314,17 +355,6 @@ namespace Beaker.Repository.SQLite
             }
         }
 
-        public Medication FindByDrugCode(int drugCode)
-        {
-            MedicationTable t = this.Connection.Table<MedicationTable>().Where(m => m.DrugCode == drugCode).SingleOrDefault<MedicationTable>();
-            if (t == null) return default(Medication);
-
-            return this.Find(t.DomainObjectID, Beaker.Core.Dates.Infinity);
-        }
-
-        public override void Register(IRepositoryRegistrar registrar)
-        {
-            registrar.RegisterRepository<IMedicationRepository, Medication>(this);
-        }
+        #endregion
     }
 }

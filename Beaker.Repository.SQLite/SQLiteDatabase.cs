@@ -7,10 +7,11 @@ using Beaker.Repository;
 using SQLite;
 using Beaker.Repository.SQLite.Tables;
 using AutoMapper;
+using Beaker.Core;
 
 namespace Beaker.Repository.SQLite
 {
-    public class SQLiteDatabase : Database
+    public class SQLiteDatabase : Database , ISQLiteDatabase
     {
         internal BeakerSQLiteConnection Connection { get; private set; }
 

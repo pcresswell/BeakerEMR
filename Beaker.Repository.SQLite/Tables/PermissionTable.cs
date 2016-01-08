@@ -21,34 +21,19 @@
 // SOFTWARE.
 //
 using System;
-using Beaker.Core.Authorize;
-using Beaker.Core;
-using Beaker.Repository.SQLite;
-using Beaker.Repository;
-using NUnit.Framework;
+using SQLite;
 
-namespace Beaker.Test
+namespace Beaker.Repository.SQLite
 {
-    public class TestHelper
+    [Table("permissions")]
+    public class PermissionTable : Table
     {
-        public TestHelper()
+        public PermissionTable()
         {
         }
 
-        protected ICan UserPermission { get; set; }
-
-        protected IAuthor Author { get; set; }
-
-        protected SQLiteRepositoryFactory Factory {get;set;}
-
-        [SetUp]
-        public void Setup()
-        {
-            this.UserPermission = new TestPermissions();
-            this.Author = new TestAuthor();
-            this.Factory = new SQLiteRepositoryFactory();
-        }
-
+        [Column("content")]
+        public string Content { get; set; }
     }
 }
 

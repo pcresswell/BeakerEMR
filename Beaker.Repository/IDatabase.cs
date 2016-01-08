@@ -21,33 +21,19 @@
 // SOFTWARE.
 //
 using System;
-using Beaker.Core.Authorize;
 using Beaker.Core;
-using Beaker.Repository.SQLite;
-using Beaker.Repository;
-using NUnit.Framework;
+using Beaker.Core.Authorize;
 
-namespace Beaker.Test
+namespace Beaker.Repository
 {
-    public class TestHelper
+    public interface IDatabase
     {
-        public TestHelper()
-        {
-        }
+        
+        void Save<TPersistable>(TPersistable persistable) where TPersistable : IPersistable;
 
-        protected ICan UserPermission { get; set; }
+        void Delete<TPersistable>(TPersistable persistable) where TPersistable : IPersistable;
 
-        protected IAuthor Author { get; set; }
-
-        protected SQLiteRepositoryFactory Factory {get;set;}
-
-        [SetUp]
-        public void Setup()
-        {
-            this.UserPermission = new TestPermissions();
-            this.Author = new TestAuthor();
-            this.Factory = new SQLiteRepositoryFactory();
-        }
+        bool IsPersisted<TPersistable>(TPersistable persistable) where TPersistable : IPersistable;
 
     }
 }

@@ -7,7 +7,7 @@ using SQLite;
 using Beaker.Core;
 using Beaker.Repository;
 using Beaker.Repository.SQLite.Tables;
-using Beaker.Authorize;
+using Beaker.Core.Authorize;
 
 namespace Beaker.Repository.SQLite
 {
@@ -15,68 +15,44 @@ namespace Beaker.Repository.SQLite
     {
         public IPersonRepository PersonRepository { get; set; }
 
-        public PatientRepository(ICan can, IAuthor author)
-            : base(can, author)
+        public PatientRepository()
+            : base()
         {
-        }
-
-        protected override Patient Find(Guid domainObjectID, DateTime onDateTime)
-        {
-            PatientTable patientTable = this.Connection.Find<PatientTable>(domainObjectID, onDateTime);
-
-            if (patientTable == null)
-            {
-                return default(Patient);
-            }
-
-            return this.CreatePatient(patientTable);
-        }
-
-        #region implemented abstract members of SQLiteRepository
-
-        protected override void InitializeAutoMapper(AutoMapper.IConfiguration autoMapper)
-        {
-            this.CreateTwoWayMap<Patient, PatientTable>(autoMapper);
-        }
-
-        #endregion
-
-        protected override Patient Get(Guid id)
-        {
-            PatientTable patientTable = this.Connection.Get<PatientTable>(id);
-
-            if (patientTable == null)
-            {
-                return default(Patient);
-            }
-
-            return this.CreatePatient(patientTable);
-        }
-
-        private Patient CreatePatient(PatientTable p)
-        {
-            Patient patient = new Patient();
-            p.CopyTo(patient, this.PersonRepository);
-            return patient;
-        }
-
-        protected override void Insert(Patient persistable)
-        {
-            PatientTable patientTable = new PatientTable();
-            patientTable.Update(persistable, this.PersonRepository);
-            this.Connection.Insert(patientTable);
-        }
-
-        protected override void Update(Patient persistable)
-        {
-            PatientTable patientTable = this.Connection.Get<PatientTable>(persistable.ID);
-            patientTable.Update(persistable, this.PersonRepository);
-            this.Connection.Update(patientTable);
         }
 
         public override void Register(IRepositoryRegistrar registrar)
         {
             registrar.RegisterRepository<IPatientRepository, Patient>(this);
         }
+
+
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void CustomMappingToPersistable(Patient persistable, PatientTable table)
+        {
+            if (!Guid.Empty.Equals(table.PersonID))
+            {
+                persistable.Person = ((IQuery<Person>)this.PersonRepository).Find(table.PersonID);
+            }
+        }
+
+        #endregion
+
+        #region implemented abstract members of SQLiteRepository
+
+        protected override void CustomMappingToTable(PatientTable table, Patient persistable)
+        {
+            table.Note = persistable.Note;
+            if (persistable.Person != null)
+            {
+                table.PersonID = persistable.Person.DomainObjectID;
+                if (!PersonRepository.IsPersisted(persistable.Person))
+                {
+                    PersonRepository.Save(persistable.Person);
+                }
+            }
+        }
+
+        #endregion
     }
 }
