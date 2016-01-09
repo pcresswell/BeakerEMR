@@ -118,7 +118,5 @@
       <HintPath>..\..\Beaker.Test\packages\Newtonsoft.Json.8.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Authorize\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

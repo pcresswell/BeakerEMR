@@ -43,10 +43,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Beaker.Authorize\Beaker.Authorize.csproj">
-      <Project>{7fa31657-7d0e-4924-be6b-61f3743d6116}</Project>
-      <Name>Beaker.Authorize</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Beaker.Core\Beaker.Core\Beaker.Core.csproj">
       <Project>{065ff225-b832-4a42-9c0d-2df7cae4fef6}</Project>
       <Name>Beaker.Core</Name>
