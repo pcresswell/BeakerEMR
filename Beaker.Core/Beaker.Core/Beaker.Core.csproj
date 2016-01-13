@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
-    <Compile Include="SameAsAttribute.cs" />
     <Compile Include="DomainObject.cs" />
     <Compile Include="HealthCondition.cs" />
     <Compile Include="Immunization.cs" />
@@ -104,6 +103,8 @@
     <Compile Include="Authorize\Update.cs" />
     <Compile Include="Authorize\Role.cs" />
     <Compile Include="Authorize\Permission.cs" />
+    <Compile Include="Attributes\MergeableAttribute.cs" />
+    <Compile Include="Attributes\SameAsAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -119,4 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+  </ItemGroup>
 </Project>

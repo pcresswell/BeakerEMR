@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Gender class. Represents a person's gender.
@@ -62,6 +63,7 @@ namespace Beaker.Core
         /// <summary>
         /// The name of the gender. For example "Male" or "Female".
         /// </summary>
+        [SameAs]
         public string Name { get; private set; }
 
         /// <summary>

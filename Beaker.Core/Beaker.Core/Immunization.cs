@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Immunization.
@@ -39,84 +40,98 @@ namespace Beaker.Core
         /// Gets or sets the code.
         /// </summary>
         /// <value>The code.</value>
+        [SameAs]
         public string Code { get; set; }
 
         /// <summary>
         /// Gets or sets the date.
         /// </summary>
         /// <value>The date.</value>
+        [SameAs]
         public FuzzyDateTime Date { get; set; }
 
         /// <summary>
         /// Gets or sets the dose.
         /// </summary>
         /// <value>The dose.</value>
+        [SameAs]
         public string Dose { get; set; }
 
         /// <summary>
         /// Gets or sets the instructions.
         /// </summary>
         /// <value>The instructions.</value>
+        [SameAs]
         public string Instructions { get; set; }
 
         /// <summary>
         /// Gets or sets the lot number.
         /// </summary>
         /// <value>The lot number.</value>
+        [SameAs]
         public string LotNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the manufacturer.
         /// </summary>
         /// <value>The manufacturer.</value>
+        [SameAs]
         public string Manufacturer { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
+        [SameAs]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the notes.
         /// </summary>
         /// <value>The notes.</value>
+        [SameAs]
         public string Notes { get; set; }
 
         /// <summary>
         /// Gets or sets the patient.
         /// </summary>
         /// <value>The patient.</value>
+        [SameAs]
         public Patient Patient { get; set; }
 
         /// <summary>
         /// Gets or sets the refusal date.
         /// </summary>
         /// <value>The refusal date.</value>
+        [SameAs]
         public FuzzyDateTime RefusalDate { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="Beaker.Core.Immunization"/> is refused.
         /// </summary>
         /// <value><c>true</c> if refused; otherwise, <c>false</c>.</value>
+        [SameAs]
         public bool Refused { get; set; }
 
         /// <summary>
         /// Gets or sets the route.
         /// </summary>
         /// <value>The route.</value>
+        [SameAs]
         public string Route { get; set; }
 
         /// <summary>
         /// Gets or sets the site.
         /// </summary>
         /// <value>The site.</value>
+        [SameAs]
         public string Site { get; set; }
 
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
         /// <value>The type.</value>
+        [SameAs]
         public string Type { get; set; }
     }
 }

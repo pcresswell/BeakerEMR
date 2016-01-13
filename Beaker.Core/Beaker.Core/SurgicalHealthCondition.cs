@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Surgical health condition.
@@ -38,11 +39,13 @@ namespace Beaker.Core
         /// <summary>
         /// The date on which the procedure was performed.
         /// </summary>
+        [SameAs]
         public FuzzyDateTime ProcedureDate { get; set; }
 
         /// <summary>
         /// The name of the procedure performed.
         /// </summary>
+        [SameAs]
         public string Procedure { get; set; }
     }
 }

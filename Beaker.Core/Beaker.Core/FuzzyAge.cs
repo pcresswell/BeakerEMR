@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// A fuzzy age.
@@ -49,11 +50,13 @@ namespace Beaker.Core
         /// <summary>
         /// The age.
         /// </summary>
+        [SameAs]
         public int Age { get; private set; }
 
         /// <summary>
         /// The accuracy of the age recording.
         /// </summary>
+        [SameAs]
         public FuzzyAgeAccuracy Accuracy { get; private set; }
 
         /// <summary>

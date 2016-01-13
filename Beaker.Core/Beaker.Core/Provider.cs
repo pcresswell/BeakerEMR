@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// A provider.
@@ -46,11 +47,13 @@ namespace Beaker.Core
         /// <summary>
         /// The user that manages this provider.
         /// </summary>
+        [SameAs]
         public User User { get; set; }
 
         /// <summary>
         /// The person.
         /// </summary>
+        [SameAs]
         public Person Person { get; set; }
     }
 }

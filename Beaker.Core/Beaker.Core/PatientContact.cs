@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Patient contact.
@@ -39,48 +40,56 @@ namespace Beaker.Core
         /// Gets or sets the cell phone number.
         /// </summary>
         /// <value>The cell phone number.</value>
+        [SameAs]
         public PhoneNumber CellPhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the contact person.
         /// </summary>
         /// <value>The contact person.</value>
+        [SameAs]
         public Person ContactPerson { get; set; }
 
         /// <summary>
         /// Gets or sets the email.
         /// </summary>
         /// <value>The email.</value>
+        [SameAs]
         public EmailAddress Email { get; set; }
 
         /// <summary>
         /// Gets or sets the home phone number.
         /// </summary>
         /// <value>The home phone number.</value>
+        [SameAs]
         public PhoneNumber HomePhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the note.
         /// </summary>
         /// <value>The note.</value>
+        [SameAs]
         public string Note { get; set; }
 
         /// <summary>
         /// Gets or sets the patient.
         /// </summary>
         /// <value>The patient.</value>
+        [SameAs]
         public Patient Patient { get; set; }
 
         /// <summary>
         /// Gets or sets the purpose.
         /// </summary>
         /// <value>The purpose.</value>
+        [SameAs]
         public string Purpose { get; set; }
 
         /// <summary>
         /// Gets or sets the work phone number.
         /// </summary>
         /// <value>The work phone number.</value>
+        [SameAs]
         public PhoneNumber WorkPhoneNumber { get; set; }
     }
 }

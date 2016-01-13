@@ -25,6 +25,7 @@ SOFTWARE.
 namespace Beaker.Core
 {
     using System;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Represents the relationship between two family members.
@@ -43,17 +44,20 @@ namespace Beaker.Core
         /// <summary>
         /// Person one. 
         /// </summary>
+        [SameAs]
         public Person One { get; set; }
 
         /// <summary>
         /// Person two.
         /// </summary>
+        [SameAs]
         public Person Two { get; set; }
 
         /// <summary>
         /// The type of relationship. Follows a convension of "One-Two" such as "Child-Parent" where 
         /// person one is the child and person two is the parent.
         /// </summary>
+        [SameAs]
         public string Type { get; private set; }
     }
 }

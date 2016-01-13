@@ -32,6 +32,7 @@ namespace Beaker.Core
     using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Base class for all domain objects. 

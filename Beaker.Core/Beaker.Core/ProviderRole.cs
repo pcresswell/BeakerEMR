@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// A provider role.
@@ -38,11 +39,13 @@ namespace Beaker.Core
         /// <summary>
         /// The provider.
         /// </summary>
+        [SameAs]
         public Provider Provider { get; set; }
 
         /// <summary>
         /// The type of the role.
         /// </summary>
+        [SameAs]
         public string Type { get; set; }
     }
 }

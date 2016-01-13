@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// An Ontario health card.
@@ -38,21 +39,25 @@ namespace Beaker.Core
         /// <summary>
         /// The expiry date.
         /// </summary>
+        [SameAs]
         public DateTime ExpiryDate { get; set; }
 
         /// <summary>
         /// The number.
         /// </summary>
+        [SameAs]
         public string Number { get; set; }
 
         /// <summary>
         /// The owner of the health card.
         /// </summary>
+        [SameAs]
         public Patient Owner { get; set; }
 
         /// <summary>
         /// The version code of the health card.
         /// </summary>
+        [SameAs]
         public string Version { get; set; }
     }
 }

@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Represents a physical person. Does not contain any role information such as patient, provider, etc.
@@ -52,47 +53,56 @@ namespace Beaker.Core
         /// <summary>
         /// The person's first name.
         /// </summary>
+        [SameAs]
         public string FirstName { get; set; }
 
         /// <summary>
         /// The person's last name.
         /// </summary>
+        [SameAs]
         public string LastName { get; set; }
 
         /// <summary>
         /// The person's middle name.
         /// </summary>
+        [SameAs]
         public string MiddleName { get; set; }
 
         /// <summary>
         /// The person's prefix. Example, "Mr." or "Ms.".
         /// </summary>
+        [SameAs]
         public string Prefix { get; set; }
 
         /// <summary>
         /// The person's suffix. Example, "Jr.", "Sr.".
         /// </summary>
+        [SameAs]
         public string Suffix { get; set; }
 
         /// <summary>
         /// The persons gender as identified at birth.
         /// </summary>
+        [SameAs]
         public Gender Gender { get; set; }
 
         /// <summary>
         /// The person's date of birth.
         /// </summary>
+        [SameAs]
         public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Preferred official language. Official languages are specified based on the country of origin.
         /// For example, "English" or "French" for Canada are offical languages.
         /// </summary>
+        [SameAs]
         public ISOLanguage PreferredOfficialLanguage { get; set; }
 
         /// <summary>
         /// Preferred language for conversation. Does not depend on the country of origin. 
         /// </summary>
+        [SameAs]
         public ISOLanguage PreferredSpokenLanguage { get; set; }
     }
 }

@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// A general purpose identification for a patient.
@@ -38,6 +39,7 @@ namespace Beaker.Core
         /// <summary>
         /// The patient.
         /// </summary>
+        [SameAs]
         public Patient Patient { get; set; }
     }
 }

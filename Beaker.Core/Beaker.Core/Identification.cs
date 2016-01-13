@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// General identification number. 
@@ -38,11 +39,13 @@ namespace Beaker.Core
         /// <summary>
         /// The number.
         /// </summary>
+        [SameAs]
         public string Number { get; set; }
 
         /// <summary>
         /// The type of identification.
         /// </summary>
+        [SameAs]
         public string Type { get; set; }
     }
 }

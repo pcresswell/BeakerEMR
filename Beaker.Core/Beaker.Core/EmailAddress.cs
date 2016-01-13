@@ -25,6 +25,7 @@ SOFTWARE.
 namespace Beaker.Core
 {
     using System;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Email address.

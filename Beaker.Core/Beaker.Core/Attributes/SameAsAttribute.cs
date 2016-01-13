@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace Beaker.Core
+namespace Beaker.Core.Attributes
 {
     using System;
     using System.Reflection;

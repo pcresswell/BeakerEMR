@@ -28,6 +28,7 @@ namespace Beaker.Core
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// The patient role. 
@@ -45,16 +46,19 @@ namespace Beaker.Core
         /// <summary>
         /// The user that manages this patient.
         /// </summary>
+        [SameAs]
         public User User { get; set; }
 
         /// <summary>
         /// A note about the patient.
         /// </summary>
+        [SameAs]
         public string Note { get; set; }
 
         /// <summary>
         /// The person.
         /// </summary>
+        [SameAs]
         public Person Person { get; set; }
     }
 }

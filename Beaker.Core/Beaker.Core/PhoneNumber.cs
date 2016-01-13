@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// A phone number.
@@ -38,26 +39,31 @@ namespace Beaker.Core
         /// <summary>
         /// The area code.
         /// </summary>
+        [SameAs]
         public string AreaCode { get; set; }
 
         /// <summary>
         /// The extension.
         /// </summary>
+        [SameAs]
         public string Extension { get; set; }
 
         /// <summary>
         /// The phone number.
         /// </summary>
+        [SameAs]
         public string Number { get; set; }
 
         /// <summary>
         /// The owner of the phone number.
         /// </summary>
+        [SameAs]
         public Person Owner { get; set; }
 
         /// <summary>
         /// The type of phone number. For example, "Home" or "Work".
         /// </summary>
+        [SameAs]
         public string Type { get; set; }
     }
 }

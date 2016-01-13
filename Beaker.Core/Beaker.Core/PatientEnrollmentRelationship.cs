@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Patient enrollment relationship.
@@ -45,11 +46,13 @@ namespace Beaker.Core
         /// <summary>
         /// Reason for the termination of enrollment.
         /// </summary>
+        [SameAs]
         public int TerminationReasonCode { get; set; }
 
         /// <summary>
         /// The enrollment status.
         /// </summary>
+        [SameAs]
         public string EnrollmentStatus { get; set; }
     }
 }

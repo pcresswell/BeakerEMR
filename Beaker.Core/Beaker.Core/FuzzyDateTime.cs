@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// A DateTime in which the accuracy of the value is not exactly known.
@@ -75,11 +76,13 @@ namespace Beaker.Core
         /// <summary>
         /// The DateTime
         /// </summary>
+        [SameAs]
         public DateTime DateTime { get; private set; }
 
         /// <summary>
         /// The accuracy of the DateTime value.
         /// </summary>
+        [SameAs]
         public FuzzyDateTimeAccuracy Accuracy { get; private set; }
 
         /// <summary>

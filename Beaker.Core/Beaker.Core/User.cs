@@ -30,6 +30,7 @@ namespace Beaker.Core
     using System.Text;
     using System.Threading.Tasks;
     using Beaker.Core.Authorize;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// A user. 
@@ -40,18 +41,21 @@ namespace Beaker.Core
         /// Gets or sets the username.
         /// </summary>
         /// <value>The username.</value>
+        [SameAs]
         public string Username { get; set; }
 
         /// <summary>
         /// Gets or sets the password.
         /// </summary>
         /// <value>The password.</value>
+        [SameAs]
         public string Password { get; set; }
 
         /// <summary>
         /// Gets or sets the email address.
         /// </summary>
         /// <value>The email address.</value>
+        [SameAs]
         public string EmailAddress { get; set; }
 
         /// <summary>

@@ -29,6 +29,7 @@ namespace Beaker.Core
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// A general relationship between a provider and a patient.
@@ -46,26 +47,31 @@ namespace Beaker.Core
         /// <summary>
         /// The patient.
         /// </summary>
+        [SameAs]
         public Patient Patient { get; set; }
 
         /// <summary>
         /// The provider.
         /// </summary>
+        [SameAs]
         public Provider Provider { get; set; }
 
         /// <summary>
         /// The date on which the relationship started.
         /// </summary>
+        [SameAs]
         public DateTime StartDate { get; set; }
 
         /// <summary>
         /// The type of relationship.
         /// </summary>
+        [SameAs]
         public string Type { get; set; }
 
         /// <summary>
         /// The date on which the relationship ended.
         /// </summary>
+        [SameAs]
         public DateTime EndDate { get; set; }
     }
 }

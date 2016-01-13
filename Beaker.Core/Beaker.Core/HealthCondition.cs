@@ -25,6 +25,7 @@ SOFTWARE.
 namespace Beaker.Core
 {
     using System;
+    using Beaker.Core.Attributes;
 
     /// <summary>
     /// Represents a health condition for a patient.
